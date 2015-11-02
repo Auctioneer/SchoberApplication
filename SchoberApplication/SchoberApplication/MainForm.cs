@@ -46,11 +46,23 @@ namespace SchoberApplication
         {
             login = new Login(); //Create a login Screen 
         
+            //Is called when user Presses Login Button. Will be used to crosscheck username and password with database and grant user according priviledges. 
+
             login.OnLogin += new Login.LoginHandler(CheckLogin);
+            //CheckForNoPriviledges Is called when Login Form is closed.
+            //If the user hasn't gained any priviledges after logging in, it closes the Application.
+            login.OnLoginFormClose += new Login.LoginPageClose(CheckForNoPriviledge); 
             this.Hide();
             login.ShowDialog();
 
             
+        }
+
+        private void CheckForNoPriviledge()
+        {
+            Console.WriteLine("WOOO PRIVILEDGE");
+            if (userAccess == AccessLevels.None)
+                Application.Exit();
         }
 
         void CheckLogin(object a, LoginArgs e)
@@ -59,7 +71,7 @@ namespace SchoberApplication
             //Check whether the loginDetails are comparable to the ones we have in database and give user according userAccess.
             //e.LoginDetails returns a String in the format  "username%%password"
             //Currently temp code which will be replaced by a query to database
-            Console.WriteLine(e.LoginDetails);
+            Console.WriteLine( "PRIVILEDGE NOT SET");
 
 
             if (e.LoginDetails.CompareTo(e.LoginDetails) == 0)

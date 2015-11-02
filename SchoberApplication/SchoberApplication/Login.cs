@@ -18,7 +18,9 @@ namespace SchoberApplication
         Boolean processing = false;
         public delegate void LoginHandler(object myObject,
                                                LoginArgs myArgs);
+        public delegate void LoginPageClose();
         public event LoginHandler OnLogin;
+        public event LoginPageClose OnLoginFormClose;
         public Login()
         {
 
@@ -129,7 +131,7 @@ namespace SchoberApplication
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
-           
+            OnLoginFormClose();
         }
 
       
