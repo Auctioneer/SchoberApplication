@@ -106,6 +106,7 @@
             this.supplierButton.TabIndex = 4;
             this.supplierButton.Text = "Supplier";
             this.supplierButton.UseVisualStyleBackColor = true;
+            this.supplierButton.Click += new System.EventHandler(this.supplierButton_Click);
             // 
             // graphsButton
             // 

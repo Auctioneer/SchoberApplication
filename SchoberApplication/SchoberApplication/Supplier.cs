@@ -10,15 +10,17 @@ using System.Windows.Forms;
 
 namespace SchoberApplication
 {
-    public partial class Product : Form
+    public partial class Supplier : Form
     {
-
-        public Product()
+        public Supplier()
         {
             InitializeComponent();
             this.ControlBox = false;
         }
 
-        
+        private void Supplier_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
