@@ -344,6 +344,7 @@
             this.Controls.Add(this.buttonBox);
             this.Controls.Add(this.yesLabel);
             this.Controls.Add(this.noLabel);
+            this.IsMdiContainer = true;
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.Activated += new System.EventHandler(this.MainForm_Activated);
