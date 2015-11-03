@@ -12,10 +12,15 @@ namespace SchoberApplication
 {
     public partial class Product : Form
     {
+        String name, colour, dimensions, type, activity;
+        int weight, capacity;
+        float price; 
         public Product()
         {
             InitializeComponent();
             this.ControlBox = false;
         }
+
+        
     }
 }
