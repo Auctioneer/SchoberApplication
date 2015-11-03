@@ -21,6 +21,49 @@ namespace SchoberApplication
             this.ControlBox = false;
         }
 
-        
+        //private Boolean checkMissing()
+        //{
+        //    helpMissing.Visible = false;
+         
+        //    foreach(TextBox in this.Controls)
+        //    if (TextName.Text.Length == 0)
+        //    {
+        //        helpMissingUsernameLabel.Visible = true;
+        //        cTextUsername.Focus();
+        //        return true;
+        //    }
+
+        //    if (cTextPassword.Text.Length == 0)
+        //    {
+        //        helpMissingPasswordLabel.Visible = true;
+        //        cTextPassword.Focus();
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
+        public String getName()
+
+        {
+            return name;
+        }
+        public String getColour()
+        {
+            return colour;
+        }
+        public String getDimensions()
+        {
+            return dimensions;
+        }
+        public String getType()
+        {
+            return type;
+        }
+        public String getActivity()
+        {
+            return activity;
+        }
+
+
     }
 }
