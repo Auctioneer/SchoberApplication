@@ -19,6 +19,7 @@ namespace SchoberApplication
         Employee employee = new Employee();
         Product productForm = new Product();
         Supplier supplierForm = new Supplier();
+
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
         {
@@ -173,6 +174,7 @@ namespace SchoberApplication
             hideControls();
             productForm.MdiParent = this;
             productForm.Dock = DockStyle.Fill;
+
             productForm.FormBorderStyle = FormBorderStyle.None;
             productForm.Show();
         }
@@ -192,12 +194,14 @@ namespace SchoberApplication
         private void employeeButton_Click(object sender, EventArgs e)
         {
             hideControls();
+
             employee.MdiParent = this;
             employee.Dock = DockStyle.Fill;
             employee.ControlBox = false;
             employee.FormBorderStyle = FormBorderStyle.None;
             employee.Show();
         }
+
 
         private void supplierButton_Click(object sender, EventArgs e)
         {

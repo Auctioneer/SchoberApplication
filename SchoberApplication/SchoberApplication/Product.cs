@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,13 +12,10 @@ namespace SchoberApplication
 {
     public partial class Product : Form
     {
-
         public Product()
         {
             InitializeComponent();
             this.ControlBox = false;
         }
-
-        
     }
 }
