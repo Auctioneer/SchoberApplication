@@ -10,14 +10,12 @@ using System.Windows.Forms;
 
 namespace SchoberApplication
 {
-    public partial class Form1 : Form
+    public partial class Employee : Form
     {
-        public Form1()
+        public Employee()
         {
             InitializeComponent();
             
         }
-    //Label label = new Label();
-        //label.Text = "test";
     }
 }

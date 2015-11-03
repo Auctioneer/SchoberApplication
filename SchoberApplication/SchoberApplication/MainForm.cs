@@ -16,7 +16,7 @@ namespace SchoberApplication
         List<Label> _priviledgeLabels;
         Login login;
         DBConnect db;
-        Form1 form1 = new Form1();
+        Employee employee = new Employee();
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
         {
@@ -145,8 +145,7 @@ namespace SchoberApplication
         private void MainForm_Load(object sender, EventArgs e)
         {
             IsMdiContainer = true;
-            form1.MdiParent = this;
-           
+            employee.MdiParent = this;
 
         }
 
@@ -162,8 +161,7 @@ namespace SchoberApplication
 
         private void productButton_Click(object sender, EventArgs e)
         {
-            form1.MdiParent = this;
-            form1.Show();
+            
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -176,6 +174,15 @@ namespace SchoberApplication
         {
             if (userAccess == AccessLevels.None)
                 Application.Exit();
+        }
+
+        private void employeeButton_Click(object sender, EventArgs e)
+        {
+            employee.MdiParent = this;
+            employee.Dock = DockStyle.Fill;
+            employee.ControlBox = false;
+            employee.FormBorderStyle = FormBorderStyle.None;
+            employee.Show();
         }
 
      
