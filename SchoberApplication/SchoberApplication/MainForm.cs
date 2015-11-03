@@ -17,6 +17,7 @@ namespace SchoberApplication
         Login login;
         DBConnect db;
         Employee employee = new Employee();
+        Product productForm = new Product();
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
         {
@@ -161,7 +162,12 @@ namespace SchoberApplication
 
         private void productButton_Click(object sender, EventArgs e)
         {
+            employee.Hide();
+            productForm.MdiParent = this;
+            productForm.Dock = DockStyle.Fill;
             
+            productForm.FormBorderStyle = FormBorderStyle.None;
+            productForm.Show();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
