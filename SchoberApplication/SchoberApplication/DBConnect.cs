@@ -26,13 +26,13 @@ namespace ConnectCsharpToMysql
         //Initialize values
         private void Initialize()
         {
-            server = "silva";
+            server = "silva.computing.dundee.ac.uk";
             database = "14ac3d06";
             uid = "14ac3u06";
             password = "cba123";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
+           
             connection = new MySqlConnection(connectionString);
         }
 
