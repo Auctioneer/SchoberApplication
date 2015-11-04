@@ -17,6 +17,7 @@ namespace SchoberApplication
         Login login;
         DBConnect db;
         Employee employee = new Employee();
+        Store store = new Store();
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
         {
@@ -146,6 +147,7 @@ namespace SchoberApplication
         {
             IsMdiContainer = true;
             employee.MdiParent = this;
+            store.MdiParent = this;
 
         }
 
@@ -183,6 +185,15 @@ namespace SchoberApplication
             employee.ControlBox = false;
             employee.FormBorderStyle = FormBorderStyle.None;
             employee.Show();
+        }
+
+        private void storeButton_Click(object sender, EventArgs e)
+        {
+            store.MdiParent = this;
+            store.Dock = DockStyle.Fill;
+            store.ControlBox = false;
+            store.FormBorderStyle = FormBorderStyle.None;
+            store.Show();
         }
 
      
