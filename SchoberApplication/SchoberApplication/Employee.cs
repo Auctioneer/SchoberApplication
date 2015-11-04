@@ -17,5 +17,10 @@ namespace SchoberApplication
             InitializeComponent();
             
         }
+
+        private void submitEmployee_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
