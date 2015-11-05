@@ -20,6 +20,7 @@ namespace SchoberApplication
         Product productForm = new Product();
         Supplier supplierForm = new Supplier();
 
+        Store store = new Store();
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
         {
@@ -156,6 +157,7 @@ namespace SchoberApplication
         {
             IsMdiContainer = true;
             employee.MdiParent = this;
+            store.MdiParent = this;
 
         }
 
@@ -213,7 +215,14 @@ namespace SchoberApplication
             supplierForm.Show();
         }
 
-     
+     	private void storeButton_Click(object sender, EventArgs e)
+        {
+            store.MdiParent = this;
+            store.Dock = DockStyle.Fill;
+            store.ControlBox = false;
+            store.FormBorderStyle = FormBorderStyle.None;
+            store.Show();
+        }
        
     }
 

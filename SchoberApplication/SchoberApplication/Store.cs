@@ -10,15 +10,14 @@ using System.Windows.Forms;
 
 namespace SchoberApplication
 {
-    public partial class Employee : Form
+    public partial class Store : Form
     {
-        public Employee()
+        public Store()
         {
             InitializeComponent();
-            
         }
 
-        private void submitEmployee_Click(object sender, EventArgs e)
+        private void storeSubmit_Click(object sender, EventArgs e)
         {
 
         }
