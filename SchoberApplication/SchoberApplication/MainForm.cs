@@ -19,6 +19,7 @@ namespace SchoberApplication
         Employee employee = new Employee();
         Product productForm = new Product();
         Supplier supplierForm = new Supplier();
+        Graphs graphs = new Graphs();
 
         Store store = new Store();
         public AccessLevels userAccess = AccessLevels.None;
@@ -222,6 +223,15 @@ namespace SchoberApplication
             store.ControlBox = false;
             store.FormBorderStyle = FormBorderStyle.None;
             store.Show();
+        }
+
+        private void graphsButton_Click(object sender, EventArgs e)
+        {
+            graphs.MdiParent = this;
+            graphs.Dock = DockStyle.Fill;
+            graphs.ControlBox = false;
+            graphs.FormBorderStyle = FormBorderStyle.None;
+            graphs.Show();
         }
        
     }
