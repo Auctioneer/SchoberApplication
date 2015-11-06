@@ -96,6 +96,7 @@
             this.supplierButton.TabIndex = 4;
             this.supplierButton.Text = "Supplier";
             this.supplierButton.UseVisualStyleBackColor = true;
+            this.supplierButton.Click += new System.EventHandler(this.supplierButton_Click);
             // 
             // graphsButton
             // 
@@ -107,6 +108,7 @@
             this.graphsButton.TabIndex = 5;
             this.graphsButton.Text = "Graphs";
             this.graphsButton.UseVisualStyleBackColor = true;
+            this.graphsButton.Click += new System.EventHandler(this.graphsButton_Click);
             // 
             // editTableButton
             // 

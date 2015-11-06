@@ -17,6 +17,10 @@ namespace SchoberApplication
         Login login;
         DBConnect db;
         Employee employee = new Employee();
+        Product productForm = new Product();
+        Supplier supplierForm = new Supplier();
+        Graphs graphs = new Graphs();
+
         Store store = new Store();
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
@@ -36,6 +40,13 @@ namespace SchoberApplication
 
             connectDataBase();
             
+        }
+
+        private void hideControls()
+        {
+            employee.Hide();
+            productForm.Hide();
+            supplierForm.Hide();
         }
 
         private void connectDataBase()
@@ -163,7 +174,12 @@ namespace SchoberApplication
 
         private void productButton_Click(object sender, EventArgs e)
         {
-            
+            hideControls();
+            productForm.MdiParent = this;
+            productForm.Dock = DockStyle.Fill;
+
+            productForm.FormBorderStyle = FormBorderStyle.None;
+            productForm.Show();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -180,6 +196,8 @@ namespace SchoberApplication
 
         private void employeeButton_Click(object sender, EventArgs e)
         {
+            hideControls();
+
             employee.MdiParent = this;
             employee.Dock = DockStyle.Fill;
             employee.ControlBox = false;
@@ -187,7 +205,18 @@ namespace SchoberApplication
             employee.Show();
         }
 
-        private void storeButton_Click(object sender, EventArgs e)
+
+        private void supplierButton_Click(object sender, EventArgs e)
+        {
+            hideControls();
+            supplierForm.MdiParent = this;
+            supplierForm.Dock = DockStyle.Fill;
+            supplierForm.ControlBox = false;
+            supplierForm.FormBorderStyle = FormBorderStyle.None;
+            supplierForm.Show();
+        }
+
+     	private void storeButton_Click(object sender, EventArgs e)
         {
             store.MdiParent = this;
             store.Dock = DockStyle.Fill;
@@ -196,7 +225,14 @@ namespace SchoberApplication
             store.Show();
         }
 
-     
+        private void graphsButton_Click(object sender, EventArgs e)
+        {
+            graphs.MdiParent = this;
+            graphs.Dock = DockStyle.Fill;
+            graphs.ControlBox = false;
+            graphs.FormBorderStyle = FormBorderStyle.None;
+            graphs.Show();
+        }
        
     }
 
