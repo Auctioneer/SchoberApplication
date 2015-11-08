@@ -1,4 +1,6 @@
-﻿using System;
+﻿//HELLO, THIS IS THE REAL COPY OF THE SOLUTION
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,16 +11,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using System.Windows.Forms.DataVisualization.Charting;
+using SchoberApplication;
+using ConnectCsharpToMysql;
 
 namespace SchoberApplication
 {
     public partial class Graphs : Form
     {
 
+        DBConnect dbConnect;
+
         public Graphs()
         {
             InitializeComponent();
-
+             dbConnect = new DBConnect();
             //Charts should be hidden on form open
             hideCharts();
         }
@@ -39,8 +45,8 @@ namespace SchoberApplication
             //For storing sales
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
-            //Connect to database and return the list of records for each store
-
+            //Set the list to the result of the SQL command getting all sales of all stores
+            storeRecordList = dbConnect.chartStoresRecords();
 
             //TEST DATA
             //storeRecordList.Add(new StoreRecord("Alpine"));

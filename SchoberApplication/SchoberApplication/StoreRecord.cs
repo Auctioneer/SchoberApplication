@@ -9,8 +9,11 @@ namespace SchoberApplication
 
     class StoreRecord
     {
-        //Name of store OR the country (this field can be used for both)
+        //Name of store
         String storeName;
+
+        //Country
+        String storeCountry;
 
         int storeID;
 
@@ -26,11 +29,21 @@ namespace SchoberApplication
             this.storeName = storeName;
         }
 
+        public String getStoreCountry()
+        {
+            return storeCountry;
+        }
+
         //The actual constructor, passing in ID and name
         public StoreRecord(int storeID, String storeName)
         {
             this.storeID = storeID;
             this.storeName = storeName;
+        }
+
+        public void setCountry(String storeCountry)
+        {
+            this.storeCountry = storeCountry;
         }
 
         public String getStoreName()

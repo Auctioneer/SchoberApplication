@@ -6,17 +6,20 @@ namespace SchoberApplication
     public class StoreSale
     {
         int quantity;
+        int productID;
         decimal value;
         decimal total;
         DateTime dateOfSale;
+
+        public StoreSale()
+        {
+
+        }
 
         public StoreSale(int quantity, decimal value)
         {
             this.quantity = quantity;
             this.value = value;
-
-            //Call method to calculate total
-            calculateAddTotal();
         }
 
         //Overload for including date in sale
@@ -27,9 +30,29 @@ namespace SchoberApplication
             this.dateOfSale = dateOfSale;
         }
 
+        public void setQuantity(int quantity)
+        {
+            this.quantity = quantity;
+        }
+
+        public void setProductId(int productID)
+        {
+            this.productID = productID;
+        }
+
+        public void setValue(decimal value)
+        {
+            this.value = value;
+        }
+
         public int getQuantity()
         {
             return quantity;
+        }
+
+        public int getProductID()
+        {
+            return productID;
         }
 
         public decimal getValue()
@@ -37,14 +60,9 @@ namespace SchoberApplication
             return value;
         }
 
-        //For getting the overall value of the sale
-        private void calculateAddTotal()
-        {
-            this.total = quantity * value;
-        }
-
         public decimal getTotal()
         {
+            this.total = quantity * value;
             return total;
         }
 

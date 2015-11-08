@@ -289,7 +289,7 @@ namespace ConnectCsharpToMysql
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT 'Quantity,Product_idProduct' FROM sales WHERE Store_idStore = " + storeID;
+                string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore = " + storeID;
                 List<StoreSale> listOfSales = new List<StoreSale>();
 
                 command = new MySqlCommand(query, connection);
@@ -298,10 +298,20 @@ namespace ConnectCsharpToMysql
                 while (data.Read())
                 {
                     int quantity = data.GetInt32("Quantity");
-                    decimal value = getProductPrice(data.GetInt32("Product_idProduct"));
-                    StoreSale store = new StoreSale(quantity, value);
+                    int productID = data.GetInt32("Product_idProduct");
+                    //decimal value = getProductPrice(data.GetInt32("Product_idProduct"));
+                    //StoreSale store = new StoreSale(quantity, value);
+                    StoreSale store = new StoreSale();
+                    store.setQuantity(quantity);
+                    store.setProductId(productID);
                     listOfSales.Add(store);
 
+                }
+                connection.Close();
+                foreach(StoreSale sale in listOfSales)
+                {
+                    decimal value = getProductPrice(sale.getProductID());
+                    sale.setValue(value);
                 }
 
                 return listOfSales;
@@ -318,8 +328,56 @@ namespace ConnectCsharpToMysql
 
         }
 
+        //Method to return every sale from every sale
+        public List<StoreRecord> chartStoresRecords()
+        {
+            try
+            {
+                connection.Open();
+                MySqlCommand command;
+                MySqlDataReader data;
+                string query = "SELECT * FROM store";
+                List<StoreRecord> listOfStores = new List<StoreRecord>();
+
+                command = new MySqlCommand(query, connection);
+                data = command.ExecuteReader();
+
+                while (data.Read())
+                {
+                    int id = data.GetInt32("idStore");
+                    String name = data.GetString("Name");
+
+                    //decimal value = getProductPrice(data.GetInt32("Product_idProduct"));
+                    StoreRecord store = new StoreRecord(id, name);
+                    //store.setStoreSales(chartStoresSales(id));
+                    //store.setCountry(getStoreCountry(id));
+                    
+                    listOfStores.Add(store);
+
+                }
+                connection.Close();
+                foreach(StoreRecord singStore in listOfStores)
+                {
+                    singStore.setStoreSales(chartStoresSales(singStore.getStoreID()));
+                }
+
+                return listOfStores;
+
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
+
+
+        }
+
         public decimal getProductPrice(int productID)
         {
+            connection.Open();
             string query = "SELECT Price FROM product where idProduct =" + productID;
             MySqlCommand command;
             MySqlDataReader data;
@@ -335,13 +393,69 @@ namespace ConnectCsharpToMysql
                 {
                     price = data.GetDecimal("Price");
                 }
-
+                connection.Close();
                 return price;
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 return price;
+            }
+        }
+
+        public String getStoreCountry(int storeID)
+        {
+            string query = "SELECT Address_idAddress FROM store where idStore =" + storeID;
+            MySqlCommand command;
+            MySqlDataReader data;
+            int addressID;
+            String country = "";
+
+            command = new MySqlCommand(query, connection);
+
+            data = command.ExecuteReader();
+
+            try
+            {
+                while (data.Read())
+                {
+                    addressID = data.GetInt32("Address_idAddress");
+                    country = getCountryFromID(addressID);
+                }
+
+                return country;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return country;
+            }
+        }
+
+        public String getCountryFromID(int addressID)
+        {
+            string query = "SELECT Country FROM address where idAddress =" + addressID;
+            MySqlCommand command;
+            MySqlDataReader data;
+            String country = "";
+
+            command = new MySqlCommand(query, connection);
+
+            data = command.ExecuteReader();
+
+            try
+            {
+                while (data.Read())
+                {
+                    country = data.GetString("Country");
+                }
+
+                return country;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return country;
             }
         }
     }
