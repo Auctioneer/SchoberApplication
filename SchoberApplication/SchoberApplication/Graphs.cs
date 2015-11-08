@@ -162,27 +162,27 @@ namespace SchoberApplication
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
             //TEST DATA
-            storeRecordList.Add(new StoreRecord("Austria"));
-            storeRecordList.Add(new StoreRecord("Scotland"));
-            storeRecordList.Add(new StoreRecord("Tibet"));
+            //storeRecordList.Add(new StoreRecord("Austria"));
+            //storeRecordList.Add(new StoreRecord("Scotland"));
+            //storeRecordList.Add(new StoreRecord("Tibet"));
 
             //Here are some sales and some salaries for each store
             //Alpine
-            storeRecordList[0].addSale(6, 130.99m);
-            storeRecordList[0].addSale(3, 7.50m);
-            storeRecordList[0].addSale(2, 60m);
+            //storeRecordList[0].addSale(6, 130.99m);
+            //storeRecordList[0].addSale(3, 7.50m);
+            //storeRecordList[0].addSale(2, 60m);
 
             //Valley
-            storeRecordList[1].addSale(2, 40m);
-            storeRecordList[1].addSale(10, 13.50m);
-            storeRecordList[1].addSale(4, 7.99m);
-            storeRecordList[1].addSale(7, 70m);
+            //storeRecordList[1].addSale(2, 40m);
+            //storeRecordList[1].addSale(10, 13.50m);
+            //storeRecordList[1].addSale(4, 7.99m);
+            //storeRecordList[1].addSale(7, 70m);
 
             //Plateau
-            storeRecordList[2].addSale(10, 10m);
-            storeRecordList[2].addSale(3, 35.66m);
-            storeRecordList[2].addSale(2, 100m);
-            storeRecordList[2].addSale(4, 20m);
+            //storeRecordList[2].addSale(10, 10m);
+            //storeRecordList[2].addSale(3, 35.66m);
+            //storeRecordList[2].addSale(2, 100m);
+            //storeRecordList[2].addSale(4, 20m);
 
             for (int i = 0; i < storeRecordList.Count; i++)
             {

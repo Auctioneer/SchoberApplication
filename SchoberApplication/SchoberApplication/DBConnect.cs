@@ -360,6 +360,10 @@ namespace ConnectCsharpToMysql
                 {
                     singStore.setStoreSales(chartStoresSales(singStore.getStoreID()));
                 }
+                foreach(StoreRecord singStore in listOfStores)
+                {
+                    singStore.setCountry(getStoreCountry(singStore.getStoreID()));
+                }
 
                 return listOfStores;
 
@@ -405,10 +409,11 @@ namespace ConnectCsharpToMysql
 
         public String getStoreCountry(int storeID)
         {
+            connection.Open();
             string query = "SELECT Address_idAddress FROM store where idStore =" + storeID;
             MySqlCommand command;
             MySqlDataReader data;
-            int addressID;
+            int addressID=0;
             String country = "";
 
             command = new MySqlCommand(query, connection);
@@ -420,9 +425,10 @@ namespace ConnectCsharpToMysql
                 while (data.Read())
                 {
                     addressID = data.GetInt32("Address_idAddress");
-                    country = getCountryFromID(addressID);
+                    //country = getCountryFromID(addressID);
                 }
-
+                connection.Close();
+                country = getCountryFromID(addressID);
                 return country;
             }
             catch (Exception e)
@@ -434,6 +440,7 @@ namespace ConnectCsharpToMysql
 
         public String getCountryFromID(int addressID)
         {
+            connection.Open();
             string query = "SELECT Country FROM address where idAddress =" + addressID;
             MySqlCommand command;
             MySqlDataReader data;
@@ -449,7 +456,7 @@ namespace ConnectCsharpToMysql
                 {
                     country = data.GetString("Country");
                 }
-
+                connection.Close();
                 return country;
             }
             catch (Exception e)
