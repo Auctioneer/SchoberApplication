@@ -161,6 +161,9 @@ namespace SchoberApplication
             //For storing sales
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
+            //Set the list to the result of the SQL command getting all sales of all stores
+            storeRecordList = dbConnect.chartStoresRecords();
+
             //TEST DATA
             //storeRecordList.Add(new StoreRecord("Austria"));
             //storeRecordList.Add(new StoreRecord("Scotland"));
@@ -184,14 +187,33 @@ namespace SchoberApplication
             //storeRecordList[2].addSale(2, 100m);
             //storeRecordList[2].addSale(4, 20m);
 
+            //This is a new list which will store each country's sales, not each store's
+            List<StoreRecord> countrySortedStoreRecordList = new List<StoreRecord>();
+
             for (int i = 0; i < storeRecordList.Count; i++)
             {
+
+                int pos = doesCountryExist(storeRecordList[i].getStoreCountry(), countrySortedStoreRecordList);
+                
+                if (pos < 0)
+                {
+                    countrySortedStoreRecordList.Add(storeRecordList[i]);
+                }
+                else
+                {
+                    countrySortedStoreRecordList[pos].addStoreSales(storeRecordList[i].getStoreSales());
+                }
+                
+            }
+                for (int i = 0; i < countrySortedStoreRecordList.Count; i++)
+                {
                 //Get totals for that store
-                decimal salesTotal = storeRecordList[i].getTotalSales();
+                decimal salesTotal = countrySortedStoreRecordList[i].getTotalSales();
 
                 //Display these on the chartSalariesIncome
-                chartSalariesIncome.Series["Sale Profits"].Points.AddXY(storeRecordList[i].getStoreName(), salesTotal);
-            }
+                chartSalariesIncome.Series["Sale Profits"].Points.AddXY(countrySortedStoreRecordList[i].getStoreCountry(), salesTotal);
+                }
+            
 
 
             //Change chart type to doughnut chart
@@ -203,8 +225,20 @@ namespace SchoberApplication
 
         }
 
-
-
+        //Method to check whether country exists in new list of countries being compiled
+        private int doesCountryExist(String targetCountry, List<StoreRecord>newList)
+        {
+            for (int i = 0; i < newList.Count; i++)
+            {
+                if (targetCountry.Equals(newList[i].getStoreCountry()))
+                {
+                    //Return position of country in new list if found
+                    return i;
+                }
+            }
+            //Return -1 if not
+            return -1;
+        }
 
 
 

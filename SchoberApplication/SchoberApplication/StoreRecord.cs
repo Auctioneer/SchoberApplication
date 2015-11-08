@@ -61,6 +61,20 @@ namespace SchoberApplication
             this.saleList = saleList;
         }
 
+        public List<StoreSale> getStoreSales()
+        {
+            return saleList;
+        }
+
+        public void addStoreSales(List<StoreSale> salesToAdd)
+        {
+            for (int i = 0; i < salesToAdd.Count; i++)
+            {
+                saleList.Add(salesToAdd[i]);
+            }
+                
+        }
+
         //Method to add sale to list of sales
         //ONLY FOR TEST DATA - TO BE REMOVED
         public void addSale(int quantity, decimal value)
