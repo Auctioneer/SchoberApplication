@@ -28,134 +28,135 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.suppTitle = new System.Windows.Forms.Label();
+            this.suppname = new System.Windows.Forms.Label();
+            this.suppnr = new System.Windows.Forms.Label();
+            this.suppfname = new System.Windows.Forms.Label();
+            this.supplname = new System.Windows.Forms.Label();
+            this.suppemail = new System.Windows.Forms.Label();
+            this.suppnametxt = new System.Windows.Forms.TextBox();
+            this.suppnrtxt = new System.Windows.Forms.TextBox();
+            this.suppfnametxt = new System.Windows.Forms.TextBox();
+            this.supplnametxt = new System.Windows.Forms.TextBox();
+            this.suppemailtxt = new System.Windows.Forms.TextBox();
+            this.suppSubmit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // suppTitle
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(107, 414);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(254, 83);
-            this.button1.TabIndex = 35;
-            this.button1.Text = "SUBMIT";
-            this.button1.UseVisualStyleBackColor = true;
+            this.suppTitle.AutoSize = true;
+            this.suppTitle.Location = new System.Drawing.Point(322, 27);
+            this.suppTitle.Name = "suppTitle";
+            this.suppTitle.Size = new System.Drawing.Size(78, 13);
+            this.suppTitle.TabIndex = 36;
+            this.suppTitle.Text = "Supplier details";
             // 
-            // label5
+            // suppname
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label5.Location = new System.Drawing.Point(107, 271);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(151, 25);
-            this.label5.TabIndex = 28;
-            this.label5.Text = "Contact Email:";
+            this.suppname.AutoSize = true;
+            this.suppname.Location = new System.Drawing.Point(159, 62);
+            this.suppname.Name = "suppname";
+            this.suppname.Size = new System.Drawing.Size(35, 13);
+            this.suppname.TabIndex = 37;
+            this.suppname.Text = "Name";
             // 
-            // textBox5
+            // suppnr
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(281, 271);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 31);
-            this.textBox5.TabIndex = 27;
+            this.suppnr.AutoSize = true;
+            this.suppnr.Location = new System.Drawing.Point(135, 88);
+            this.suppnr.Name = "suppnr";
+            this.suppnr.Size = new System.Drawing.Size(59, 13);
+            this.suppnr.TabIndex = 38;
+            this.suppnr.Text = "Contact nr.";
             // 
-            // textBox4
+            // suppfname
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(281, 214);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 31);
-            this.textBox4.TabIndex = 25;
+            this.suppfname.AutoSize = true;
+            this.suppfname.Location = new System.Drawing.Point(116, 114);
+            this.suppfname.Name = "suppfname";
+            this.suppfname.Size = new System.Drawing.Size(78, 13);
+            this.suppfname.TabIndex = 39;
+            this.suppfname.Text = "Rep. first name";
             // 
-            // label3
+            // supplname
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label3.Location = new System.Drawing.Point(102, 140);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(162, 53);
-            this.label3.TabIndex = 24;
-            this.label3.Text = "Representative First Name: ";
+            this.supplname.AutoSize = true;
+            this.supplname.Location = new System.Drawing.Point(97, 140);
+            this.supplname.Name = "supplname";
+            this.supplname.Size = new System.Drawing.Size(97, 13);
+            this.supplname.TabIndex = 40;
+            this.supplname.Text = "Rep. second name";
             // 
-            // textBox3
+            // suppemail
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(281, 153);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 31);
-            this.textBox3.TabIndex = 23;
+            this.suppemail.AutoSize = true;
+            this.suppemail.Location = new System.Drawing.Point(162, 166);
+            this.suppemail.Name = "suppemail";
+            this.suppemail.Size = new System.Drawing.Size(32, 13);
+            this.suppemail.TabIndex = 41;
+            this.suppemail.Text = "Email";
             // 
-            // label1
+            // suppnametxt
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(107, 106);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 24);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Contact Number: ";
+            this.suppnametxt.Location = new System.Drawing.Point(200, 62);
+            this.suppnametxt.Name = "suppnametxt";
+            this.suppnametxt.Size = new System.Drawing.Size(100, 20);
+            this.suppnametxt.TabIndex = 42;
             // 
-            // textBox2
+            // suppnrtxt
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(281, 103);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 31);
-            this.textBox2.TabIndex = 21;
+            this.suppnrtxt.Location = new System.Drawing.Point(200, 88);
+            this.suppnrtxt.Name = "suppnrtxt";
+            this.suppnrtxt.Size = new System.Drawing.Size(100, 20);
+            this.suppnrtxt.TabIndex = 43;
             // 
-            // label2
+            // suppfnametxt
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label2.Location = new System.Drawing.Point(107, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(143, 25);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Brand Name: ";
+            this.suppfnametxt.Location = new System.Drawing.Point(200, 114);
+            this.suppfnametxt.Name = "suppfnametxt";
+            this.suppfnametxt.Size = new System.Drawing.Size(100, 20);
+            this.suppfnametxt.TabIndex = 44;
             // 
-            // textBox1
+            // supplnametxt
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(281, 47);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 31);
-            this.textBox1.TabIndex = 19;
+            this.supplnametxt.Location = new System.Drawing.Point(200, 140);
+            this.supplnametxt.Name = "supplnametxt";
+            this.supplnametxt.Size = new System.Drawing.Size(100, 20);
+            this.supplnametxt.TabIndex = 45;
             // 
-            // label6
+            // suppemailtxt
             // 
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label6.Location = new System.Drawing.Point(102, 203);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(162, 53);
-            this.label6.TabIndex = 36;
-            this.label6.Text = "Representative Last Name: ";
+            this.suppemailtxt.Location = new System.Drawing.Point(200, 166);
+            this.suppemailtxt.Name = "suppemailtxt";
+            this.suppemailtxt.Size = new System.Drawing.Size(100, 20);
+            this.suppemailtxt.TabIndex = 46;
+            // 
+            // suppSubmit
+            // 
+            this.suppSubmit.Location = new System.Drawing.Point(472, 166);
+            this.suppSubmit.Name = "suppSubmit";
+            this.suppSubmit.Size = new System.Drawing.Size(75, 23);
+            this.suppSubmit.TabIndex = 47;
+            this.suppSubmit.Text = "Submit";
+            this.suppSubmit.UseVisualStyleBackColor = true;
             // 
             // Supplier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 585);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.suppSubmit);
+            this.Controls.Add(this.suppemailtxt);
+            this.Controls.Add(this.supplnametxt);
+            this.Controls.Add(this.suppfnametxt);
+            this.Controls.Add(this.suppnrtxt);
+            this.Controls.Add(this.suppnametxt);
+            this.Controls.Add(this.suppemail);
+            this.Controls.Add(this.supplname);
+            this.Controls.Add(this.suppfname);
+            this.Controls.Add(this.suppnr);
+            this.Controls.Add(this.suppname);
+            this.Controls.Add(this.suppTitle);
             this.Name = "Supplier";
             this.Text = "Supplier";
             this.Load += new System.EventHandler(this.Supplier_Load);
@@ -166,16 +167,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label suppTitle;
+        private System.Windows.Forms.Label suppname;
+        private System.Windows.Forms.Label suppnr;
+        private System.Windows.Forms.Label suppfname;
+        private System.Windows.Forms.Label supplname;
+        private System.Windows.Forms.Label suppemail;
+        private System.Windows.Forms.TextBox suppnametxt;
+        private System.Windows.Forms.TextBox suppnrtxt;
+        private System.Windows.Forms.TextBox suppfnametxt;
+        private System.Windows.Forms.TextBox supplnametxt;
+        private System.Windows.Forms.TextBox suppemailtxt;
+        private System.Windows.Forms.Button suppSubmit;
     }
 }

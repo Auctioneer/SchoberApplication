@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChreneLib.Controls.TextBoxes;
 using System.Threading;
+using System.Data.SqlClient;
 
 
 namespace SchoberApplication
@@ -133,9 +134,5 @@ namespace SchoberApplication
         {
             OnLoginFormClose();
         }
-
-      
-
-
     }
 }

@@ -44,6 +44,7 @@
             this.strregiontxt = new System.Windows.Forms.TextBox();
             this.strcountrytxt = new System.Windows.Forms.TextBox();
             this.storeSubmit = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // strnametxt
@@ -169,7 +170,7 @@
             // 
             // storeSubmit
             // 
-            this.storeSubmit.Location = new System.Drawing.Point(462, 285);
+            this.storeSubmit.Location = new System.Drawing.Point(443, 244);
             this.storeSubmit.Name = "storeSubmit";
             this.storeSubmit.Size = new System.Drawing.Size(75, 23);
             this.storeSubmit.TabIndex = 15;
@@ -177,11 +178,19 @@
             this.storeSubmit.UseVisualStyleBackColor = true;
             this.storeSubmit.Click += new System.EventHandler(this.storeSubmit_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(422, 114);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 16;
+            // 
             // Store
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 375);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.storeSubmit);
             this.Controls.Add(this.strcountrytxt);
             this.Controls.Add(this.strregiontxt);
@@ -223,5 +232,6 @@
         private System.Windows.Forms.TextBox strregiontxt;
         private System.Windows.Forms.TextBox strcountrytxt;
         private System.Windows.Forms.Button storeSubmit;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

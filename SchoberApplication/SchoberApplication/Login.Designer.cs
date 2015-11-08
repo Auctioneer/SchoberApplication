@@ -67,10 +67,10 @@
             this.cTextPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.32F);
             this.cTextPassword.Location = new System.Drawing.Point(235, 118);
             this.cTextPassword.Name = "cTextPassword";
+            this.cTextPassword.PasswordChar = '*';
             this.cTextPassword.Size = new System.Drawing.Size(150, 20);
             this.cTextPassword.TabIndex = 6;
             this.cTextPassword.WaterMark = "Password";
-            this.cTextPassword.PasswordChar = '*';
             this.cTextPassword.WaterMarkActiveForeColor = System.Drawing.Color.Gray;
             this.cTextPassword.WaterMarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cTextPassword.WaterMarkForeColor = System.Drawing.Color.LightGray;

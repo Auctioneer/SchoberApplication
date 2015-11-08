@@ -17,11 +17,13 @@ namespace SchoberApplication
         Login login;
         DBConnect db;
         Employee employee = new Employee();
+<<<<<<< HEAD
         Product productForm = new Product();
         Supplier supplierForm = new Supplier();
-        Store store = new Store();
-        Graphs graphs = new Graphs();
 
+=======
+        Store store = new Store();
+>>>>>>> mantas
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
         {
@@ -47,9 +49,6 @@ namespace SchoberApplication
             employee.Hide();
             productForm.Hide();
             supplierForm.Hide();
-            store.Hide();
-            graphs.Hide();
-
         }
 
         private void connectDataBase()
@@ -208,6 +207,7 @@ namespace SchoberApplication
             employee.Show();
         }
 
+<<<<<<< HEAD
 
         private void supplierButton_Click(object sender, EventArgs e)
         {
@@ -217,25 +217,18 @@ namespace SchoberApplication
             supplierForm.ControlBox = false;
             supplierForm.FormBorderStyle = FormBorderStyle.None;
             supplierForm.Show();
-        }
-
-     	private void storeButton_Click(object sender, EventArgs e)
+=======
+        private void storeButton_Click(object sender, EventArgs e)
         {
             store.MdiParent = this;
             store.Dock = DockStyle.Fill;
             store.ControlBox = false;
             store.FormBorderStyle = FormBorderStyle.None;
             store.Show();
+>>>>>>> mantas
         }
 
-        private void graphsButton_Click(object sender, EventArgs e)
-        {
-            graphs.MdiParent = this;
-            graphs.Dock = DockStyle.Fill;
-            graphs.ControlBox = false;
-            graphs.FormBorderStyle = FormBorderStyle.None;
-            graphs.Show();
-        }
+     
        
     }
 
