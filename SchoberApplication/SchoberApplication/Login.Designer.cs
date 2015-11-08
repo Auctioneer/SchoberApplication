@@ -67,6 +67,7 @@
             this.cTextPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.32F);
             this.cTextPassword.Location = new System.Drawing.Point(235, 118);
             this.cTextPassword.Name = "cTextPassword";
+            this.cTextPassword.PasswordChar = '*';
             this.cTextPassword.Size = new System.Drawing.Size(150, 20);
             this.cTextPassword.TabIndex = 6;
             this.cTextPassword.WaterMark = "Password";

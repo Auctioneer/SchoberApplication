@@ -108,6 +108,7 @@
             this.graphsButton.TabIndex = 5;
             this.graphsButton.Text = "Graphs";
             this.graphsButton.UseVisualStyleBackColor = true;
+            this.graphsButton.Click += new System.EventHandler(this.graphsButton_Click);
             // 
             // editTableButton
             // 
