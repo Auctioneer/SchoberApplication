@@ -1,4 +1,5 @@
-﻿namespace SchoberApplication
+﻿using System.Drawing;
+namespace SchoberApplication
 {
     partial class Login
     {
@@ -28,6 +29,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+
+            Image view = Image.FromFile(@"login.jpg");
+            this.BackgroundImage = view;
+
             this.label2 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.cTextUsername = new ChreneLib.Controls.TextBoxes.CTextBox();
@@ -52,7 +57,7 @@
             // cTextUsername
             // 
             this.cTextUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.32F);
-            this.cTextUsername.Location = new System.Drawing.Point(235, 92);
+            this.cTextUsername.Location = new System.Drawing.Point(235, 230);
             this.cTextUsername.Name = "cTextUsername";
             this.cTextUsername.Size = new System.Drawing.Size(150, 20);
             this.cTextUsername.TabIndex = 5;
@@ -65,19 +70,19 @@
             // cTextPassword
             // 
             this.cTextPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.32F);
-            this.cTextPassword.Location = new System.Drawing.Point(235, 118);
+            this.cTextPassword.Location = new System.Drawing.Point(235, 256);
             this.cTextPassword.Name = "cTextPassword";
-            this.cTextPassword.PasswordChar = '*';
             this.cTextPassword.Size = new System.Drawing.Size(150, 20);
             this.cTextPassword.TabIndex = 6;
             this.cTextPassword.WaterMark = "Password";
+            this.cTextPassword.PasswordChar = '*';
             this.cTextPassword.WaterMarkActiveForeColor = System.Drawing.Color.Gray;
             this.cTextPassword.WaterMarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cTextPassword.WaterMarkForeColor = System.Drawing.Color.LightGray;
             // 
             // signinButton
             // 
-            this.signinButton.Location = new System.Drawing.Point(256, 157);
+            this.signinButton.Location = new System.Drawing.Point(256, 295);
             this.signinButton.Name = "signinButton";
             this.signinButton.Size = new System.Drawing.Size(92, 24);
             this.signinButton.TabIndex = 7;
@@ -89,13 +94,13 @@
             // 
             this.helpMissingUsernameLabel.AutoSize = true;
             this.helpMissingUsernameLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.helpMissingUsernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F);
+            this.helpMissingUsernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.helpMissingUsernameLabel.ForeColor = System.Drawing.Color.Red;
-            this.helpMissingUsernameLabel.Location = new System.Drawing.Point(107, 188);
+            this.helpMissingUsernameLabel.Location = new System.Drawing.Point(150, 326);
             this.helpMissingUsernameLabel.Name = "helpMissingUsernameLabel";
             this.helpMissingUsernameLabel.Size = new System.Drawing.Size(413, 39);
             this.helpMissingUsernameLabel.TabIndex = 8;
-            this.helpMissingUsernameLabel.Text = "Please Enter a Username";
+            this.helpMissingUsernameLabel.Text = "Please Enter Your Username";
             this.helpMissingUsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.helpMissingUsernameLabel.Visible = false;
             this.helpMissingUsernameLabel.Click += new System.EventHandler(this.label1_Click);
@@ -104,13 +109,13 @@
             // 
             this.helpMissingPasswordLabel.AutoSize = true;
             this.helpMissingPasswordLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.helpMissingPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F);
+            this.helpMissingPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.helpMissingPasswordLabel.ForeColor = System.Drawing.Color.Red;
-            this.helpMissingPasswordLabel.Location = new System.Drawing.Point(107, 188);
+            this.helpMissingPasswordLabel.Location = new System.Drawing.Point(150, 326);
             this.helpMissingPasswordLabel.Name = "helpMissingPasswordLabel";
             this.helpMissingPasswordLabel.Size = new System.Drawing.Size(405, 39);
             this.helpMissingPasswordLabel.TabIndex = 9;
-            this.helpMissingPasswordLabel.Text = "Please Enter a Password";
+            this.helpMissingPasswordLabel.Text = "Please Enter Your Password";
             this.helpMissingPasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.helpMissingPasswordLabel.Visible = false;
             this.helpMissingPasswordLabel.Click += new System.EventHandler(this.helpMissingPasswordLabel_Click);
@@ -118,9 +123,9 @@
             // exitButton
             // 
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(502, 230);
+            this.exitButton.Location = new System.Drawing.Point(400, 430);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(183, 41);
+            this.exitButton.Size = new System.Drawing.Size(180, 40);
             this.exitButton.TabIndex = 10;
             this.exitButton.Text = "Exit Application";
             this.exitButton.UseVisualStyleBackColor = true;
@@ -130,14 +135,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 283);
+            this.ClientSize = new System.Drawing.Size(600, 500);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.helpMissingPasswordLabel);
             this.Controls.Add(this.helpMissingUsernameLabel);
             this.Controls.Add(this.signinButton);
             this.Controls.Add(this.cTextPassword);
             this.Controls.Add(this.cTextUsername);
-            this.Controls.Add(this.label2);
+            //this.Controls.Add(this.label2);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";

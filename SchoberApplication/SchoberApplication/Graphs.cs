@@ -48,29 +48,6 @@ namespace SchoberApplication
             //Set the list to the result of the SQL command getting all sales of all stores
             storeRecordList = dbConnect.chartStoresRecords();
 
-            //TEST DATA
-            //storeRecordList.Add(new StoreRecord("Alpine"));
-            //storeRecordList.Add(new StoreRecord("Valley"));
-            //storeRecordList.Add(new StoreRecord("Plateau"));
-
-            //Here are some sales and some salaries for each store
-            //Alpine
-            //storeRecordList[0].addSale(6, 130.99m);
-            //storeRecordList[0].addSale(3, 7.50m);
-            //storeRecordList[0].addSale(2, 60m);
-
-            //Valley
-            //storeRecordList[1].addSale(2, 40m);
-            //storeRecordList[1].addSale(10, 13.50m);
-            //storeRecordList[1].addSale(4, 7.99m);
-            //storeRecordList[1].addSale(7, 70m);
-
-            //Plateau
-            //storeRecordList[2].addSale(10, 10m);
-            //storeRecordList[2].addSale(3, 35.66m);
-            //storeRecordList[2].addSale(2, 100m);
-            //storeRecordList[2].addSale(4, 20m);
-
             for (int i = 0; i < storeRecordList.Count; i++)
             {
                 //Get totals for that store
@@ -164,55 +141,39 @@ namespace SchoberApplication
             //Set the list to the result of the SQL command getting all sales of all stores
             storeRecordList = dbConnect.chartStoresRecords();
 
-            //TEST DATA
-            //storeRecordList.Add(new StoreRecord("Austria"));
-            //storeRecordList.Add(new StoreRecord("Scotland"));
-            //storeRecordList.Add(new StoreRecord("Tibet"));
-
-            //Here are some sales and some salaries for each store
-            //Alpine
-            //storeRecordList[0].addSale(6, 130.99m);
-            //storeRecordList[0].addSale(3, 7.50m);
-            //storeRecordList[0].addSale(2, 60m);
-
-            //Valley
-            //storeRecordList[1].addSale(2, 40m);
-            //storeRecordList[1].addSale(10, 13.50m);
-            //storeRecordList[1].addSale(4, 7.99m);
-            //storeRecordList[1].addSale(7, 70m);
-
-            //Plateau
-            //storeRecordList[2].addSale(10, 10m);
-            //storeRecordList[2].addSale(3, 35.66m);
-            //storeRecordList[2].addSale(2, 100m);
-            //storeRecordList[2].addSale(4, 20m);
-
             //This is a new list which will store each country's sales, not each store's
             List<StoreRecord> countrySortedStoreRecordList = new List<StoreRecord>();
 
+            //Loop through the old list
             for (int i = 0; i < storeRecordList.Count; i++)
             {
-
+                //Get the position of the new list on which to add items to, if the countries match
                 int pos = doesCountryExist(storeRecordList[i].getStoreCountry(), countrySortedStoreRecordList);
                 
+                //If pos is less than 0, the search returned no results
+                //Therefore the entry to the list is a new entry
                 if (pos < 0)
                 {
                     countrySortedStoreRecordList.Add(storeRecordList[i]);
                 }
+                //Else, it returned a position in which the country's sales are already stored
+                //Therefore, to avoid duplicate country entries, we simply add the sales of the current entry to the new list's entry
                 else
                 {
                     countrySortedStoreRecordList[pos].addStoreSales(storeRecordList[i].getStoreSales());
                 }
                 
             }
-                for (int i = 0; i < countrySortedStoreRecordList.Count; i++)
-                {
+
+            //Now we display the data of the new list
+            for (int i = 0; i < countrySortedStoreRecordList.Count; i++)
+            {
                 //Get totals for that store
                 decimal salesTotal = countrySortedStoreRecordList[i].getTotalSales();
 
                 //Display these on the chartSalariesIncome
                 chartSalariesIncome.Series["Sale Profits"].Points.AddXY(countrySortedStoreRecordList[i].getStoreCountry(), salesTotal);
-                }
+            }
             
 
 

@@ -101,7 +101,7 @@ namespace SchoberApplication
             }
             this.StartPosition = FormStartPosition.Manual;
             //Show this main form again slightly above where the Login page was (Incase it was moved)
-            this.Location = new Point(((Form)a).Location.X, ((Form)a).Location.Y - 150);
+            this.Location = new Point(((Form)a).Location.X, ((Form)a).Location.Y);
             ((Form)a).Close(); //Close the Login Screen and return to whatever screen launched it.
          //   priviledgeLabels.
             ShowUserPriviledges(userAccess);
