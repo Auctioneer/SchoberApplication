@@ -12,14 +12,24 @@ namespace SchoberApplication
         //Name of store OR the country (this field can be used for both)
         String storeName;
 
+        int storeID;
+
         //List of sales
         List<StoreSale> saleList = new List<StoreSale>();
 
         //List of employee salaries
         List<decimal> salariesList = new List<decimal>();
 
+        //TEST CONSTRUCTOR - PLEASE REMOVE
         public StoreRecord(String storeName)
         {
+            this.storeName = storeName;
+        }
+
+        //The actual constructor, passing in ID and name
+        public StoreRecord(int storeID, String storeName)
+        {
+            this.storeID = storeID;
             this.storeName = storeName;
         }
 
@@ -28,13 +38,30 @@ namespace SchoberApplication
             return storeName;
         }
 
+        public int getStoreID()
+        {
+            return storeID;
+        }
+
+        public void setStoreSales(List<StoreSale> saleList)
+        {
+            this.saleList = saleList;
+        }
+
         //Method to add sale to list of sales
+        //ONLY FOR TEST DATA - TO BE REMOVED
         public void addSale(int quantity, decimal value)
         {
             saleList.Add(new StoreSale(quantity, value));
         }
 
+        public void setStoreSalaries(List<decimal> salary)
+        {
+            this.salariesList = salary;
+        }
+
         //Method to add salary to list of salaries
+        //ONLY FOR TEST DATA - TO BE REMOVED
         public void addSalary(decimal salary)
         {
             salariesList.Add(salary);
