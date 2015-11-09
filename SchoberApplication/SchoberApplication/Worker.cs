@@ -11,6 +11,7 @@ namespace SchoberApplication
         decimal workerSalary;
         int workerID;
         int storeID;
+        int jobID;
         //String forename;
         //String surname;
 
@@ -24,11 +25,12 @@ namespace SchoberApplication
             this.workerID = workerID;
         }
 
-        public Worker(int workerID, int storeID, decimal workerSalary)
+        public Worker(int workerID, int storeID, decimal workerSalary,int jobID)
         {
             this.workerID = workerID;
             this.storeID = storeID;
             this.workerSalary = workerSalary;
+            this.jobID = jobID;
         }
 
         public decimal getSalary()
@@ -39,6 +41,16 @@ namespace SchoberApplication
         public int getStoreID()
         {
             return storeID;
+        }
+
+        public int getJobID()
+        {
+            return jobID;
+        }
+
+        public void setJobID(int jobID)
+        {
+            this.jobID = jobID;
         }
 
         public void setSalary(decimal workerSalary)

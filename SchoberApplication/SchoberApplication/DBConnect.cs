@@ -524,5 +524,80 @@ namespace ConnectCsharpToMysql
                 return country;
             }
         }
+
+        public List<Worker> chartWorkersSalaries()
+        {
+            try
+            {
+                connection.Open();
+                MySqlCommand command;
+                MySqlDataReader data;
+                string query = "SELECT WorkerId,Store_idStore,Job_idJob FROM worker";
+                List<Worker> listOfWorkers = new List<Worker>();
+
+                command = new MySqlCommand(query, connection);
+                data = command.ExecuteReader();
+
+                while (data.Read())
+                {
+                    int workerID = data.GetInt32("WorkerId");
+                    int storeID = data.GetInt32("Store_idStore");
+                    int jobID = data.GetInt32("Job_idJob");
+
+                    Worker worker = new Worker();
+                    worker.setWorkerID(workerID);
+                    worker.setStoreID(storeID);
+                    worker.setJobID(jobID);
+                    listOfWorkers.Add(worker);
+
+                }
+                connection.Close();
+                foreach (Worker wrkr in listOfWorkers)
+                {
+                    decimal salary = getWorkerSalary(wrkr.getJobID());
+                    wrkr.setSalary(salary);
+                }
+
+                return listOfWorkers;
+
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
+
+
+        }
+
+        public decimal getWorkerSalary(int jobID)
+        {
+            connection.Open();
+            string query = "SELECT Salary FROM job where idJob =" + jobID;
+            MySqlCommand command;
+            MySqlDataReader data;
+            decimal salary = 0;
+
+            command = new MySqlCommand(query, connection);
+
+            data = command.ExecuteReader();
+
+            try
+            {
+                while (data.Read())
+                {
+                    salary = data.GetDecimal("Salary");
+                }
+                connection.Close();
+                return salary;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return salary;
+            }
+        }
     }
 }
