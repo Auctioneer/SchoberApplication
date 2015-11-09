@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartSalariesIncome = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.comboBoxGraphMain = new System.Windows.Forms.ComboBox();
             this.btnRunQuery = new System.Windows.Forms.Button();
@@ -40,21 +40,21 @@
             // 
             // chartSalariesIncome
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartSalariesIncome.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartSalariesIncome.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chartSalariesIncome.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartSalariesIncome.Legends.Add(legend1);
             this.chartSalariesIncome.Location = new System.Drawing.Point(88, 96);
             this.chartSalariesIncome.Name = "chartSalariesIncome";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Sale Profits";
-            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Monthly Wage Expenditure";
-            this.chartSalariesIncome.Series.Add(series5);
-            this.chartSalariesIncome.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Sale Profits";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Monthly Wage Expenditure";
+            this.chartSalariesIncome.Series.Add(series1);
+            this.chartSalariesIncome.Series.Add(series2);
             this.chartSalariesIncome.Size = new System.Drawing.Size(486, 353);
             this.chartSalariesIncome.TabIndex = 1;
             this.chartSalariesIncome.Text = "chart1";
@@ -67,7 +67,8 @@
             "Compare overall sales for each store",
             "Compare overall sales for each country",
             "Compare sales of last 30 days to employee wage expenses",
-            "Compare overall sales of each product type"});
+            "Compare overall sales of each product type",
+            "Compare overall sales of products\' activity grouping"});
             this.comboBoxGraphMain.Location = new System.Drawing.Point(88, 43);
             this.comboBoxGraphMain.Name = "comboBoxGraphMain";
             this.comboBoxGraphMain.Size = new System.Drawing.Size(366, 21);

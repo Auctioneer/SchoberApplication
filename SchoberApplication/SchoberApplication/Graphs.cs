@@ -252,13 +252,16 @@ namespace SchoberApplication
                     getThirtyDaysProfitsWages();
                     break;
                 case "Compare overall sales of each product type":
-                    getProductTypeSales();
+                    getProductTypeSales(0);
+                    break;
+                case "Compare overall sales of products' activity grouping":
+                    getProductTypeSales(1);
                     break;
             }
         }
 
         //Method to compare sales of each type of product
-        private void getProductTypeSales()
+        private void getProductTypeSales(int TypeOrActivity)
         {
             //Clear and add series
             chartSalariesIncome.Series.Clear();
@@ -285,8 +288,16 @@ namespace SchoberApplication
                 //Loop through sales
                 for (int j = 0; j < currentSaleList.Count; j++)
                 {
-                    String currentType = currentSaleList[i].getType();
+                    String currentType;
 
+                    if (TypeOrActivity == 0)
+                    {
+                        currentType = currentSaleList[i].getType();
+                    }
+                    else
+                    {
+                        currentType = currentSaleList[i].getActivity();
+                    }
                     int pos = findProductPos(currentType, productTypeQuantityList);
 
                     //If pos is less than 0, the search returned no results
@@ -326,11 +337,18 @@ namespace SchoberApplication
         {
             for (int i = 0; i < productCountList.Count; i++)
             {
-                if (targetType.Equals(productCountList[i].getProductType()))
-                {
-                    //Return position of country in new list if found
-                    return i;
-                }
+                    if (targetType.Equals(productCountList[i].getProductType()))
+                    {
+                        //Return position of country in new list if found
+                        return i;
+                    }
+                
+                    if (targetType.Equals(productCountList[i].getProductType()))
+                    {
+                        //Return position of country in new list if found
+                        return i;
+                    }
+                
             }
             //Return -1 if not
             return -1;

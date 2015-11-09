@@ -8,6 +8,7 @@ namespace SchoberApplication
 {
     class ProductCount
     {
+        //Type or quantity depending on method called
         String productType;
         int quantity;
 
