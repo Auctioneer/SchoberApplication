@@ -67,8 +67,8 @@ namespace SchoberApplication
         public void getThirtyDaysProfitsWages()
         {
             //List of records storing store name list of salaries, and list of sales records
-            //This should be kept in the class as we need to use this list for different methods
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
+            List<Worker> workerList = new List<Worker>();
 
             //Add the two necessary series
             chartSalariesIncome.Series.Clear();
@@ -79,53 +79,55 @@ namespace SchoberApplication
             chartSalariesIncome.ChartAreas[0].AxisX.Title = "Store Name";
             chartSalariesIncome.ChartAreas[0].AxisY.Title = "Profit/Cost (£)";
 
-            //When calling in chartStoresRecords, pass in a 1
+            //When calling in chartStoresRecords, pass in a 1 (that means we'll get data for past 30 days only
+            //Set the list to the result of the SQL command getting sales of all stores
+            storeRecordList = dbConnect.chartStoresRecords(1);
 
-            //TEST DATA
-            //storeRecordList.Add(new StoreRecord("Alpine"));
-            //storeRecordList.Add(new StoreRecord("Valley"));
-            //storeRecordList.Add(new StoreRecord("Plateau"));
+            //Get list of worker details
+            workerList = dbConnect.chartWorkersSalaries();
 
-            //Here are some sales and some salaries for each store
-            //Alpine
-            //storeRecordList[0].addSale(6, 130.99m);
-            //storeRecordList[0].addSale(3, 7.50m);
-            //storeRecordList[0].addSale(2, 60m);
-            //storeRecordList[0].addSalary(250m);
-            //storeRecordList[0].addSalary(600m);
-            //storeRecordList[0].addSalary(300m);
+            //This is a new list which will store each store's salaries
+            List<Salary> storeSalaryList = new List<Salary>();
 
-            //Valley
-            //storeRecordList[1].addSale(2, 40m);
-            //storeRecordList[1].addSale(10, 13.50m);
-            //storeRecordList[1].addSale(4, 7.99m);
-            //storeRecordList[1].addSale(7, 70m);
-            //storeRecordList[1].addSalary(500m);
+            //Loop through the worker list
+            for (int i = 0; i < workerList.Count; i++)
+            {
+                //Get the position of the new list on which to add items to, if the worker's store IDs match
+                int pos = findStorePos(workerList[i].getStoreID(), storeSalaryList);
 
-            //Plateau
-            //storeRecordList[2].addSale(10, 10m);
-            //storeRecordList[2].addSale(3, 35.66m);
-            //storeRecordList[2].addSale(2, 100m);
-            //storeRecordList[2].addSale(4, 20m);
-            //storeRecordList[2].addSalary(250m);
-            //storeRecordList[2].addSalary(100m);
-            //storeRecordList[2].addSalary(150m);
+                //If pos is less than 0, the search returned no results
+                //Therefore the entry to the salary list is a new entry
+                if (pos < 0)
+                {
+                    Salary salaryToAdd = new Salary(workerList[i].getStoreID(), workerList[i].getSalary());
+                    storeSalaryList.Add(salaryToAdd);
+                }
+                //Else, it returned a position in which the salaries are already stored
+                //Therefore, to avoid duplicate country entries, we simply add the sales of the current entry to the new list's entry
+                else
+                {
+                    storeSalaryList[pos].addSalary(workerList[i].getSalary());
+                }
 
+            }
+            
+            //Loop through stores
             for (int i = 0; i < storeRecordList.Count; i++)
             {
+                //Get the relative position in the salary list of the salaries for the current store
+                int pos = findStorePos(storeRecordList[i].getStoreID(), storeSalaryList);
 
                 //Get totals for that store
                 decimal salesTotal = storeRecordList[i].getTotalSales();
-                decimal salariesTotal = storeRecordList[i].getTotalSalaries();
-
-                //Display these on the chartSalariesIncome
                 chartSalariesIncome.Series["Sale Profits"].Points.AddXY(storeRecordList[i].getStoreName(), salesTotal);
-                chartSalariesIncome.Series["Monthly Wage Expenditure"].Points.AddXY(storeRecordList[i].getStoreName(), salariesTotal);
+
+                //Add total salaries for that store
+                chartSalariesIncome.Series["Monthly Wage Expenditure"].Points.AddXY(storeRecordList[i].getStoreName(), storeSalaryList[pos].getTotalSalaries());
 
             }
 
-            //Display
-            chartSalariesIncome.Show();
+                //Display
+                chartSalariesIncome.Show();
 
         }
 
@@ -135,7 +137,6 @@ namespace SchoberApplication
             //Clear and add series
             chartSalariesIncome.Series.Clear();
             chartSalariesIncome.Series.Add("Sale Profits");
-
 
             //For storing sales
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
@@ -150,7 +151,7 @@ namespace SchoberApplication
             for (int i = 0; i < storeRecordList.Count; i++)
             {
                 //Get the position of the new list on which to add items to, if the countries match
-                int pos = doesCountryExist(storeRecordList[i].getStoreCountry(), countrySortedStoreRecordList);
+                int pos = findCountryPos(storeRecordList[i].getStoreCountry(), countrySortedStoreRecordList);
                 
                 //If pos is less than 0, the search returned no results
                 //Therefore the entry to the list is a new entry
@@ -189,11 +190,26 @@ namespace SchoberApplication
         }
 
         //Method to check whether country exists in new list of countries being compiled
-        private int doesCountryExist(String targetCountry, List<StoreRecord>newList)
+        private int findCountryPos(String targetCountry, List<StoreRecord>newList)
         {
             for (int i = 0; i < newList.Count; i++)
             {
                 if (targetCountry.Equals(newList[i].getStoreCountry()))
+                {
+                    //Return position of country in new list if found
+                    return i;
+                }
+            }
+            //Return -1 if not
+            return -1;
+        }
+
+        //Method to check whether store exists in new list of stores being compiled, and if so at what position
+        private int findStorePos(int targetID, List<Salary> salaryList)
+        {
+            for (int i = 0; i < salaryList.Count; i++)
+            {
+                if (targetID == salaryList[i].getStoreID())
                 {
                     //Return position of country in new list if found
                     return i;

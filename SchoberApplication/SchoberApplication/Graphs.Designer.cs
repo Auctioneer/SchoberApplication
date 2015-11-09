@@ -55,7 +55,7 @@
             series2.Name = "Monthly Wage Expenditure";
             this.chartSalariesIncome.Series.Add(series1);
             this.chartSalariesIncome.Series.Add(series2);
-            this.chartSalariesIncome.Size = new System.Drawing.Size(366, 353);
+            this.chartSalariesIncome.Size = new System.Drawing.Size(486, 353);
             this.chartSalariesIncome.TabIndex = 1;
             this.chartSalariesIncome.Text = "chart1";
             // 
@@ -75,7 +75,7 @@
             // 
             // btnRunQuery
             // 
-            this.btnRunQuery.Location = new System.Drawing.Point(487, 216);
+            this.btnRunQuery.Location = new System.Drawing.Point(460, 43);
             this.btnRunQuery.Name = "btnRunQuery";
             this.btnRunQuery.Size = new System.Drawing.Size(75, 23);
             this.btnRunQuery.TabIndex = 3;
