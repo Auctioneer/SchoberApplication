@@ -260,11 +260,80 @@ namespace SchoberApplication
         //Method to compare sales of each type of product
         private void getProductTypeSales()
         {
+            //Clear and add series
+            chartSalariesIncome.Series.Clear();
+            chartSalariesIncome.Series.Add("Number of Sales");
+
             //Change chart type to pie chart
             chartSalariesIncome.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
 
+            //For storing sales
+            List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
+            //Set the list to the result of the SQL command getting all sales of all stores
+            storeRecordList = dbConnect.chartStoresRecords(0);
 
+            //Make list of product type and quantity
+            List<ProductCount> productTypeQuantityList = new List<ProductCount>();
+
+            //Loop through list of store records
+            for (int i = 0; i < storeRecordList.Count; i++)
+            {
+                //Get list of sales from record
+                List<StoreSale> currentSaleList = new List<StoreSale>(storeRecordList[i].getStoreSales());
+
+                //Loop through sales
+                for (int j = 0; j < currentSaleList.Count; j++)
+                {
+                    String currentType = currentSaleList[i].getType();
+
+                    int pos = findProductPos(currentType, productTypeQuantityList);
+
+                    //If pos is less than 0, the search returned no results
+                    //Therefore the entry to the list is a new entry
+                    if (pos < 0)
+                    {
+                        ProductCount productToAdd = new ProductCount(currentType);
+                        productToAdd.addToQuantity(currentSaleList[i].getQuantity());
+                        productTypeQuantityList.Add(productToAdd);
+                    }
+                    //Else, it returned a position in which the country's sales are already stored
+                    //Therefore, to avoid duplicate country entries, we simply add the sales of the current entry to the new list's entry
+                    else
+                    {
+                        productTypeQuantityList[pos].addToQuantity(currentSaleList[i].getQuantity());
+                    }
+
+                }
+
+            }
+
+            //Now we display the data of the new list
+            for (int i = 0; i < productTypeQuantityList.Count; i++)
+            {
+                //Get quantity for type
+                decimal quantityTotal = productTypeQuantityList[i].getQuantity();
+
+                //Display these on the chartSalariesIncome
+                chartSalariesIncome.Series["Number of Sales"].Points.AddXY(productTypeQuantityList[i].getProductType(), quantityTotal);
+            }
+
+            chartSalariesIncome.Show();
+
+        }
+
+        private int findProductPos(String targetType, List<ProductCount> productCountList)
+        {
+            for (int i = 0; i < productCountList.Count; i++)
+            {
+                if (targetType.Equals(productCountList[i].getProductType()))
+                {
+                    //Return position of country in new list if found
+                    return i;
+                }
+            }
+            //Return -1 if not
+            return -1;
         }
 
         //Method to clear every chart of data
