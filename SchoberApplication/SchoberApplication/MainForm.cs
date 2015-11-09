@@ -21,6 +21,8 @@ namespace SchoberApplication
         Supplier supplierForm = new Supplier();
         Store store = new Store();
         Graphs graphs = new Graphs();
+        Tables tables = new Tables();
+        
 
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
@@ -49,6 +51,7 @@ namespace SchoberApplication
             supplierForm.Hide();
             store.Hide();
             graphs.Hide();
+            tables.Hide();
 
         }
 
@@ -235,6 +238,15 @@ namespace SchoberApplication
             graphs.ControlBox = false;
             graphs.FormBorderStyle = FormBorderStyle.None;
             graphs.Show();
+        }
+
+        private void editTableButton_Click(object sender, EventArgs e)
+        {
+            tables.MdiParent = this;
+            tables.Dock = DockStyle.Fill;
+            tables.ControlBox = false;
+            tables.FormBorderStyle = FormBorderStyle.None;
+            tables.Show();
         }
        
     }

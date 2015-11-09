@@ -46,7 +46,7 @@ namespace SchoberApplication
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
             //Set the list to the result of the SQL command getting all sales of all stores
-            storeRecordList = dbConnect.chartStoresRecords();
+            storeRecordList = dbConnect.chartStoresRecords(0);
 
             for (int i = 0; i < storeRecordList.Count; i++)
             {
@@ -78,6 +78,8 @@ namespace SchoberApplication
             //Set axis labels
             chartSalariesIncome.ChartAreas[0].AxisX.Title = "Store Name";
             chartSalariesIncome.ChartAreas[0].AxisY.Title = "Profit/Cost (£)";
+
+            //When calling in chartStoresRecords, pass in a 1
 
             //TEST DATA
             //storeRecordList.Add(new StoreRecord("Alpine"));
@@ -139,7 +141,7 @@ namespace SchoberApplication
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
             //Set the list to the result of the SQL command getting all sales of all stores
-            storeRecordList = dbConnect.chartStoresRecords();
+            storeRecordList = dbConnect.chartStoresRecords(0);
 
             //This is a new list which will store each country's sales, not each store's
             List<StoreRecord> countrySortedStoreRecordList = new List<StoreRecord>();

@@ -119,6 +119,7 @@
             this.editTableButton.TabIndex = 6;
             this.editTableButton.Text = "Edit Table";
             this.editTableButton.UseVisualStyleBackColor = true;
+            this.editTableButton.Click += new System.EventHandler(this.editTableButton_Click);
             // 
             // buttonBox
             // 

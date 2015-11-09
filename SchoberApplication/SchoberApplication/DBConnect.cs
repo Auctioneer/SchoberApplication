@@ -328,8 +328,54 @@ namespace ConnectCsharpToMysql
 
         }
 
-        //Method to return every sale from every sale
-        public List<StoreRecord> chartStoresRecords()
+        public List<StoreSale> chartMonthGross(int storeID)
+        {
+            try
+            {
+                connection.Open();
+                MySqlCommand command;
+                MySqlDataReader data;
+                string query = "SELECT Quantity,Product_idProduct,Date FROM sales WHERE Date < CURDATE() AND Date > (CURDATE() - 30) AND Store_idStore =" + storeID;
+                List<StoreSale> listOfSales = new List<StoreSale>();
+
+                command = new MySqlCommand(query, connection);
+                data = command.ExecuteReader();
+
+                while (data.Read())
+                {
+                    int quantity = data.GetInt32("Quantity");
+                    int productID = data.GetInt32("Product_idProduct");
+                    //decimal value = getProductPrice(data.GetInt32("Product_idProduct"));
+                    //StoreSale store = new StoreSale(quantity, value);
+                    StoreSale store = new StoreSale();
+                    store.setQuantity(quantity);
+                    store.setProductId(productID);
+                    listOfSales.Add(store);
+
+                }
+                connection.Close();
+                foreach (StoreSale sale in listOfSales)
+                {
+                    decimal value = getProductPrice(sale.getProductID());
+                    sale.setValue(value);
+                }
+
+                return listOfSales;
+
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
+
+
+        }
+
+        //Method to return every sale from every store
+        public List<StoreRecord> chartStoresRecords(int choice)
         {
             try
             {
@@ -356,13 +402,26 @@ namespace ConnectCsharpToMysql
 
                 }
                 connection.Close();
-                foreach(StoreRecord singStore in listOfStores)
+
+                if (choice == 0)
                 {
-                    singStore.setStoreSales(chartStoresSales(singStore.getStoreID()));
+                    foreach (StoreRecord singStore in listOfStores)
+                    {
+                        singStore.setStoreSales(chartStoresSales(singStore.getStoreID()));
+                    }
+                    foreach (StoreRecord singStore in listOfStores)
+                    {
+                        singStore.setCountry(getStoreCountry(singStore.getStoreID()));
+                    }
                 }
-                foreach(StoreRecord singStore in listOfStores)
+                else
                 {
-                    singStore.setCountry(getStoreCountry(singStore.getStoreID()));
+
+                    foreach (StoreRecord singStore in listOfStores)
+                    {
+                        singStore.setStoreSales(chartMonthGross(singStore.getStoreID()));
+                    }
+                    
                 }
 
                 return listOfStores;
