@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace SchoberApplication
 {
@@ -22,31 +23,40 @@ namespace SchoberApplication
         private void storeSubmit_Click(object sender, EventArgs e)
         {
 
-            string server = "localhost";
-            string uid = "mantas";
-            string password = "labas";
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+    
+            String storename = strnametxt.Text;
+            String storeadd1 = straddress1txt.Text;
+            String storeadd2 = straddress2txt.Text;
+            String storenr = strnrtxt.Text;
+            String storezip = strziptxt.Text;
+            String storeregion = strregiontxt.Text;
+            String storecountry = strcountrytxt.Text;
+            int addressFK = int.Parse(textBox1.Text);
 
-            string Query = "SELECT * FROM mydb.address WHERE idAddress=1";
-
-            MySqlConnection con = new MySqlConnection(connectionString);
-            MySqlCommand comm = new MySqlCommand(Query, con);
-            MySqlDataReader dr;
-            try
-            {
-                con.Open();
-                dr = comm.ExecuteReader();
-                while(dr.Read())
-                {
-                    textBox1.Text = dr.GetString("Postcode");
-                }
-                con.Close();
-            }
-            catch (Exception Exception){ }
-
-                
             
+            
+            
+
+            using (MySqlConnection conn = new MySqlConnection(connstring))
+            {
+
+                String query = "INSERT INTO Store (Name, ContactNumber, Address_idAddress) VALUES (@Name, @ContactNumber, @Address_idAddress)";
+
+                String query1 = "INSERT INTO Address (AddressLine1, AddressLine2, Pstcode, Region, Country) VALUES (storeadd1, storeadd2, storenr, storezip, storeregion, storecountry)";
+                using(MySqlCommand comm = new MySqlCommand(query))
+                {
+                    comm.Connection = conn;
+                    comm.Parameters.Add("@Name", MySqlDbType.VarChar, 45).Value = storename;
+                    comm.Parameters.Add("@ContactNumber", MySqlDbType.VarChar, 15).Value = storenr;
+                    comm.Parameters.Add("@Address_idAddress", MySqlDbType.Int32, 11).Value = addressFK;
+                    conn.Open();
+                    comm.ExecuteNonQuery();
+                    conn.Close();
+                    
+                }
+       
+            }
         }
     }
 }
