@@ -1,4 +1,6 @@
-﻿using System;
+﻿//HELLO, THIS IS THE REAL COPY OF THE SOLUTION
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,16 +11,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using System.Windows.Forms.DataVisualization.Charting;
+using SchoberApplication;
+using ConnectCsharpToMysql;
 
 namespace SchoberApplication
 {
     public partial class Graphs : Form
     {
 
+        DBConnect dbConnect;
+
         public Graphs()
         {
             InitializeComponent();
-
+             dbConnect = new DBConnect();
             //Charts should be hidden on form open
             hideCharts();
         }
@@ -39,28 +45,31 @@ namespace SchoberApplication
             //For storing sales
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
+            //Set the list to the result of the SQL command getting all sales of all stores
+            storeRecordList = dbConnect.chartStoresRecords();
+
             //TEST DATA
-            storeRecordList.Add(new StoreRecord("Alpine"));
-            storeRecordList.Add(new StoreRecord("Valley"));
-            storeRecordList.Add(new StoreRecord("Plateau"));
+            //storeRecordList.Add(new StoreRecord("Alpine"));
+            //storeRecordList.Add(new StoreRecord("Valley"));
+            //storeRecordList.Add(new StoreRecord("Plateau"));
 
             //Here are some sales and some salaries for each store
             //Alpine
-            storeRecordList[0].addSale(6, 130.99m);
-            storeRecordList[0].addSale(3, 7.50m);
-            storeRecordList[0].addSale(2, 60m);
+            //storeRecordList[0].addSale(6, 130.99m);
+            //storeRecordList[0].addSale(3, 7.50m);
+            //storeRecordList[0].addSale(2, 60m);
 
             //Valley
-            storeRecordList[1].addSale(2, 40m);
-            storeRecordList[1].addSale(10, 13.50m);
-            storeRecordList[1].addSale(4, 7.99m);
-            storeRecordList[1].addSale(7, 70m);
+            //storeRecordList[1].addSale(2, 40m);
+            //storeRecordList[1].addSale(10, 13.50m);
+            //storeRecordList[1].addSale(4, 7.99m);
+            //storeRecordList[1].addSale(7, 70m);
 
             //Plateau
-            storeRecordList[2].addSale(10, 10m);
-            storeRecordList[2].addSale(3, 35.66m);
-            storeRecordList[2].addSale(2, 100m);
-            storeRecordList[2].addSale(4, 20m);
+            //storeRecordList[2].addSale(10, 10m);
+            //storeRecordList[2].addSale(3, 35.66m);
+            //storeRecordList[2].addSale(2, 100m);
+            //storeRecordList[2].addSale(4, 20m);
 
             for (int i = 0; i < storeRecordList.Count; i++)
             {
@@ -94,34 +103,34 @@ namespace SchoberApplication
             chartSalariesIncome.ChartAreas[0].AxisY.Title = "Profit/Cost (£)";
 
             //TEST DATA
-            storeRecordList.Add(new StoreRecord("Alpine"));
-            storeRecordList.Add(new StoreRecord("Valley"));
-            storeRecordList.Add(new StoreRecord("Plateau"));
+            //storeRecordList.Add(new StoreRecord("Alpine"));
+            //storeRecordList.Add(new StoreRecord("Valley"));
+            //storeRecordList.Add(new StoreRecord("Plateau"));
 
             //Here are some sales and some salaries for each store
             //Alpine
-            storeRecordList[0].addSale(6, 130.99m);
-            storeRecordList[0].addSale(3, 7.50m);
-            storeRecordList[0].addSale(2, 60m);
-            storeRecordList[0].addSalary(250m);
-            storeRecordList[0].addSalary(600m);
-            storeRecordList[0].addSalary(300m);
+            //storeRecordList[0].addSale(6, 130.99m);
+            //storeRecordList[0].addSale(3, 7.50m);
+            //storeRecordList[0].addSale(2, 60m);
+            //storeRecordList[0].addSalary(250m);
+            //storeRecordList[0].addSalary(600m);
+            //storeRecordList[0].addSalary(300m);
 
             //Valley
-            storeRecordList[1].addSale(2, 40m);
-            storeRecordList[1].addSale(10, 13.50m);
-            storeRecordList[1].addSale(4, 7.99m);
-            storeRecordList[1].addSale(7, 70m);
-            storeRecordList[1].addSalary(500m);
+            //storeRecordList[1].addSale(2, 40m);
+            //storeRecordList[1].addSale(10, 13.50m);
+            //storeRecordList[1].addSale(4, 7.99m);
+            //storeRecordList[1].addSale(7, 70m);
+            //storeRecordList[1].addSalary(500m);
 
             //Plateau
-            storeRecordList[2].addSale(10, 10m);
-            storeRecordList[2].addSale(3, 35.66m);
-            storeRecordList[2].addSale(2, 100m);
-            storeRecordList[2].addSale(4, 20m);
-            storeRecordList[2].addSalary(250m);
-            storeRecordList[2].addSalary(100m);
-            storeRecordList[2].addSalary(150m);
+            //storeRecordList[2].addSale(10, 10m);
+            //storeRecordList[2].addSale(3, 35.66m);
+            //storeRecordList[2].addSale(2, 100m);
+            //storeRecordList[2].addSale(4, 20m);
+            //storeRecordList[2].addSalary(250m);
+            //storeRecordList[2].addSalary(100m);
+            //storeRecordList[2].addSalary(150m);
 
             for (int i = 0; i < storeRecordList.Count; i++)
             {
@@ -203,6 +212,8 @@ namespace SchoberApplication
         private void comboBoxGraphMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             //TO DO
+            //When query changes to get details of specific store, query database for list of store names
+            //When query changes to get details of countries, query database for list of countries
         }
 
         //Button to start creating the visualisation based on the user's option
@@ -212,6 +223,8 @@ namespace SchoberApplication
             clearCharts();
 
             String firstSelection = (String)comboBoxGraphMain.SelectedItem;
+            //String secondSelection = (String)comboBoxGraphSecondary.SelectedItem;
+            //secondSelection = "Scotland";
 
             switch (firstSelection)
             {
@@ -220,6 +233,7 @@ namespace SchoberApplication
                     break;
                 case "Get overall sales for each country":
                     getSalesCountry();
+                    //getSalesCountry(secondSelection);
                     break;
                 case "Compare sales of last 30 days to employee wage expenses":
                     getThirtyDaysProfitsWages();
