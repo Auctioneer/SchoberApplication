@@ -241,17 +241,30 @@ namespace SchoberApplication
 
             switch (firstSelection)
             {
-                case "Get overall sales for each store":
+                case "Compare overall sales for each store":
                     getAllSales();
                     break;
-                case "Get overall sales for each country":
+                case "Compare overall sales for each country":
                     getSalesCountry();
                     //getSalesCountry(secondSelection);
                     break;
                 case "Compare sales of last 30 days to employee wage expenses":
                     getThirtyDaysProfitsWages();
                     break;
+                case "Compare overall sales of each product type":
+                    getProductTypeSales();
+                    break;
             }
+        }
+
+        //Method to compare sales of each type of product
+        private void getProductTypeSales()
+        {
+            //Change chart type to pie chart
+            chartSalariesIncome.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+
+
+
         }
 
         //Method to clear every chart of data

@@ -308,10 +308,14 @@ namespace ConnectCsharpToMysql
 
                 }
                 connection.Close();
-                foreach(StoreSale sale in listOfSales)
+                foreach (StoreSale sale in listOfSales)
                 {
                     decimal value = getProductPrice(sale.getProductID());
+                    string type = getProductType(sale.getProductID());
+                    string activity = getProductActivity(sale.getProductID());
                     sale.setValue(value);
+                    sale.setType(type);
+                    sale.setActivity(activity);
                 }
 
                 return listOfSales;
@@ -570,6 +574,62 @@ namespace ConnectCsharpToMysql
             }
 
 
+        }
+
+        public string getProductType(int productID)
+        {
+            connection.Open();
+            string query = "SELECT Type FROM product where idProduct =" + productID;
+            MySqlCommand command;
+            MySqlDataReader data;
+            string type = "";
+
+            command = new MySqlCommand(query, connection);
+
+            data = command.ExecuteReader();
+
+            try
+            {
+                while (data.Read())
+                {
+                    type = data.GetString("Type");
+                }
+                connection.Close();
+                return type;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return type;
+            }
+        }
+
+        public string getProductActivity(int productID)
+        {
+            connection.Open();
+            string query = "SELECT Activity FROM product where idProduct =" + productID;
+            MySqlCommand command;
+            MySqlDataReader data;
+            string activity = "";
+
+            command = new MySqlCommand(query, connection);
+
+            data = command.ExecuteReader();
+
+            try
+            {
+                while (data.Read())
+                {
+                    activity = data.GetString("Activity");
+                }
+                connection.Close();
+                return activity;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return activity;
+            }
         }
 
         public decimal getWorkerSalary(int jobID)

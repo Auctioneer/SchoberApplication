@@ -66,6 +66,7 @@
     <Compile Include="Graphs.Designer.cs">
       <DependentUpon>Graphs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products.cs" />
     <Compile Include="Salary.cs" />
     <Compile Include="Store.cs">
       <SubType>Form</SubType>

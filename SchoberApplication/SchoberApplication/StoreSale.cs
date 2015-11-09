@@ -10,6 +10,8 @@ namespace SchoberApplication
         decimal value;
         decimal total;
         DateTime dateOfSale;
+        string type;
+        string activity;
 
         public StoreSale()
         {
@@ -43,6 +45,26 @@ namespace SchoberApplication
         public void setValue(decimal value)
         {
             this.value = value;
+        }
+
+        public void setType(string type)
+        {
+            this.type = type;
+        }
+
+        public void setActivity(string activity)
+        {
+            this.activity = activity;
+        }
+
+        public string getType()
+        {
+            return type;
+        }
+
+        public string getActivity()
+        {
+            return activity;
         }
 
         public int getQuantity()
