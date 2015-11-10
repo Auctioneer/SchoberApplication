@@ -66,6 +66,9 @@
     <Compile Include="Graphs.Designer.cs">
       <DependentUpon>Graphs.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductCount.cs" />
+    <Compile Include="Products.cs" />
+    <Compile Include="Salary.cs" />
     <Compile Include="Store.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +110,8 @@
     <Compile Include="Tables.Designer.cs">
       <DependentUpon>Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Waterproof.cs" />
+    <Compile Include="Worker.cs" />
     <EmbeddedResource Include="Employee.resx">
       <DependentUpon>Employee.cs</DependentUpon>
     </EmbeddedResource>
