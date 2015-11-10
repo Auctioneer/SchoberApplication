@@ -64,7 +64,7 @@ namespace SchoberApplication
             this.waterproof = waterproof;
         }
 
-        public bool getWaterproof(bool waterproof)
+        public bool getWaterproof()
         {
             return waterproof;
         }

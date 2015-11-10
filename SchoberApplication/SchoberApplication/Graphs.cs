@@ -263,6 +263,7 @@ namespace SchoberApplication
             }
         }
 
+        //Method to compare countries' sales of waterproof vs. non-waterproof items
         private void getWaterproofSales()
         {
             //New list to store country name and quantities of waterproof vs. non-waterproof
@@ -277,8 +278,68 @@ namespace SchoberApplication
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
             //Set the list to the result of the SQL command getting all sales of all stores
-            //storeRecordList = dbConnect.chartStoresRecords(1);
+            storeRecordList = dbConnect.chartStoresRecords(1);
 
+            //So now we have a list of all the records, and each sale has a waterproof bool in it
+
+            //We get storerecord list of countries
+            
+            //This is a new list which will store each country's sales, not each store's
+            List<StoreRecord> countrySortedStoreRecordList = new List<StoreRecord>();
+
+            //Loop through the old list
+            for (int i = 0; i < storeRecordList.Count; i++)
+            {
+                //Get the position of the new list on which to add items to, if the countries match
+                int pos = findCountryPos(storeRecordList[i].getStoreCountry(), countrySortedStoreRecordList);
+
+                //If pos is less than 0, the search returned no results
+                //Therefore the entry to the list is a new entry
+                if (pos < 0)
+                {
+                    countrySortedStoreRecordList.Add(storeRecordList[i]);
+                }
+                //Else, it returned a position in which the country's sales are already stored
+                //Therefore, to avoid duplicate country entries, we simply add the sales of the current entry to the new list's entry
+                else
+                {
+                    countrySortedStoreRecordList[pos].addStoreSales(storeRecordList[i].getStoreSales());
+                }
+
+            }
+
+            //We loop through each storerecord
+            //Loop through the new list
+            for (int i = 0; i < countrySortedStoreRecordList.Count; i++)
+            {
+                //Make new Waterproof object with country in constructor
+                Waterproof waterproofToAdd = new Waterproof(countrySortedStoreRecordList[i].getStoreCountry());
+                waterproofCountry.Add(waterproofToAdd);
+
+                //Loop through store sales in record
+                List<StoreSale> currentSaleList = countrySortedStoreRecordList[i].getStoreSales();
+
+                for (int j = 0; j < currentSaleList.Count; j++)
+                {
+                    //Add sales to Waterproof[j] passing in quantity and waterproof bool
+                    waterproofCountry[i].addSale(currentSaleList[j].getQuantity(), currentSaleList[j].getWaterproof());
+                }
+
+                //Run method to calculate percentages now we have all the data
+                waterproofCountry[i].calculatePercentages();
+                
+                //Display
+                chartSalariesIncome.Series["Waterproof item sales"].Points.AddXY(waterproofCountry[i].getCountry(), waterproofCountry[i].getPercentageW());
+                chartSalariesIncome.Series["Non-waterproof item sales"].Points.AddXY(waterproofCountry[i].getCountry(), waterproofCountry[i].getPercentageN());
+            }
+
+            //Change type to StackedColumn100
+            chartSalariesIncome.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn100;
+            chartSalariesIncome.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn100;
+
+
+            //So we have a list of waterproof quantities stored under a country
+            chartSalariesIncome.Show();
 
         }
 

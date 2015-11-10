@@ -425,6 +425,10 @@ namespace ConnectCsharpToMysql
                     {
                         singStore.setStoreSales(getWaterPData(singStore.getStoreID()));
                     }
+                    foreach (StoreRecord singStore in listOfStores)
+                    {
+                        singStore.setCountry(getStoreCountry(singStore.getStoreID()));
+                    }
                 }
                 else
                 {

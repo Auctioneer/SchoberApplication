@@ -38,6 +38,18 @@ namespace SchoberApplication
             nonWaterproofCount = nonWaterproofCount + quantity;
         }
 
+        public void addSale(int quantity, bool isWaterproof)
+        {
+            if (isWaterproof == true)
+            {
+                addWaterproof(quantity);
+            }
+            else
+            {
+                addNonWaterproof(quantity);
+            }
+        }
+
         public String getCountry()
         {
             return country;
