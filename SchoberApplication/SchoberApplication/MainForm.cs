@@ -229,6 +229,7 @@ namespace SchoberApplication
             store.ControlBox = false;
             store.FormBorderStyle = FormBorderStyle.None;
             store.Show();
+            store.storemsg.Text = "";
         }
 
         private void graphsButton_Click(object sender, EventArgs e)

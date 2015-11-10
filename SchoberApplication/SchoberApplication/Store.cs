@@ -24,32 +24,37 @@ namespace SchoberApplication
         {
 
             String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
-    
-            String storename = strnametxt.Text;
-            String storeadd1 = straddress1txt.Text;
-            String storeadd2 = straddress2txt.Text;
-            String storenr = strnrtxt.Text;
-            String storezip = strziptxt.Text;
-            String storeregion = strregiontxt.Text;
-            String storecountry = strcountrytxt.Text;
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-
-                using(MySqlCommand comm = new MySqlCommand("address"))
+                string query = "BEGIN; INSERT INTO address (AddressLine1, AddressLine2, Postcode, Region, Country) VALUES (@address1, @address2, @zip, @reg, @count); INSERT INTO store (Address_idAddress, Name, ContactNumber) VALUES (LAST_INSERT_ID(), @storename, @storenr); COMMIT;";
+                using(MySqlCommand comm = new MySqlCommand(query, conn))
                 {
-                    comm.CommandType = CommandType.StoredProcedure;
-                    comm.Connection = conn;
-
                     comm.Parameters.AddWithValue("@address1",straddress1txt.Text);
                     comm.Parameters.AddWithValue("@address2", straddress2txt.Text);
                     comm.Parameters.AddWithValue("@zip", strziptxt.Text);
                     comm.Parameters.AddWithValue("@reg", strregiontxt.Text);
                     comm.Parameters.AddWithValue("@count", strcountrytxt.Text);
+                    comm.Parameters.AddWithValue("@storename", strnametxt.Text);
+                    comm.Parameters.AddWithValue("@storenr", strnrtxt.Text);
                    
                     conn.Open();
                     comm.ExecuteNonQuery();
-                    conn.Close();  
+                    conn.Close();
+
+                    clear();
+                    storemsg.Text = "Successfully added an entry";  
+                }
+            }
+        }
+
+        private void clear()
+        {
+            foreach (var c in this.Controls)
+            {
+                if (c is TextBox)
+                {
+                    ((TextBox)c).Text = String.Empty;
                 }
             }
         }
