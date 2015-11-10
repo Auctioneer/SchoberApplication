@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
     <Compile Include="DBConnect.cs" />
     <Compile Include="Employee.cs">
       <SubType>Form</SubType>
@@ -60,6 +61,7 @@
     <Compile Include="Employee.Designer.cs">
       <DependentUpon>Employee.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphConnect.cs" />
     <Compile Include="Graphs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +106,7 @@
     <Compile Include="Supplier.Designer.cs">
       <DependentUpon>Supplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableConnect.cs" />
     <Compile Include="Tables.cs">
       <SubType>Form</SubType>
     </Compile>

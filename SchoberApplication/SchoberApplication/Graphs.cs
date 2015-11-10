@@ -20,11 +20,14 @@ namespace SchoberApplication
     {
 
         DBConnect dbConnect;
+        GraphConnect graphConnect;
 
         public Graphs()
         {
             InitializeComponent();
             dbConnect = new DBConnect();
+            graphConnect = new GraphConnect(dbConnect.getConnection());
+
             //Charts should be hidden on form open
             hideCharts();
         }
@@ -46,7 +49,7 @@ namespace SchoberApplication
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
             //Set the list to the result of the SQL command getting all sales of all stores
-            storeRecordList = dbConnect.chartStoresRecords(0);
+            storeRecordList = graphConnect.chartStoresRecords(0);
 
             for (int i = 0; i < storeRecordList.Count; i++)
             {
@@ -81,10 +84,10 @@ namespace SchoberApplication
 
             //When calling in chartStoresRecords, pass in a 2 (that means we'll get data for past 30 days only
             //Set the list to the result of the SQL command getting sales of all stores
-            storeRecordList = dbConnect.chartStoresRecords(2);
+            storeRecordList = graphConnect.chartStoresRecords(2);
 
             //Get list of worker details
-            workerList = dbConnect.chartWorkersSalaries();
+            workerList = graphConnect.chartWorkersSalaries();
 
             //This is a new list which will store each store's salaries
             List<Salary> storeSalaryList = new List<Salary>();
@@ -142,7 +145,7 @@ namespace SchoberApplication
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
             //Set the list to the result of the SQL command getting all sales of all stores
-            storeRecordList = dbConnect.chartStoresRecords(0);
+            storeRecordList = graphConnect.chartStoresRecords(0);
 
             //This is a new list which will store each country's sales, not each store's
             List<StoreRecord> countrySortedStoreRecordList = new List<StoreRecord>();
@@ -278,7 +281,7 @@ namespace SchoberApplication
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
             //Set the list to the result of the SQL command getting all sales of all stores
-            storeRecordList = dbConnect.chartStoresRecords(1);
+            storeRecordList = graphConnect.chartStoresRecords(1);
 
             //So now we have a list of all the records, and each sale has a waterproof bool in it
 
@@ -357,7 +360,7 @@ namespace SchoberApplication
             List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
             //Set the list to the result of the SQL command getting all sales of all stores
-            storeRecordList = dbConnect.chartStoresRecords(0);
+            storeRecordList = graphConnect.chartStoresRecords(0);
 
             //Make list of product type and quantity
             List<ProductCount> productTypeQuantityList = new List<ProductCount>();
