@@ -55,7 +55,7 @@
             series2.Name = "Monthly Wage Expenditure";
             this.chartSalariesIncome.Series.Add(series1);
             this.chartSalariesIncome.Series.Add(series2);
-            this.chartSalariesIncome.Size = new System.Drawing.Size(366, 353);
+            this.chartSalariesIncome.Size = new System.Drawing.Size(486, 353);
             this.chartSalariesIncome.TabIndex = 1;
             this.chartSalariesIncome.Text = "chart1";
             // 
@@ -64,9 +64,12 @@
             this.comboBoxGraphMain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxGraphMain.FormattingEnabled = true;
             this.comboBoxGraphMain.Items.AddRange(new object[] {
-            "Get overall sales for each store",
-            "Get overall sales for each country",
-            "Compare sales of last 30 days to employee wage expenses"});
+            "Compare overall sales for each store",
+            "Compare overall sales for each country",
+            "Compare sales of last 30 days to employee wage expenses",
+            "Compare overall sales of each product type",
+            "Compare overall sales of products\' activity grouping",
+            "Compare sales of waterproof vs. non-waterproof items for each country"});
             this.comboBoxGraphMain.Location = new System.Drawing.Point(88, 43);
             this.comboBoxGraphMain.Name = "comboBoxGraphMain";
             this.comboBoxGraphMain.Size = new System.Drawing.Size(366, 21);
@@ -75,7 +78,7 @@
             // 
             // btnRunQuery
             // 
-            this.btnRunQuery.Location = new System.Drawing.Point(487, 216);
+            this.btnRunQuery.Location = new System.Drawing.Point(460, 42);
             this.btnRunQuery.Name = "btnRunQuery";
             this.btnRunQuery.Size = new System.Drawing.Size(75, 23);
             this.btnRunQuery.TabIndex = 3;

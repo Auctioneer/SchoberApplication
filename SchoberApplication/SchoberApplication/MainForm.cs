@@ -21,6 +21,8 @@ namespace SchoberApplication
         Supplier supplierForm = new Supplier();
         Store store = new Store();
         Graphs graphs = new Graphs();
+        Tables tables = new Tables();
+        
 
         public AccessLevels userAccess = AccessLevels.None;
         public MainForm()
@@ -49,6 +51,7 @@ namespace SchoberApplication
             supplierForm.Hide();
             store.Hide();
             graphs.Hide();
+            tables.Hide();
 
         }
 
@@ -101,7 +104,7 @@ namespace SchoberApplication
             }
             this.StartPosition = FormStartPosition.Manual;
             //Show this main form again slightly above where the Login page was (Incase it was moved)
-            this.Location = new Point(((Form)a).Location.X, ((Form)a).Location.Y - 150);
+            this.Location = new Point(((Form)a).Location.X, ((Form)a).Location.Y);
             ((Form)a).Close(); //Close the Login Screen and return to whatever screen launched it.
          //   priviledgeLabels.
             ShowUserPriviledges(userAccess);
@@ -235,6 +238,15 @@ namespace SchoberApplication
             graphs.ControlBox = false;
             graphs.FormBorderStyle = FormBorderStyle.None;
             graphs.Show();
+        }
+
+        private void editTableButton_Click(object sender, EventArgs e)
+        {
+            tables.MdiParent = this;
+            tables.Dock = DockStyle.Fill;
+            tables.ControlBox = false;
+            tables.FormBorderStyle = FormBorderStyle.None;
+            tables.Show();
         }
        
     }

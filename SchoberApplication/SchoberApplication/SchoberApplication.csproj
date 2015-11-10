@@ -66,6 +66,9 @@
     <Compile Include="Graphs.Designer.cs">
       <DependentUpon>Graphs.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductCount.cs" />
+    <Compile Include="Products.cs" />
+    <Compile Include="Salary.cs" />
     <Compile Include="Store.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +104,14 @@
     <Compile Include="Supplier.Designer.cs">
       <DependentUpon>Supplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables.Designer.cs">
+      <DependentUpon>Tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Waterproof.cs" />
+    <Compile Include="Worker.cs" />
     <EmbeddedResource Include="Employee.resx">
       <DependentUpon>Employee.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +141,9 @@
     </Compile>
     <EmbeddedResource Include="Supplier.resx">
       <DependentUpon>Supplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables.resx">
+      <DependentUpon>Tables.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

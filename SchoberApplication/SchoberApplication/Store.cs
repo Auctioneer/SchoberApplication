@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace SchoberApplication
 {
@@ -22,31 +23,35 @@ namespace SchoberApplication
         private void storeSubmit_Click(object sender, EventArgs e)
         {
 
-            string server = "localhost";
-            string uid = "mantas";
-            string password = "labas";
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+    
+            String storename = strnametxt.Text;
+            String storeadd1 = straddress1txt.Text;
+            String storeadd2 = straddress2txt.Text;
+            String storenr = strnrtxt.Text;
+            String storezip = strziptxt.Text;
+            String storeregion = strregiontxt.Text;
+            String storecountry = strcountrytxt.Text;
 
-            string Query = "SELECT * FROM mydb.address WHERE idAddress=1";
-
-            MySqlConnection con = new MySqlConnection(connectionString);
-            MySqlCommand comm = new MySqlCommand(Query, con);
-            MySqlDataReader dr;
-            try
+            using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                con.Open();
-                dr = comm.ExecuteReader();
-                while(dr.Read())
-                {
-                    textBox1.Text = dr.GetString("Postcode");
-                }
-                con.Close();
-            }
-            catch (Exception Exception){ }
 
-                
-            
+                using(MySqlCommand comm = new MySqlCommand("address"))
+                {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Connection = conn;
+
+                    comm.Parameters.AddWithValue("@address1",straddress1txt.Text);
+                    comm.Parameters.AddWithValue("@address2", straddress2txt.Text);
+                    comm.Parameters.AddWithValue("@zip", strziptxt.Text);
+                    comm.Parameters.AddWithValue("@reg", strregiontxt.Text);
+                    comm.Parameters.AddWithValue("@count", strcountrytxt.Text);
+                   
+                    conn.Open();
+                    comm.ExecuteNonQuery();
+                    conn.Close();  
+                }
+            }
         }
     }
 }
