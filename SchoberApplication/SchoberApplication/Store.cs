@@ -32,30 +32,25 @@ namespace SchoberApplication
             String storezip = strziptxt.Text;
             String storeregion = strregiontxt.Text;
             String storecountry = strcountrytxt.Text;
-            int addressFK = int.Parse(textBox1.Text);
-
-            
-            
-            
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
 
-                String query = "INSERT INTO Store (Name, ContactNumber, Address_idAddress) VALUES (@Name, @ContactNumber, @Address_idAddress)";
-
-                String query1 = "INSERT INTO Address (AddressLine1, AddressLine2, Pstcode, Region, Country) VALUES (storeadd1, storeadd2, storenr, storezip, storeregion, storecountry)";
-                using(MySqlCommand comm = new MySqlCommand(query))
+                using(MySqlCommand comm = new MySqlCommand("address"))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
                     comm.Connection = conn;
-                    comm.Parameters.Add("@Name", MySqlDbType.VarChar, 45).Value = storename;
-                    comm.Parameters.Add("@ContactNumber", MySqlDbType.VarChar, 15).Value = storenr;
-                    comm.Parameters.Add("@Address_idAddress", MySqlDbType.Int32, 11).Value = addressFK;
+
+                    comm.Parameters.AddWithValue("@address1",straddress1txt.Text);
+                    comm.Parameters.AddWithValue("@address2", straddress2txt.Text);
+                    comm.Parameters.AddWithValue("@zip", strziptxt.Text);
+                    comm.Parameters.AddWithValue("@reg", strregiontxt.Text);
+                    comm.Parameters.AddWithValue("@count", strcountrytxt.Text);
+                   
                     conn.Open();
                     comm.ExecuteNonQuery();
-                    conn.Close();
-                    
+                    conn.Close();  
                 }
-       
             }
         }
     }
