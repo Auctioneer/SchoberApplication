@@ -13,6 +13,8 @@ namespace SchoberApplication
         string type;
         string activity;
 
+        bool waterproof;
+
         public StoreSale()
         {
 
@@ -55,6 +57,16 @@ namespace SchoberApplication
         public void setActivity(string activity)
         {
             this.activity = activity;
+        }
+
+        public void setWaterproof(bool waterproof)
+        {
+            this.waterproof = waterproof;
+        }
+
+        public bool getWaterproof(bool waterproof)
+        {
+            return waterproof;
         }
 
         public string getType()

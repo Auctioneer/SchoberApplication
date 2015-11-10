@@ -401,7 +401,7 @@ namespace ConnectCsharpToMysql
                     StoreRecord store = new StoreRecord(id, name);
                     //store.setStoreSales(chartStoresSales(id));
                     //store.setCountry(getStoreCountry(id));
-                    
+
                     listOfStores.Add(store);
 
                 }
@@ -418,6 +418,14 @@ namespace ConnectCsharpToMysql
                         singStore.setCountry(getStoreCountry(singStore.getStoreID()));
                     }
                 }
+
+                else if (choice == 1)
+                {
+                    foreach (StoreRecord singStore in listOfStores)
+                    {
+                        singStore.setStoreSales(getWaterPData(singStore.getStoreID()));
+                    }
+                }
                 else
                 {
 
@@ -425,7 +433,7 @@ namespace ConnectCsharpToMysql
                     {
                         singStore.setStoreSales(chartMonthGross(singStore.getStoreID()));
                     }
-                    
+
                 }
 
                 return listOfStores;
@@ -476,7 +484,7 @@ namespace ConnectCsharpToMysql
             string query = "SELECT Address_idAddress FROM store where idStore =" + storeID;
             MySqlCommand command;
             MySqlDataReader data;
-            int addressID=0;
+            int addressID = 0;
             String country = "";
 
             command = new MySqlCommand(query, connection);
@@ -657,6 +665,109 @@ namespace ConnectCsharpToMysql
             {
                 MessageBox.Show(e.Message);
                 return salary;
+            }
+        }
+
+        public List<StoreSale> getWaterPData(int storeID)
+        {
+            try
+            {
+                connection.Open();
+                MySqlCommand command;
+                MySqlDataReader data;
+                string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore =" + storeID;
+                List<StoreSale> listOfSales = new List<StoreSale>();
+
+                command = new MySqlCommand(query, connection);
+                data = command.ExecuteReader();
+
+                while (data.Read())
+                {
+                    int quantity = data.GetInt32("Quantity");
+                    int productID = data.GetInt32("Product_idProduct");
+                    //decimal value = getProductPrice(data.GetInt32("Product_idProduct"));
+                    //StoreSale store = new StoreSale(quantity, value);
+                    StoreSale store = new StoreSale();
+                    store.setQuantity(quantity);
+                    store.setProductId(productID);
+                    listOfSales.Add(store);
+
+                }
+                connection.Close();
+                foreach (StoreSale sale in listOfSales)
+                {
+                    int materialID = getMaterialID(sale.getProductID());
+                    bool waterproof = getWaterProof(materialID);
+                    sale.setWaterproof(waterproof);
+                }
+
+                return listOfSales;
+
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
+
+
+        }
+
+        public int getMaterialID(int productID)
+        {
+            connection.Open();
+            string query = "SELECT Material_idMaterial from product where idProduct =" + productID;
+            MySqlCommand command;
+            MySqlDataReader data;
+            int materialID = 0;
+
+            command = new MySqlCommand(query, connection);
+
+            data = command.ExecuteReader();
+
+            try
+            {
+                while (data.Read())
+                {
+                    materialID = data.GetInt32("Material_idMaterial");
+                }
+                connection.Close();
+                return materialID;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return materialID;
+            }
+        }
+
+        public bool getWaterProof(int materialID)
+        {
+            connection.Open();
+            string query = "SELECT Waterproof FROM material where idMaterial =" + materialID;
+            MySqlCommand command;
+            MySqlDataReader data;
+            bool waterproof = false;
+
+            command = new MySqlCommand(query, connection);
+
+            data = command.ExecuteReader();
+
+            try
+            {
+                while (data.Read())
+                {
+                    waterproof = data.GetBoolean("Waterproof");
+                }
+                connection.Close();
+                return waterproof;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return waterproof;
             }
         }
     }

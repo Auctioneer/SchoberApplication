@@ -24,7 +24,7 @@ namespace SchoberApplication
         public Graphs()
         {
             InitializeComponent();
-             dbConnect = new DBConnect();
+            dbConnect = new DBConnect();
             //Charts should be hidden on form open
             hideCharts();
         }
@@ -79,9 +79,9 @@ namespace SchoberApplication
             chartSalariesIncome.ChartAreas[0].AxisX.Title = "Store Name";
             chartSalariesIncome.ChartAreas[0].AxisY.Title = "Profit/Cost (£)";
 
-            //When calling in chartStoresRecords, pass in a 1 (that means we'll get data for past 30 days only
+            //When calling in chartStoresRecords, pass in a 2 (that means we'll get data for past 30 days only
             //Set the list to the result of the SQL command getting sales of all stores
-            storeRecordList = dbConnect.chartStoresRecords(1);
+            storeRecordList = dbConnect.chartStoresRecords(2);
 
             //Get list of worker details
             workerList = dbConnect.chartWorkersSalaries();
@@ -110,7 +110,7 @@ namespace SchoberApplication
                 }
 
             }
-            
+
             //Loop through stores
             for (int i = 0; i < storeRecordList.Count; i++)
             {
@@ -126,8 +126,8 @@ namespace SchoberApplication
 
             }
 
-                //Display
-                chartSalariesIncome.Show();
+            //Display
+            chartSalariesIncome.Show();
 
         }
 
@@ -152,7 +152,7 @@ namespace SchoberApplication
             {
                 //Get the position of the new list on which to add items to, if the countries match
                 int pos = findCountryPos(storeRecordList[i].getStoreCountry(), countrySortedStoreRecordList);
-                
+
                 //If pos is less than 0, the search returned no results
                 //Therefore the entry to the list is a new entry
                 if (pos < 0)
@@ -165,7 +165,7 @@ namespace SchoberApplication
                 {
                     countrySortedStoreRecordList[pos].addStoreSales(storeRecordList[i].getStoreSales());
                 }
-                
+
             }
 
             //Now we display the data of the new list
@@ -177,7 +177,7 @@ namespace SchoberApplication
                 //Display these on the chartSalariesIncome
                 chartSalariesIncome.Series["Sale Profits"].Points.AddXY(countrySortedStoreRecordList[i].getStoreCountry(), salesTotal);
             }
-            
+
 
 
             //Change chart type to doughnut chart
@@ -190,7 +190,7 @@ namespace SchoberApplication
         }
 
         //Method to check whether country exists in new list of countries being compiled
-        private int findCountryPos(String targetCountry, List<StoreRecord>newList)
+        private int findCountryPos(String targetCountry, List<StoreRecord> newList)
         {
             for (int i = 0; i < newList.Count; i++)
             {
@@ -257,7 +257,29 @@ namespace SchoberApplication
                 case "Compare overall sales of products' activity grouping":
                     getProductTypeSales(1);
                     break;
+                case "Compare sales of waterproof vs. non-waterproof items for each country":
+                    getWaterproofSales();
+                    break;
             }
+        }
+
+        private void getWaterproofSales()
+        {
+            //New list to store country name and quantities of waterproof vs. non-waterproof
+            List<Waterproof> waterproofCountry = new List<Waterproof>();
+
+            //Clear and add series
+            chartSalariesIncome.Series.Clear();
+            chartSalariesIncome.Series.Add("Waterproof item sales");
+            chartSalariesIncome.Series.Add("Non-waterproof item sales");
+
+            //For storing sales
+            List<StoreRecord> storeRecordList = new List<StoreRecord>();
+
+            //Set the list to the result of the SQL command getting all sales of all stores
+            //storeRecordList = dbConnect.chartStoresRecords(1);
+
+
         }
 
         //Method to compare sales of each type of product
@@ -337,18 +359,18 @@ namespace SchoberApplication
         {
             for (int i = 0; i < productCountList.Count; i++)
             {
-                    if (targetType.Equals(productCountList[i].getProductType()))
-                    {
-                        //Return position of country in new list if found
-                        return i;
-                    }
-                
-                    if (targetType.Equals(productCountList[i].getProductType()))
-                    {
-                        //Return position of country in new list if found
-                        return i;
-                    }
-                
+                if (targetType.Equals(productCountList[i].getProductType()))
+                {
+                    //Return position of country in new list if found
+                    return i;
+                }
+
+                if (targetType.Equals(productCountList[i].getProductType()))
+                {
+                    //Return position of country in new list if found
+                    return i;
+                }
+
             }
             //Return -1 if not
             return -1;

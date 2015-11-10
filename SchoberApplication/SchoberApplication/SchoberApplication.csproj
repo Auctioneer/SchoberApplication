@@ -110,6 +110,7 @@
     <Compile Include="Tables.Designer.cs">
       <DependentUpon>Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Waterproof.cs" />
     <Compile Include="Worker.cs" />
     <EmbeddedResource Include="Employee.resx">
       <DependentUpon>Employee.cs</DependentUpon>

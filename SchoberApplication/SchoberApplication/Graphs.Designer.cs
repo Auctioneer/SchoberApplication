@@ -68,7 +68,8 @@
             "Compare overall sales for each country",
             "Compare sales of last 30 days to employee wage expenses",
             "Compare overall sales of each product type",
-            "Compare overall sales of products\' activity grouping"});
+            "Compare overall sales of products\' activity grouping",
+            "Compare sales of waterproof vs. non-waterproof items for each country"});
             this.comboBoxGraphMain.Location = new System.Drawing.Point(88, 43);
             this.comboBoxGraphMain.Name = "comboBoxGraphMain";
             this.comboBoxGraphMain.Size = new System.Drawing.Size(366, 21);
