@@ -47,17 +47,18 @@
             this.empzip = new System.Windows.Forms.Label();
             this.empregion = new System.Windows.Forms.Label();
             this.empcountry = new System.Windows.Forms.Label();
-            this.empregiondrop = new System.Windows.Forms.ComboBox();
-            this.empcountrydrop = new System.Windows.Forms.ComboBox();
             this.personDetails = new System.Windows.Forms.Label();
             this.posDetails = new System.Windows.Forms.Label();
             this.empposition = new System.Windows.Forms.Label();
             this.empsalary = new System.Windows.Forms.Label();
             this.emphours = new System.Windows.Forms.Label();
             this.empbranch = new System.Windows.Forms.Label();
+            this.submitEmployee = new System.Windows.Forms.Button();
+            this.employeemsg = new System.Windows.Forms.Label();
+            this.empregiontxt = new System.Windows.Forms.TextBox();
+            this.empcountrytxt = new System.Windows.Forms.TextBox();
             this.emphoursdrop = new System.Windows.Forms.ComboBox();
             this.empbranchdrop = new System.Windows.Forms.ComboBox();
-            this.submitEmployee = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // empTitle
@@ -213,28 +214,6 @@
             this.empcountry.TabIndex = 18;
             this.empcountry.Text = "Country";
             // 
-            // empregiondrop
-            // 
-            this.empregiondrop.FormattingEnabled = true;
-            this.empregiondrop.Items.AddRange(new object[] {
-            "Shrobery",
-            "Ben nevis"});
-            this.empregiondrop.Location = new System.Drawing.Point(95, 291);
-            this.empregiondrop.Name = "empregiondrop";
-            this.empregiondrop.Size = new System.Drawing.Size(121, 21);
-            this.empregiondrop.TabIndex = 19;
-            // 
-            // empcountrydrop
-            // 
-            this.empcountrydrop.FormattingEnabled = true;
-            this.empcountrydrop.Items.AddRange(new object[] {
-            "Austria",
-            "Scotland"});
-            this.empcountrydrop.Location = new System.Drawing.Point(95, 318);
-            this.empcountrydrop.Name = "empcountrydrop";
-            this.empcountrydrop.Size = new System.Drawing.Size(121, 21);
-            this.empcountrydrop.TabIndex = 20;
-            // 
             // personDetails
             // 
             this.personDetails.AutoSize = true;
@@ -283,33 +262,11 @@
             // empbranch
             // 
             this.empbranch.AutoSize = true;
-            this.empbranch.Location = new System.Drawing.Point(335, 184);
+            this.empbranch.Location = new System.Drawing.Point(335, 180);
             this.empbranch.Name = "empbranch";
             this.empbranch.Size = new System.Drawing.Size(41, 13);
             this.empbranch.TabIndex = 26;
             this.empbranch.Text = "Branch";
-            // 
-            // emphoursdrop
-            // 
-            this.emphoursdrop.FormattingEnabled = true;
-            this.emphoursdrop.Items.AddRange(new object[] {
-            "Part-time",
-            "Full-time"});
-            this.emphoursdrop.Location = new System.Drawing.Point(401, 153);
-            this.emphoursdrop.Name = "emphoursdrop";
-            this.emphoursdrop.Size = new System.Drawing.Size(121, 21);
-            this.emphoursdrop.TabIndex = 27;
-            // 
-            // empbranchdrop
-            // 
-            this.empbranchdrop.FormattingEnabled = true;
-            this.empbranchdrop.Items.AddRange(new object[] {
-            "Viena",
-            "Mallaig"});
-            this.empbranchdrop.Location = new System.Drawing.Point(401, 180);
-            this.empbranchdrop.Name = "empbranchdrop";
-            this.empbranchdrop.Size = new System.Drawing.Size(121, 21);
-            this.empbranchdrop.TabIndex = 28;
             // 
             // submitEmployee
             // 
@@ -321,22 +278,67 @@
             this.submitEmployee.UseVisualStyleBackColor = true;
             this.submitEmployee.Click += new System.EventHandler(this.submitEmployee_Click);
             // 
+            // employeemsg
+            // 
+            this.employeemsg.AutoSize = true;
+            this.employeemsg.Location = new System.Drawing.Point(277, 350);
+            this.employeemsg.Name = "employeemsg";
+            this.employeemsg.Size = new System.Drawing.Size(0, 13);
+            this.employeemsg.TabIndex = 30;
+            // 
+            // empregiontxt
+            // 
+            this.empregiontxt.Location = new System.Drawing.Point(95, 291);
+            this.empregiontxt.Name = "empregiontxt";
+            this.empregiontxt.Size = new System.Drawing.Size(100, 20);
+            this.empregiontxt.TabIndex = 31;
+            // 
+            // empcountrytxt
+            // 
+            this.empcountrytxt.Location = new System.Drawing.Point(95, 317);
+            this.empcountrytxt.Name = "empcountrytxt";
+            this.empcountrytxt.Size = new System.Drawing.Size(100, 20);
+            this.empcountrytxt.TabIndex = 32;
+            // 
+            // emphoursdrop
+            // 
+            this.emphoursdrop.AutoCompleteCustomSource.AddRange(new string[] {
+            "part-time",
+            "full-time"});
+            this.emphoursdrop.FormattingEnabled = true;
+            this.emphoursdrop.Items.AddRange(new object[] {
+            "part-time",
+            "full-time"});
+            this.emphoursdrop.Location = new System.Drawing.Point(401, 154);
+            this.emphoursdrop.Name = "emphoursdrop";
+            this.emphoursdrop.Size = new System.Drawing.Size(121, 21);
+            this.emphoursdrop.TabIndex = 33;
+            // 
+            // empbranchdrop
+            // 
+            this.empbranchdrop.FormattingEnabled = true;
+            this.empbranchdrop.Location = new System.Drawing.Point(401, 181);
+            this.empbranchdrop.Name = "empbranchdrop";
+            this.empbranchdrop.Size = new System.Drawing.Size(121, 21);
+            this.empbranchdrop.TabIndex = 34;
+            // 
             // Employee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 400);
-            this.Controls.Add(this.submitEmployee);
             this.Controls.Add(this.empbranchdrop);
             this.Controls.Add(this.emphoursdrop);
+            this.Controls.Add(this.empcountrytxt);
+            this.Controls.Add(this.empregiontxt);
+            this.Controls.Add(this.employeemsg);
+            this.Controls.Add(this.submitEmployee);
             this.Controls.Add(this.empbranch);
             this.Controls.Add(this.emphours);
             this.Controls.Add(this.empsalary);
             this.Controls.Add(this.empposition);
             this.Controls.Add(this.posDetails);
             this.Controls.Add(this.personDetails);
-            this.Controls.Add(this.empcountrydrop);
-            this.Controls.Add(this.empregiondrop);
             this.Controls.Add(this.empcountry);
             this.Controls.Add(this.empregion);
             this.Controls.Add(this.empzip);
@@ -384,17 +386,18 @@
         private System.Windows.Forms.Label empzip;
         private System.Windows.Forms.Label empregion;
         private System.Windows.Forms.Label empcountry;
-        private System.Windows.Forms.ComboBox empregiondrop;
-        private System.Windows.Forms.ComboBox empcountrydrop;
         private System.Windows.Forms.Label personDetails;
         private System.Windows.Forms.Label posDetails;
         private System.Windows.Forms.Label empposition;
         private System.Windows.Forms.Label empsalary;
         private System.Windows.Forms.Label emphours;
         private System.Windows.Forms.Label empbranch;
+        private System.Windows.Forms.Button submitEmployee;
+        private System.Windows.Forms.Label employeemsg;
+        private System.Windows.Forms.TextBox empregiontxt;
+        private System.Windows.Forms.TextBox empcountrytxt;
         private System.Windows.Forms.ComboBox emphoursdrop;
         private System.Windows.Forms.ComboBox empbranchdrop;
-        private System.Windows.Forms.Button submitEmployee;
 
     }
 }
