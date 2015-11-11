@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ChreneLib.Controls.TextBoxes;
 using System.Threading;
 using System.Data.SqlClient;
+using ConnectCsharpToMysql;
 
 
 namespace SchoberApplication
@@ -79,17 +80,7 @@ namespace SchoberApplication
 
 
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
-
-
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
         //Called when user Presses the signInButton.
         //Calls loginEvent.
         private void signinButton_Click(object sender, EventArgs e)
@@ -101,23 +92,44 @@ namespace SchoberApplication
 
         private void LoginUser()
         {
-            LoginArgs loginArgs = new LoginArgs(cTextUsername.Text + "%%" + cTextPassword.Text);
+            incorrectUsernameLabel.Visible = false;
+            incorrectPasswordLabel.Visible = false;
+            String username = cTextUsername.Text;
+            String pass = cTextPassword.Text;
+            
+
+            if (!checkCredentials(username, pass))
+            {
+                return;
+            }
+            LoginArgs loginArgs = new LoginArgs(username);
             OnLogin(this, loginArgs);
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private bool checkCredentials(String username, String pass)
         {
+            DBConnect dbconn = new DBConnect();
+            bool isU = dbconn.unameExists(username);
 
-        }
+            if (!isU)
+            {
+                incorrectUsernameLabel.Visible = true;
+                cTextPassword.Text = "";
+                cTextUsername.Text = "";
+                cTextUsername.Focus();
+                return false;
+            }
+            else
+            {
+                if (!dbconn.matchPassword(username, pass))
+                {
+                    incorrectPasswordLabel.Visible = true;
+                    cTextPassword.Text = "";
+                    return false;
+                }
+            }
 
-        private void cTextUsername_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void helpMissingPasswordLabel_Click(object sender, EventArgs e)
-        {
-
+            return true;
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -125,10 +137,6 @@ namespace SchoberApplication
             Application.Exit();
         }
 
-        private void Login_Load_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
