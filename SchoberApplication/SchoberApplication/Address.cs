@@ -84,5 +84,10 @@ namespace SchoberApplication
         {
             return country;
         }
+
+        public string getPostcode()
+        {
+            return postCode;
+        }
     }
 }

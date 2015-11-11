@@ -94,15 +94,18 @@ namespace SchoberApplication
             addressList = tableConnection.getAllAddresses();
 
             //Add addresses to table
-            dgvTable.ColumnCount = 3;
+            dgvTable.ColumnCount = 6;
             dgvTable.Columns[0].Name = "ID";
             dgvTable.Columns[1].Name = "Address Line 1";
             dgvTable.Columns[2].Name = "Address Line 2";
+            dgvTable.Columns[3].Name = "Postcode";
+            dgvTable.Columns[4].Name = "Region";
+            dgvTable.Columns[5].Name = "Country";
 
 
             for (int i = 0; i < addressList.Count; i++)
             {
-                string[] row = new string[] { addressList[i].getAddressID().ToString(), addressList[i].getAddressln1(), addressList[i].getAddressln2() };
+                string[] row = new string[] { addressList[i].getAddressID().ToString(), addressList[i].getAddressln1(), addressList[i].getAddressln2(), addressList[i].getPostcode(), addressList[i].getRegion(), addressList[i].getCountry() };
                 dgvTable.Rows.Add(row);
             }
 
