@@ -25,6 +25,7 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
+
                 string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore = " + storeID;
                 List<StoreSale> listOfSales = new List<StoreSale>();
 
@@ -54,6 +55,7 @@ namespace SchoberApplication
                     sale.setActivity(activity);
                 }
 
+
                 return listOfSales;
 
             }
@@ -73,7 +75,7 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT Quantity,Product_idProduct,Date FROM sales WHERE Date < CURDATE() AND Date > (CURDATE() - 30) AND Store_idStore =" + storeID;
+                string query = "BEGIN; CREATE VIEW g AS SELECT Quantity,Product_idProduct,Date FROM sales WHERE Date < CURDATE() AND Date > (CURDATE() - 30) AND Store_idStore =" + storeID + "; SELECT * FROM g;";
                 List<StoreSale> listOfSales = new List<StoreSale>();
 
                 command = new MySqlCommand(query, connection);
@@ -120,7 +122,7 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT * FROM store";
+                string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT * FROM store; SELECT * FROM g;";
                 List<StoreRecord> listOfStores = new List<StoreRecord>();
 
                 command = new MySqlCommand(query, connection);
@@ -191,7 +193,7 @@ namespace SchoberApplication
         public decimal getProductPrice(int productID)
         {
             connection.Open();
-            string query = "SELECT Price FROM product where idProduct =" + productID;
+            string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Price FROM product where idProduct =" + productID + "; SELECT * FROM g;";
             MySqlCommand command;
             MySqlDataReader data;
             decimal price = 0;
@@ -219,7 +221,7 @@ namespace SchoberApplication
         public String getStoreCountry(int storeID)
         {
             connection.Open();
-            string query = "SELECT Address_idAddress FROM store where idStore =" + storeID;
+            string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Address_idAddress FROM store where idStore =" + storeID + "; SELECT * FROM g;";
             MySqlCommand command;
             MySqlDataReader data;
             int addressID = 0;
@@ -234,7 +236,6 @@ namespace SchoberApplication
                 while (data.Read())
                 {
                     addressID = data.GetInt32("Address_idAddress");
-                    //country = getCountryFromID(addressID);
                 }
                 connection.Close();
                 country = getCountryFromID(addressID);
@@ -250,7 +251,7 @@ namespace SchoberApplication
         public String getCountryFromID(int addressID)
         {
             connection.Open();
-            string query = "SELECT Country FROM address where idAddress =" + addressID;
+            string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Country FROM address where idAddress =" + addressID + "; SELECT * FROM g;";
             MySqlCommand command;
             MySqlDataReader data;
             String country = "";
@@ -282,7 +283,7 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT WorkerId,Store_idStore,Job_idJob FROM worker";
+                string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT WorkerId,Store_idStore,Job_idJob FROM worker; SELECT * FROM g;";
                 List<Worker> listOfWorkers = new List<Worker>();
 
                 command = new MySqlCommand(query, connection);
@@ -325,7 +326,7 @@ namespace SchoberApplication
         public string getProductType(int productID)
         {
             connection.Open();
-            string query = "SELECT Type FROM product where idProduct =" + productID;
+            string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Type FROM product where idProduct =" + productID + "; SELECT * FROM g;";
             MySqlCommand command;
             MySqlDataReader data;
             string type = "";
@@ -353,7 +354,7 @@ namespace SchoberApplication
         public string getProductActivity(int productID)
         {
             connection.Open();
-            string query = "SELECT Activity FROM product where idProduct =" + productID;
+            string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Activity FROM product where idProduct =" + productID + "; SELECT * FROM g;";
             MySqlCommand command;
             MySqlDataReader data;
             string activity = "";
@@ -381,7 +382,7 @@ namespace SchoberApplication
         public decimal getWorkerSalary(int jobID)
         {
             connection.Open();
-            string query = "SELECT Salary FROM job where idJob =" + jobID;
+            string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Salary FROM job where idJob =" + jobID + "; SELECT * FROM g;";
             MySqlCommand command;
             MySqlDataReader data;
             decimal salary = 0;
@@ -413,7 +414,7 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore =" + storeID;
+                string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore =" + storeID + "; SELECT * FROM g;";
                 List<StoreSale> listOfSales = new List<StoreSale>();
 
                 command = new MySqlCommand(query, connection);
@@ -456,7 +457,7 @@ namespace SchoberApplication
         public int getMaterialID(int productID)
         {
             connection.Open();
-            string query = "SELECT Material_idMaterial from product where idProduct =" + productID;
+            string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Material_idMaterial from product where idProduct =" + productID + "; SELECT * FROM g;";
             MySqlCommand command;
             MySqlDataReader data;
             int materialID = 0;
@@ -484,7 +485,7 @@ namespace SchoberApplication
         public bool getWaterProof(int materialID)
         {
             connection.Open();
-            string query = "SELECT Waterproof FROM material where idMaterial =" + materialID;
+            string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT Waterproof FROM material where idMaterial =" + materialID + "; SELECT * FROM g;";
             MySqlCommand command;
             MySqlDataReader data;
             bool waterproof = false;
@@ -516,7 +517,7 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT * FROM address";
+                string query = "BEGIN; CREATE OR REPLACE VIEW g AS SELECT * FROM address; SELECT * FROM g;";
                 List<Address> listOfAddresses = new List<Address>();
 
                 command = new MySqlCommand(query, connection);

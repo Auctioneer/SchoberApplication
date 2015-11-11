@@ -11,10 +11,37 @@ namespace SchoberApplication
         int storeID;
         List<decimal> salary;
 
+        //For getting job data for tables
+        decimal singSalary;
+        String jobName;
+
         public Salary()
         {
 
         }
+
+        //For storing info for tables
+        public void setJobName(String jobName)
+        {
+            this.jobName = jobName;
+        }
+
+        public void setSingleSalary(decimal singSalary)
+        {
+            this.singSalary = singSalary;
+        }
+
+        public String getJobName()
+        {
+            return jobName;
+        }
+
+        public decimal getSingleSalary()
+        {
+            return singSalary;
+        }
+        //End
+
 
         public Salary(int storeID, decimal singleSalary)
         {

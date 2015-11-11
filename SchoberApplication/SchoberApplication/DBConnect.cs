@@ -18,8 +18,6 @@ namespace ConnectCsharpToMysql
         private string uid;
         private string password;
 
-        //private GraphConnect graphConnect = new GraphConnect();
-
         //Constructor
         public DBConnect()
         {

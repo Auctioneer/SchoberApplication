@@ -25,7 +25,8 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT * FROM address";
+
+                string query = "BEGIN; CREATE OR REPLACE VIEW t AS SELECT * FROM address; SELECT * FROM t;";
                 List<Address> listOfAddresses = new List<Address>();
 
                 command = new MySqlCommand(query, connection);
@@ -55,6 +56,87 @@ namespace SchoberApplication
                 return null;
             }
 
+        }
+
+        public List<Worker> getAllWorkers()
+        {
+            try
+            {
+                connection.Open();
+                MySqlCommand command;
+                MySqlDataReader data;
+
+                string query = "BEGIN; CREATE OR REPLACE VIEW t AS SELECT * FROM worker; SELECT * FROM t;";
+                List<Worker> listOfWorkers = new List<Worker>();
+
+                command = new MySqlCommand(query, connection);
+                data = command.ExecuteReader();
+
+                //THIS NEEDS EXPANDING FOR CONTACT DETAILS
+                while (data.Read())
+                {
+                    int workerID = data.GetInt32("WorkerId");
+                    int storeID = data.GetInt32("Store_idStore");
+                    int jobID = data.GetInt32("Job_idJob");
+                    string forename = data.GetString("FirstName");
+                    string surname = data.GetString("LastName");
+
+                    Worker worker = new Worker(workerID, storeID, jobID, forename, surname);
+
+                    listOfWorkers.Add(worker);
+
+                }
+                connection.Close();
+
+                for (int i = 0; i < listOfWorkers.Count; i++)
+                {
+                    Salary addToWorker = getJobDetails(listOfWorkers[i].getJobID());
+                    listOfWorkers[i].setJobName(addToWorker.getJobName());
+                    listOfWorkers[i].setSalary(addToWorker.getSingleSalary());
+                }
+                return listOfWorkers;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
+        }
+
+        //Get name based on jobID
+        public Salary getJobDetails(int jobID)
+        {
+            Salary salaryToReturn = new Salary();
+
+            try
+            {
+                connection.Open();
+                MySqlCommand command;
+                MySqlDataReader data;
+
+                string query = "BEGIN; CREATE OR REPLACE VIEW t AS SELECT JobName, Salary FROM Job where idJob = " + jobID + "; SELECT * FROM t;";
+                command = new MySqlCommand(query, connection);
+                data = command.ExecuteReader();
+
+                while (data.Read())
+                {
+                    String jobName = data.GetString("JobName");
+                    decimal jobSalary = data.GetDecimal("Salary");
+
+                    salaryToReturn.setJobName(jobName);
+                    salaryToReturn.setSingleSalary(jobSalary);
+                }
+                connection.Close();
+
+                return salaryToReturn;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
         }
 
 
