@@ -11,8 +11,10 @@ namespace SchoberApplication
         decimal workerSalary;
         int workerID;
         int storeID;
-        //String forename;
-        //String surname;
+        int jobID;
+        String forename;
+        String surname;
+        String jobName;
 
         public Worker()
         {
@@ -24,21 +26,72 @@ namespace SchoberApplication
             this.workerID = workerID;
         }
 
-        public Worker(int workerID, int storeID, decimal workerSalary)
+        public Worker(int workerID, int storeID, decimal workerSalary, int jobID)
         {
             this.workerID = workerID;
             this.storeID = storeID;
             this.workerSalary = workerSalary;
+            this.jobID = jobID;
         }
+
+        public Worker(int workerID, int storeID, int jobID, String forename, String surname)
+        {
+            this.forename = forename;
+            this.surname = surname;
+            this.workerID = workerID;
+            this.storeID = storeID;
+            this.jobID = jobID;
+        }
+
 
         public decimal getSalary()
         {
             return workerSalary;
         }
 
+        public String getJobName()
+        {
+            return jobName;
+        }
+
         public int getStoreID()
         {
             return storeID;
+        }
+
+        public int getJobID()
+        {
+            return jobID;
+        }
+
+        public String getForename()
+        {
+            return forename;
+        }
+
+        public void setJobName(String jobName)
+        {
+            this.jobName = jobName;
+        }
+
+        public String getSurname()
+        {
+            return surname;
+        }
+
+        public void setForename(String forename)
+        {
+            this.forename = forename;
+        }
+
+        public void setSurname(String surname)
+        {
+            this.surname = surname;
+        }
+
+        public void setJobID(int jobID)
+        {
+            this.jobID = jobID;
         }
 
         public void setSalary(decimal workerSalary)

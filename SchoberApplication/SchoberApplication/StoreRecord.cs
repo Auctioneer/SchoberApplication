@@ -15,13 +15,14 @@ namespace SchoberApplication
         //Country
         String storeCountry;
 
+        //ID number
         int storeID;
 
         //List of sales
         List<StoreSale> saleList = new List<StoreSale>();
 
         //List of employee salaries
-        List<decimal> salariesList = new List<decimal>();
+      //  List<decimal> salariesList = new List<decimal>();
 
         //TEST CONSTRUCTOR - PLEASE REMOVE
         public StoreRecord(String storeName)
@@ -82,17 +83,17 @@ namespace SchoberApplication
             saleList.Add(new StoreSale(quantity, value));
         }
 
-        public void setStoreSalaries(List<decimal> salary)
-        {
-            this.salariesList = salary;
-        }
+      //  public void setStoreSalaries(List<decimal> salary)
+     //   {
+     //       this.salariesList = salary;
+     //   }
 
         //Method to add salary to list of salaries
         //ONLY FOR TEST DATA - TO BE REMOVED
-        public void addSalary(decimal salary)
-        {
-            salariesList.Add(salary);
-        }
+      //  public void addSalary(decimal salary)
+      //  {
+     //       salariesList.Add(salary);
+     //   }
 
         //Method to get the accumulated total of every sale
         public decimal getTotalSales()
@@ -109,18 +110,18 @@ namespace SchoberApplication
         }
 
         //Method to get the accumulated total of every employee salary
-        public decimal getTotalSalaries()
-        {
-            decimal runningSalaryTotal = 0;
+      //  public decimal getTotalSalaries()
+    //    {
+    //        decimal runningSalaryTotal = 0;
 
             //Loop through list and add each value to running total
-            for (int i = 0; i < salariesList.Count; i++)
-            {
-                runningSalaryTotal = runningSalaryTotal + salariesList[i];
-            }
+    //        for (int i = 0; i < salariesList.Count; i++)
+    //        {
+     //           runningSalaryTotal = runningSalaryTotal + salariesList[i];
+    //        }
 
-            return runningSalaryTotal;
-        }
+     //       return runningSalaryTotal;
+    //    }
 
     }
 }
