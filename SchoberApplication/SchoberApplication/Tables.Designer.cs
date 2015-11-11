@@ -31,6 +31,7 @@
             this.comboBoxSelectTable = new System.Windows.Forms.ComboBox();
             this.dgvTable = new System.Windows.Forms.DataGridView();
             this.btnGetTable = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,11 +68,22 @@
             this.btnGetTable.UseVisualStyleBackColor = true;
             this.btnGetTable.Click += new System.EventHandler(this.btnGetTable_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(216, 350);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(164, 23);
+            this.btnUpdate.TabIndex = 3;
+            this.btnUpdate.Text = "Update Table";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // Tables
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 475);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnGetTable);
             this.Controls.Add(this.dgvTable);
             this.Controls.Add(this.comboBoxSelectTable);
@@ -88,6 +100,7 @@
         private System.Windows.Forms.ComboBox comboBoxSelectTable;
         private System.Windows.Forms.DataGridView dgvTable;
         private System.Windows.Forms.Button btnGetTable;
+        private System.Windows.Forms.Button btnUpdate;
 
     }
 }

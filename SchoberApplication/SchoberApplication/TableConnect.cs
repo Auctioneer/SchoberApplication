@@ -170,6 +170,14 @@ namespace SchoberApplication
             }
         }
 
+        public List<StoreRecord> getAllStores()
+        {
+            List<StoreRecord> storeRecordList = new List<StoreRecord>();
 
+
+
+
+            return storeRecordList;
+        }
     }
 }

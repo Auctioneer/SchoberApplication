@@ -13,6 +13,7 @@ namespace SchoberApplication
 {
     public partial class Tables : Form
     {
+        //To show current table selection
         String whatTable = "";
 
         DBConnect dbConnect = new DBConnect();
@@ -22,6 +23,7 @@ namespace SchoberApplication
         //As we'll need to use them to send data back to the database
         List<Address> addressList = new List<Address>();
         List<Worker> workerList = new List<Worker>();
+        List<StoreRecord> storeList = new List<StoreRecord>();
 
 
         public Tables()
@@ -58,7 +60,16 @@ namespace SchoberApplication
                     whatTable = "Employee";
                     getEmployees();
                     break;
+                case "Stores":
+                    whatTable = "Store";
+                    getStores();
+                    break;
             }
+        }
+
+        private void getStores()
+        {
+            storeList = tableConnection.getAllStores();
         }
 
         private void getEmployees()
@@ -117,6 +128,11 @@ namespace SchoberApplication
         private void clearTables()
         {
             dgvTable.Rows.Clear();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            //Updates table based on selection
         }
 
 

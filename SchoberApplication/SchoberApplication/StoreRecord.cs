@@ -18,13 +18,15 @@ namespace SchoberApplication
         //ID number
         int storeID;
 
+        //Address
+        Address storeAddress;
+
+        //Contact number
+        String contactNumber;
+
         //List of sales
         List<StoreSale> saleList = new List<StoreSale>();
 
-        //List of employee salaries
-      //  List<decimal> salariesList = new List<decimal>();
-
-        //TEST CONSTRUCTOR - PLEASE REMOVE
         public StoreRecord(String storeName)
         {
             this.storeName = storeName;
@@ -83,17 +85,25 @@ namespace SchoberApplication
             saleList.Add(new StoreSale(quantity, value));
         }
 
-      //  public void setStoreSalaries(List<decimal> salary)
-     //   {
-     //       this.salariesList = salary;
-     //   }
+        public void setAddress(Address address)
+        {
+            this.storeAddress = address;
+        }
 
-        //Method to add salary to list of salaries
-        //ONLY FOR TEST DATA - TO BE REMOVED
-      //  public void addSalary(decimal salary)
-      //  {
-     //       salariesList.Add(salary);
-     //   }
+        public Address getAddress()
+        {
+            return storeAddress;
+        }
+
+        public void setContactNumber(String contactNumber)
+        {
+            this.contactNumber = contactNumber;
+        }
+
+        public String getContactNumber()
+        {
+            return contactNumber;
+        }
 
         //Method to get the accumulated total of every sale
         public decimal getTotalSales()
