@@ -42,6 +42,8 @@ namespace SchoberApplication
 
         private void btnGetTable_Click(object sender, EventArgs e)
         {
+            clearTables();
+
             String firstSelection = (String)comboBoxSelectTable.SelectedItem;
 
             switch (firstSelection)
@@ -102,6 +104,13 @@ namespace SchoberApplication
             dgvAddress.Show();
 
             
+        }
+
+        //Method to clear all data from all tables, just in case
+        private void clearTables()
+        {
+            dgvAddress.Rows.Clear();
+            //dgvEmployee.Rows.Clear();
         }
     }
 }
