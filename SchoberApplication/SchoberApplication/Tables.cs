@@ -15,6 +15,9 @@ namespace SchoberApplication
     {
         DBConnect dbConnect = new DBConnect();
         TableConnect tableConnection;
+        
+        //Table for employees
+        DataGridView dgvEmployee;
 
         //These variables have to be in the class and not the method
         //As we'll need to use them to send data back to the database

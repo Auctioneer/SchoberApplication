@@ -44,7 +44,7 @@
             "Employees",
             "Stores",
             "Products"});
-            this.comboBoxSelectTable.Location = new System.Drawing.Point(227, 33);
+            this.comboBoxSelectTable.Location = new System.Drawing.Point(152, 33);
             this.comboBoxSelectTable.Name = "comboBoxSelectTable";
             this.comboBoxSelectTable.Size = new System.Drawing.Size(264, 21);
             this.comboBoxSelectTable.TabIndex = 0;
@@ -52,14 +52,14 @@
             // dgvAddress
             // 
             this.dgvAddress.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAddress.Location = new System.Drawing.Point(64, 79);
+            this.dgvAddress.Location = new System.Drawing.Point(25, 79);
             this.dgvAddress.Name = "dgvAddress";
-            this.dgvAddress.Size = new System.Drawing.Size(574, 254);
+            this.dgvAddress.Size = new System.Drawing.Size(597, 254);
             this.dgvAddress.TabIndex = 1;
             // 
             // btnGetTable
             // 
-            this.btnGetTable.Location = new System.Drawing.Point(498, 33);
+            this.btnGetTable.Location = new System.Drawing.Point(423, 33);
             this.btnGetTable.Name = "btnGetTable";
             this.btnGetTable.Size = new System.Drawing.Size(75, 23);
             this.btnGetTable.TabIndex = 2;
