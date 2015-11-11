@@ -307,8 +307,8 @@
             "full-time"});
             this.emphoursdrop.FormattingEnabled = true;
             this.emphoursdrop.Items.AddRange(new object[] {
-            "part-time",
-            "full-time"});
+            "20",
+            "40"});
             this.emphoursdrop.Location = new System.Drawing.Point(401, 154);
             this.emphoursdrop.Name = "emphoursdrop";
             this.emphoursdrop.Size = new System.Drawing.Size(121, 21);
