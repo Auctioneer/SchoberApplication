@@ -289,7 +289,7 @@ namespace ConnectCsharpToMysql
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore = " + storeID;
+                string query = "BEGIN; CREATE OR REPLACE VIEW v AS SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore = " + storeID + "; SELECT * FROM v;";
                 List<StoreSale> listOfSales = new List<StoreSale>();
 
                 command = new MySqlCommand(query, connection);

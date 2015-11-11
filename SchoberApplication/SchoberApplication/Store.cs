@@ -28,6 +28,7 @@ namespace SchoberApplication
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
                 string query = "BEGIN; INSERT INTO address (AddressLine1, AddressLine2, Postcode, Region, Country) VALUES (@address1, @address2, @zip, @reg, @count); INSERT INTO store (Address_idAddress, Name, ContactNumber) VALUES (LAST_INSERT_ID(), @storename, @storenr); COMMIT;";
+                
                 using(MySqlCommand comm = new MySqlCommand(query, conn))
                 {
                     comm.Parameters.AddWithValue("@address1",straddress1txt.Text);
@@ -41,13 +42,11 @@ namespace SchoberApplication
                     conn.Open();
                     comm.ExecuteNonQuery();
                     conn.Close();
-
                     clear();
                     storemsg.Text = "Successfully added an entry";  
                 }
             }
         }
-
         private void clear()
         {
             foreach (var c in this.Controls)
@@ -58,5 +57,6 @@ namespace SchoberApplication
                 }
             }
         }
+        
     }
 }

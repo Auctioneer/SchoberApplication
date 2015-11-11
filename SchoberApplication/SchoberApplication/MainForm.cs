@@ -249,7 +249,5 @@ namespace SchoberApplication
             tables.FormBorderStyle = FormBorderStyle.None;
             tables.Show();
         }
-       
     }
-
 }
