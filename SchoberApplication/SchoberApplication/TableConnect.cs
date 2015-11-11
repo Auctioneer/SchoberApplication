@@ -91,8 +91,10 @@ namespace SchoberApplication
                 for (int i = 0; i < listOfWorkers.Count; i++)
                 {
                     Salary addToWorker = getJobDetails(listOfWorkers[i].getJobID());
+                    String storeName = getStoreName(listOfWorkers[i].getStoreID());
                     listOfWorkers[i].setJobName(addToWorker.getJobName());
                     listOfWorkers[i].setSalary(addToWorker.getSingleSalary());
+                    listOfWorkers[i].setStoreName(storeName);
                 }
                 return listOfWorkers;
 
@@ -136,6 +138,35 @@ namespace SchoberApplication
             {
                 MessageBox.Show(e.Message);
                 return null;
+            }
+        }
+
+        //Get store name based on ID
+        public String getStoreName(int storeID)
+        {
+            connection.Open();
+            string query = "BEGIN; CREATE OR REPLACE VIEW t AS SELECT Name FROM store where idStore =" + storeID + "; SELECT * FROM t;";
+            MySqlCommand command;
+            MySqlDataReader data;
+            String store = "";
+
+            command = new MySqlCommand(query, connection);
+
+            data = command.ExecuteReader();
+
+            try
+            {
+                while (data.Read())
+                {
+                    store = data.GetString("Name");
+                }
+                connection.Close();
+                return store;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return store;
             }
         }
 

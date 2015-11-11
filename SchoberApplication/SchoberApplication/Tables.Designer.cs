@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.comboBoxSelectTable = new System.Windows.Forms.ComboBox();
-            this.dgvAddress = new System.Windows.Forms.DataGridView();
+            this.dgvTable = new System.Windows.Forms.DataGridView();
             this.btnGetTable = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAddress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxSelectTable
@@ -49,13 +49,13 @@
             this.comboBoxSelectTable.Size = new System.Drawing.Size(264, 21);
             this.comboBoxSelectTable.TabIndex = 0;
             // 
-            // dgvAddress
+            // dgvTable
             // 
-            this.dgvAddress.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAddress.Location = new System.Drawing.Point(25, 79);
-            this.dgvAddress.Name = "dgvAddress";
-            this.dgvAddress.Size = new System.Drawing.Size(597, 254);
-            this.dgvAddress.TabIndex = 1;
+            this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTable.Location = new System.Drawing.Point(25, 79);
+            this.dgvTable.Name = "dgvTable";
+            this.dgvTable.Size = new System.Drawing.Size(597, 254);
+            this.dgvTable.TabIndex = 1;
             // 
             // btnGetTable
             // 
@@ -73,12 +73,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 475);
             this.Controls.Add(this.btnGetTable);
-            this.Controls.Add(this.dgvAddress);
+            this.Controls.Add(this.dgvTable);
             this.Controls.Add(this.comboBoxSelectTable);
             this.Name = "Tables";
             this.Text = "Tables";
             this.Load += new System.EventHandler(this.Tables_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAddress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -86,7 +86,7 @@
         #endregion
 
         private System.Windows.Forms.ComboBox comboBoxSelectTable;
-        private System.Windows.Forms.DataGridView dgvAddress;
+        private System.Windows.Forms.DataGridView dgvTable;
         private System.Windows.Forms.Button btnGetTable;
 
     }
