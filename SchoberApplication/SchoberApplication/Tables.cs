@@ -40,12 +40,6 @@ namespace SchoberApplication
 
         private void Tables_Load(object sender, EventArgs e)
         {
-            hideAllTables();
-        }
-
-        //Method to hide every table
-        private void hideAllTables()
-        {
             dgvTable.Hide();
         }
 
@@ -74,39 +68,10 @@ namespace SchoberApplication
                 case "Products":
                     whatTable = "product";
                     getTable();
+                    dgvTable.Columns["Supplier_idSupplier"].Visible = false;
+                    dgvTable.Columns["Material_idMaterial"].Visible = false;
                     break;
             }
-        }
-
-        private void getStores()
-        {
-            storeList = tableConnection.getAllStores();
-        }
-
-        private void getEmployees()
-        {
-            //Get addresses from tableConnect
-            workerList = tableConnection.getAllWorkers();
-
-            //Add workers to table
-            dgvTable.ColumnCount = 8;
-            dgvTable.Columns[0].Name = "ID";
-            dgvTable.Columns[1].Name = "Forename";
-            dgvTable.Columns[2].Name = "Surname";
-            dgvTable.Columns[3].Name = "Store ID";
-            dgvTable.Columns[4].Name = "Store Name";
-            dgvTable.Columns[5].Name = "Job ID";
-            dgvTable.Columns[6].Name = "Job Name";
-            dgvTable.Columns[7].Name = "Salary (£)";
-
-
-            for (int i = 0; i < workerList.Count; i++)
-            {
-                string[] row = new string[] { workerList[i].getWorkerID().ToString(), workerList[i].getForename(), workerList[i].getSurname(), workerList[i].getStoreID().ToString(), workerList[i].getStoreName(), workerList[i].getJobID().ToString(), workerList[i].getJobName(), workerList[i].getSalary().ToString() };
-                dgvTable.Rows.Add(row);
-            }
-
-            dgvTable.Show();
         }
 
         public void getTable()
