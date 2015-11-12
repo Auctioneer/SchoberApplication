@@ -1,6 +1,4 @@
-﻿//HELLO, THIS IS THE REAL COPY OF THE SOLUTION
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

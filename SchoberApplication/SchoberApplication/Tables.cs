@@ -51,23 +51,29 @@ namespace SchoberApplication
 
         private void btnGetTable_Click(object sender, EventArgs e)
         {
-            clearTables();
-
             String firstSelection = (String)comboBoxSelectTable.SelectedItem;
 
             switch (firstSelection)
             {
                 case "Addresses":
-                    whatTable = "Address";
-                    getAddresses();
+                    whatTable = "address";
+                    getTable();
                     break;
                 case "Employees":
-                    whatTable = "Employee";
-                    getEmployees();
+                    whatTable = "worker";
+                    getTable();
+                    dgvTable.Columns["Address_idAddress"].Visible = false;
+                    dgvTable.Columns["Store_idStore"].Visible = false;
+                    dgvTable.Columns["Job_idJob"].Visible = false;
+                    dgvTable.Columns["SystemLogin_idSystemLogin"].Visible = false;
                     break;
                 case "Stores":
-                    whatTable = "Store";
-                    getStores();
+                    whatTable = "store";
+                    getTable();
+                    break;
+                case "Products":
+                    whatTable = "product";
+                    getTable();
                     break;
             }
         }
@@ -103,67 +109,11 @@ namespace SchoberApplication
             dgvTable.Show();
         }
 
-        //Method to get all the addresses from the database
-  /*      private void getAddresses()
-        {
-            //Get addresses from tableConnect
-            addressList = tableConnection.getAllAddresses();
-
-            //Add addresses to table
-            dgvTable.ColumnCount = 6;
-            dgvTable.Columns[0].Name = "ID";
-            //Make ID read only
-            dgvTable.Columns[0].ReadOnly = true;
-            dgvTable.Columns[1].Name = "Address Line 1";
-            dgvTable.Columns[2].Name = "Address Line 2";
-            dgvTable.Columns[3].Name = "Postcode";
-            dgvTable.Columns[4].Name = "Region";
-            dgvTable.Columns[5].Name = "Country";
-
-
-            for (int i = 0; i < addressList.Count; i++)
-            {
-                string[] row = new string[] { addressList[i].getAddressID().ToString(), addressList[i].getAddressln1(), addressList[i].getAddressln2(), addressList[i].getPostcode(), addressList[i].getRegion(), addressList[i].getCountry() };
-                dgvTable.Rows.Add(row);
-            }
-
-            dgvTable.Show();
-
-        } */
-
-        //Method to clear all data from all tables, just in case
-        private void clearTables()
-        {
-            dgvTable.Rows.Clear();
-        }
-
- /*       private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            //Updates table based on selection
-            if (whatTable.Equals("Address"))
-            {
-            //Updates table based on selection
-            dgvTable.EndEdit();
-             
-            DataTable dt = (DataTable)dgvTable.DataSource;
-
-            DataTable changedTable = dt.GetChanges();
-            Console.WriteLine(changedTable.Rows.Count);
-
-            int rowsUpdated = da.Update(dt);
-        
-            }
-            else
-            {
-                MessageBox.Show("You need to select a table first!");
-            }
-        } */
-
-        public void getAddresses()
+        public void getTable()
         {
             String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
             MySqlConnection conn = new MySqlConnection(connstring);
-            string query = "SELECT * FROM address";
+            string query = "SELECT * FROM " + whatTable;
             da = new MySqlDataAdapter(query, conn);
             cb = new MySqlCommandBuilder(da);
             table = new DataTable();
@@ -184,6 +134,8 @@ namespace SchoberApplication
             Console.WriteLine(changedTable.Rows.Count);
 
             int rowsUpdated = da.Update(dt);
+
+            MessageBox.Show("Update successful.");
         }
         
 

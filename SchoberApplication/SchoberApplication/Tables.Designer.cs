@@ -42,9 +42,9 @@
             this.comboBoxSelectTable.Items.AddRange(new object[] {
             "Select a table...",
             "Addresses",
+            "Products",
             "Employees",
-            "Stores",
-            "Products"});
+            "Stores"});
             this.comboBoxSelectTable.Location = new System.Drawing.Point(152, 33);
             this.comboBoxSelectTable.Name = "comboBoxSelectTable";
             this.comboBoxSelectTable.Size = new System.Drawing.Size(264, 21);
