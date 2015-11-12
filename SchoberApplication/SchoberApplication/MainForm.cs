@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ConnectCsharpToMysql;
+using MySql.Data.MySqlClient;
 
 namespace SchoberApplication
 {
@@ -15,33 +15,24 @@ namespace SchoberApplication
     {
         List<Label> _priviledgeLabels;
         Login login;
-        DBConnect db;
         Employee employee = new Employee();
         Product productForm = new Product();
         Supplier supplierForm = new Supplier();
         Store store = new Store();
         Graphs graphs = new Graphs();
         Tables tables = new Tables();
-        
 
-        public AccessLevels userAccess = AccessLevels.None;
+        //public static AccessLevels userAccess = AccessLevels.None;
+
         public MainForm()
         {
             InitializeComponent();
-            _priviledgeLabels = new List<Label>();
-            //buttonBox.Controls.Add(graphsButton);
-            //buttonBox.Controls.Add(employeeButton);
-            //buttonBox.Controls.Add(productButton);
-            //buttonBox.Controls.Add(editTableButton);
-            //buttonBox.Controls.Add(storeButton);
-            //buttonBox.Controls.Add(supplierButton);
-            //buttonBox.Controls.Add(logoutButton);
-            
+
             //Creates LogInScreen which changes user's AccessLevel
             logUser();
 
-            connectDataBase();
-            
+            //connectDataBase();
+
         }
 
         private void hideControls()
@@ -55,107 +46,130 @@ namespace SchoberApplication
 
         }
 
-        private void connectDataBase()
-        {
-            db = new DBConnect();
-            Console.WriteLine(db.OpenConnection());
-        }
-
         private void logUser()
         {
             login = new Login(); //Create a login Screen 
         
             //Is called when user Presses Login Button. Will be used to crosscheck username and password with database and grant user according priviledges. 
 
-            login.OnLogin += new Login.LoginHandler(CheckLogin);
+            login.OnLogin += new Login.LoginHandler(setPrivilige);
             //CheckForNoPriviledges Is called when Login Form is closed.
-            //If the user hasn't gained any priviledges after logging in, it closes the Application.
-            login.OnLoginFormClose += new Login.LoginPageClose(CheckForNoPriviledge); 
+            //If the user hasn't gained any privileges after logging in, it closes the Application. THIS SHOULDN'T EVER HAPPEN - if it does this might indicate errors in the database
+            login.OnLoginFormClose += new Login.LoginPageClose(CheckForNoPrivilege);
             this.Hide();
             login.ShowDialog();
 
             
         }
 
-        private void CheckForNoPriviledge()
+        private void CheckForNoPrivilege()
         {
-            Console.WriteLine("WOOO PRIVILEDGE");
-            if (userAccess == AccessLevels.None)
+            Console.WriteLine("PRIVILEGE CHECK");
+            if (Program.userAccess == AccessLevels.None)
                 Application.Exit();
         }
 
-        void CheckLogin(object a, LoginArgs e)
+        void setPrivilige(object a, LoginArgs e)
         {
-          
-            //Check whether the loginDetails are comparable to the ones we have in database and give user according userAccess.
-            //e.LoginDetails returns a String in the format  "username%%password"
-            //Currently temp code which will be replaced by a query to database
-            Console.WriteLine( "PRIVILEDGE NOT SET");
 
+            //Check in the database for worker's job and assign priviliges accordingly
+            //e.LoginDetails returns a username
+            String uname = e.LoginDetails.ToString();
+            int priv = getJob(uname);
 
-            if (e.LoginDetails.CompareTo(e.LoginDetails) == 0)
+            if (priv == 0)
             {
-                userAccess = AccessLevels.Admin;
+                Program.userAccess = AccessLevels.None;
 
+            }
+            else if (priv == 10700001 || priv == 10700002)
+            {
+                Program.userAccess = AccessLevels.Admin;
+            }
+            else if (priv == 10700003)
+            {
+                Program.userAccess = AccessLevels.Manager;
             }
             else
             {
-                userAccess = AccessLevels.None;
+                Program.userAccess = AccessLevels.Regular;
             }
+
+            Console.WriteLine(Program.userAccess.ToString());
+
             this.StartPosition = FormStartPosition.Manual;
-            //Show this main form again slightly above where the Login page was (Incase it was moved)
+            //Show this main form again slightly above where the Login page was (In case it was moved)
             this.Location = new Point(((Form)a).Location.X, ((Form)a).Location.Y);
             ((Form)a).Close(); //Close the Login Screen and return to whatever screen launched it.
-         //   priviledgeLabels.
-            ShowUserPriviledges(userAccess);
-            
+            //   privilegeLabels.
+            ShowUserPrivileges(Program.userAccess);
+
         }
 
-        private void ShowUserPriviledges(AccessLevels userAccess)
+        private int getJob(String Username)
         {
-            foreach (Control button in buttonBox.Controls)
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+            int logID=0, jobID=0;
+
+            using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                if (button.Name.Contains("Yes") || button.Name.Contains("No"))
-                    button.Visible = false;
+                
+                string logIdQuery = "SELECT idSystemLogin FROM systemlogin WHERE username=\"" + Username +"\"";
+                using (MySqlCommand comm = new MySqlCommand(logIdQuery, conn))
+                {
+                    conn.Open();
+                    MySqlDataReader dr;
+                    dr = comm.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        logID = dr.GetInt32("idSystemLogin");
+                    }
+                    conn.Close();
+                }
+                string jobIdQuery = "SELECT Job_idJob FROM worker WHERE SystemLogin_idSystemLogin=" + logID;
+                using (MySqlCommand comm = new MySqlCommand(jobIdQuery, conn))
+                {
+                    conn.Open();
+                    MySqlDataReader dr;
+                    dr = comm.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        jobID = dr.GetInt32("Job_idJob");
+                    }
+                    conn.Close();
+                }
+                
             }
 
+            return jobID;
+        }
+
+        private void ShowUserPrivileges(AccessLevels userAccess)
+        {
             if (userAccess == AccessLevels.Admin)
             {
-                foreach (Control button in buttonBox.Controls)
-                {
-                    if (button.Name.Contains("Yes"))
-                        button.Visible = true;
-                }
+                employeeButton.Enabled = true;
+                productButton.Enabled = true;
+                storeButton.Enabled = true;
+                supplierButton.Enabled = true;
+                graphsButton.Enabled = true;
             }
-            else if(userAccess == AccessLevels.Regular)
+            else if (userAccess == AccessLevels.Manager)
             {
-                editPrivLabelNo.Visible = true;
-                productPrivLabelYes.Visible = true;
-                //ADD REST OF PRIVILEDGES HERE.
-
+                employeeButton.Enabled = false;
+                productButton.Enabled = true;
+                storeButton.Enabled = false;
+                supplierButton.Enabled = true;
+                graphsButton.Enabled = false;
             }
-            //List<Label> _priviledgeLabels = null;
-            //Console.WriteLine(userAccess);
-            //_priviledgeLabels = new List<Label>();
-         
-
-                //for (int i = 0; i < buttonBox.Controls.Count; i++)
-                //{
-
-                    //_priviledgeLabels.Add(new Label());
-                    //_priviledgeLabels[i].Font = yesLabel.Font;
-                    // _priviledgeLabels[i].Size = yesLabel.Size;
-                    //_priviledgeLabels[i].ForeColor = yesLabel.ForeColor;
-                    //_priviledgeLabels[i].AutoSize = true;
-                    // _priviledgeLabels[i].Text = yesLabel.Text;
-                    ////_priviledgeLabels[i].StartPosition = FormStartPosition.Manual;
-                    ////_priviledgeLabels[i].Location = new Point(200 , 200);
-                    //_priviledgeLabels[i].Location = new Point(buttonBox.Controls[i].Location.X + buttonBox.Controls[i].Size.Width + 5, buttonBox.Controls[i].Location.Y + 5); 
-                    //_priviledgeLabels[i].Visible = true;
-                    //_priviledgeLabels[i].Show();
-                    //_priviledgeLabels[i].BringToFront();
-               
-                //}
+            else if (userAccess == AccessLevels.Regular)
+            {
+                employeeButton.Enabled = false;
+                productButton.Enabled = false;
+                storeButton.Enabled = false;
+                supplierButton.Enabled = false;
+                graphsButton.Enabled = false;
+            }
 
             this.Show();
         }
@@ -168,15 +182,6 @@ namespace SchoberApplication
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void productPrivLabelYes_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void productButton_Click(object sender, EventArgs e)
         {
@@ -190,13 +195,13 @@ namespace SchoberApplication
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            userAccess = AccessLevels.None;
+            Program.userAccess = AccessLevels.None;
             logUser();
         }
 
         private void MainForm_Activated(object sender, EventArgs e)
         {
-            if (userAccess == AccessLevels.None)
+            if (Program.userAccess == AccessLevels.None)
                 Application.Exit();
         }
 
@@ -222,14 +227,13 @@ namespace SchoberApplication
             supplierForm.Show();
         }
 
-     	private void storeButton_Click(object sender, EventArgs e)
+        private void storeButton_Click(object sender, EventArgs e)
         {
             store.MdiParent = this;
             store.Dock = DockStyle.Fill;
             store.ControlBox = false;
             store.FormBorderStyle = FormBorderStyle.None;
             store.Show();
-            store.storemsg.Text = "";
         }
 
         private void graphsButton_Click(object sender, EventArgs e)
@@ -249,5 +253,7 @@ namespace SchoberApplication
             tables.FormBorderStyle = FormBorderStyle.None;
             tables.Show();
         }
+
     }
+
 }

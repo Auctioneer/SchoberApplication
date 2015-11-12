@@ -1,6 +1,4 @@
-﻿//HELLO, THIS IS THE REAL COPY OF THE SOLUTION
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,21 +10,19 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Windows.Forms.DataVisualization.Charting;
 using SchoberApplication;
-using ConnectCsharpToMysql;
 
 namespace SchoberApplication
 {
     public partial class Graphs : Form
     {
 
-        DBConnect dbConnect;
         GraphConnect graphConnect;
 
         public Graphs()
         {
             InitializeComponent();
-            dbConnect = new DBConnect();
-            graphConnect = new GraphConnect(dbConnect.getConnection());
+            //dbConnect = new DBConnect();
+            graphConnect = new GraphConnect();
 
             //Charts should be hidden on form open
             hideCharts();
