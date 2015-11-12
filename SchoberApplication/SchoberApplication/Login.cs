@@ -17,7 +17,6 @@ namespace SchoberApplication
 {
     public partial class Login : Form
     {
-        Boolean processing = false;
         public delegate void LoginHandler(object myObject,
                                                LoginArgs myArgs);
         public delegate void LoginPageClose();
@@ -75,11 +74,6 @@ namespace SchoberApplication
             }
             return false;
         }
-       
-
-
-
-
 
         //Called when user Presses the signInButton.
         //Calls loginEvent.

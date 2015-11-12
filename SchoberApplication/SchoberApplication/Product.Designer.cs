@@ -53,6 +53,8 @@
             this.prodsubmit = new System.Windows.Forms.Button();
             this.prodbranddrop = new System.Windows.Forms.ComboBox();
             this.prodmsg = new System.Windows.Forms.Label();
+            this.literlbl = new System.Windows.Forms.Label();
+            this.gramlbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // productTitle
@@ -270,11 +272,31 @@
             this.prodmsg.Size = new System.Drawing.Size(0, 13);
             this.prodmsg.TabIndex = 27;
             // 
+            // literlbl
+            // 
+            this.literlbl.AutoSize = true;
+            this.literlbl.Location = new System.Drawing.Point(185, 186);
+            this.literlbl.Name = "literlbl";
+            this.literlbl.Size = new System.Drawing.Size(9, 13);
+            this.literlbl.TabIndex = 28;
+            this.literlbl.Text = "l";
+            // 
+            // gramlbl
+            // 
+            this.gramlbl.AutoSize = true;
+            this.gramlbl.Location = new System.Drawing.Point(185, 212);
+            this.gramlbl.Name = "gramlbl";
+            this.gramlbl.Size = new System.Drawing.Size(13, 13);
+            this.gramlbl.TabIndex = 29;
+            this.gramlbl.Text = "g";
+            // 
             // Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(731, 560);
+            this.Controls.Add(this.gramlbl);
+            this.Controls.Add(this.literlbl);
             this.Controls.Add(this.prodmsg);
             this.Controls.Add(this.prodbranddrop);
             this.Controls.Add(this.prodsubmit);
@@ -334,6 +356,8 @@
         private System.Windows.Forms.Button prodsubmit;
         private System.Windows.Forms.ComboBox prodbranddrop;
         private System.Windows.Forms.Label prodmsg;
+        private System.Windows.Forms.Label literlbl;
+        private System.Windows.Forms.Label gramlbl;
 
     }
 }

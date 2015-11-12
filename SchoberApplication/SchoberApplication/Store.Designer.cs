@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.strnametxt = new System.Windows.Forms.TextBox();
+            this.strnametxt = new System.Windows.Forms.MaskedTextBox();
             this.strnrtxt = new System.Windows.Forms.TextBox();
             this.storetitle = new System.Windows.Forms.Label();
             this.storenr = new System.Windows.Forms.Label();
@@ -50,6 +50,7 @@
             // strnametxt
             // 
             this.strnametxt.Location = new System.Drawing.Point(142, 90);
+            this.strnametxt.Mask = "00000";
             this.strnametxt.Name = "strnametxt";
             this.strnametxt.Size = new System.Drawing.Size(100, 20);
             this.strnametxt.TabIndex = 0;
@@ -217,7 +218,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox strnametxt;
+        private System.Windows.Forms.MaskedTextBox strnametxt;
         private System.Windows.Forms.TextBox strnrtxt;
         private System.Windows.Forms.Label storetitle;
         private System.Windows.Forms.Label storenr;
