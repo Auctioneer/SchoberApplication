@@ -33,26 +33,17 @@ namespace SchoberApplication
             Image view = Image.FromFile(@"login.jpg");
             this.BackgroundImage = view;
 
-            this.label2 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.cTextUsername = new ChreneLib.Controls.TextBoxes.CTextBox();
             this.cTextPassword = new ChreneLib.Controls.TextBoxes.CTextBox();
             this.signinButton = new System.Windows.Forms.Button();
             this.helpMissingUsernameLabel = new System.Windows.Forms.Label();
             this.helpMissingPasswordLabel = new System.Windows.Forms.Label();
+            this.incorrectUsernameLabel = new System.Windows.Forms.Label();
+            this.incorrectPasswordLabel = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(195, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(211, 55);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Schober";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+
             // 
             // cTextUsername
             // 
@@ -65,7 +56,6 @@ namespace SchoberApplication
             this.cTextUsername.WaterMarkActiveForeColor = System.Drawing.Color.Gray;
             this.cTextUsername.WaterMarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cTextUsername.WaterMarkForeColor = System.Drawing.Color.LightGray;
-            this.cTextUsername.TextChanged += new System.EventHandler(this.cTextUsername_TextChanged);
             // 
             // cTextPassword
             // 
@@ -103,7 +93,6 @@ namespace SchoberApplication
             this.helpMissingUsernameLabel.Text = "Please Enter Your Username";
             this.helpMissingUsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.helpMissingUsernameLabel.Visible = false;
-            this.helpMissingUsernameLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // helpMissingPasswordLabel
             // 
@@ -118,7 +107,34 @@ namespace SchoberApplication
             this.helpMissingPasswordLabel.Text = "Please Enter Your Password";
             this.helpMissingPasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.helpMissingPasswordLabel.Visible = false;
-            this.helpMissingPasswordLabel.Click += new System.EventHandler(this.helpMissingPasswordLabel_Click);
+            // 
+            // incorrectUsernameLabel
+            // 
+            this.incorrectUsernameLabel.AutoSize = true;
+            this.incorrectUsernameLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.incorrectUsernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.incorrectUsernameLabel.ForeColor = System.Drawing.Color.Red;
+            this.incorrectUsernameLabel.Location = new System.Drawing.Point(150, 326);
+            this.incorrectUsernameLabel.Name = "incorrectUsernameLabel";
+            this.incorrectUsernameLabel.Size = new System.Drawing.Size(405, 39);
+            this.incorrectUsernameLabel.TabIndex = 9;
+            this.incorrectUsernameLabel.Text = "Incorrect Username. Try Again.";
+            this.incorrectUsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.incorrectUsernameLabel.Visible = false;
+            // 
+            // incorrectPasswordLabel
+            // 
+            this.incorrectPasswordLabel.AutoSize = true;
+            this.incorrectPasswordLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.incorrectPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.incorrectPasswordLabel.ForeColor = System.Drawing.Color.Red;
+            this.incorrectPasswordLabel.Location = new System.Drawing.Point(150, 326);
+            this.incorrectPasswordLabel.Name = "incorrectPasswordLabel";
+            this.incorrectPasswordLabel.Size = new System.Drawing.Size(405, 39);
+            this.incorrectPasswordLabel.TabIndex = 9;
+            this.incorrectPasswordLabel.Text = "Incorrect Password. Try Again.";
+            this.incorrectPasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.incorrectPasswordLabel.Visible = false;
             // 
             // exitButton
             // 
@@ -139,15 +155,16 @@ namespace SchoberApplication
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.helpMissingPasswordLabel);
             this.Controls.Add(this.helpMissingUsernameLabel);
+            this.Controls.Add(this.incorrectUsernameLabel);
+            this.Controls.Add(this.incorrectPasswordLabel);
             this.Controls.Add(this.signinButton);
             this.Controls.Add(this.cTextPassword);
             this.Controls.Add(this.cTextUsername);
-            //this.Controls.Add(this.label2);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
-            this.Load += new System.EventHandler(this.Login_Load_1);
+            //this.Load += new System.EventHandler(this.Login_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,13 +172,14 @@ namespace SchoberApplication
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private ChreneLib.Controls.TextBoxes.CTextBox cTextUsername;
         private ChreneLib.Controls.TextBoxes.CTextBox cTextPassword;
         private System.Windows.Forms.Button signinButton;
         private System.Windows.Forms.Label helpMissingUsernameLabel;
         private System.Windows.Forms.Label helpMissingPasswordLabel;
+        private System.Windows.Forms.Label incorrectUsernameLabel;
+        private System.Windows.Forms.Label incorrectPasswordLabel;
         private System.Windows.Forms.Button exitButton;
     }
 }

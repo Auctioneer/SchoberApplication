@@ -7,6 +7,7 @@ using System.IO;
 //Add MySql Library
 using MySql.Data.MySqlClient;
 using SchoberApplication;
+using System.Security.Cryptography;
 
 namespace ConnectCsharpToMysql
 {
@@ -87,6 +88,95 @@ namespace ConnectCsharpToMysql
         public MySqlConnection getConnection()
         {
             return connection;
+        }
+
+        //For hashing passwords. source: http://blogs.msdn.com/b/csharpfaq/archive/2006/10/09/how-do-i-calculate-a-md5-hash-from-a-string_3f00_.aspx
+        public string calcMD5(string input)
+        {
+            // step 1, calculate MD5 hash from input
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("x2"));
+            }
+            return sb.ToString();
+        }
+
+        //Check if username is in the database - for log in. Method by KP
+        public bool unameExists(String usernameToCompare)
+        {
+            string query = "SELECT username FROM systemlogin";
+
+            if (OpenConnection() == true)
+            {
+                MySqlDataReader data;
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                data = cmd.ExecuteReader();
+                while (data.Read())
+                {
+                    String username = data.GetString("username");
+                    if (username.CompareTo(usernameToCompare) == 0)
+                    {
+                        CloseConnection();
+                        return true;
+                    }
+                }
+                CloseConnection();
+                return false;
+            }
+            else
+            {
+                CloseConnection();
+                return false;
+            }
+        }
+
+        //Check if given username matches with password- for log in. Method by KP
+        public bool matchPassword(String usernameToCompare, String passToCompare)
+        {
+            try
+            {
+                string query = "SELECT password FROM systemlogin WHERE username=\"" + usernameToCompare + "\"";
+
+                if (OpenConnection() == true)
+                {
+                    MySqlDataReader data;
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    data = cmd.ExecuteReader();
+                    String password = null;
+                    while (data.Read())
+                    {
+                        password = data.GetString("password");
+                    }
+                    if (password != null)
+                    {
+                        passToCompare = calcMD5(passToCompare);
+                        if (password.CompareTo(passToCompare) == 0)
+                        {
+                            CloseConnection();
+                            return true;
+                        }
+
+                    }
+                    CloseConnection();
+                    return false;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
         }
         
     }
