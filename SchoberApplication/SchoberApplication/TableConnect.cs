@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ConnectCsharpToMysql;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace SchoberApplication
 {
-    class TableConnect : DBConnect
+    class TableConnect
     {
+        String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
         MySqlConnection connection;
 
-        public TableConnect(MySqlConnection connection)
+        public TableConnect()
         {
-            this.connection = connection;
+            this.connection = new MySqlConnection(connstring);
         }
 
         public List<Address> getAllAddresses()

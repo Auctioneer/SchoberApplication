@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ConnectCsharpToMysql;
 using MySql.Data.MySqlClient;
 
 namespace SchoberApplication
@@ -21,7 +20,7 @@ namespace SchoberApplication
         MySqlCommandBuilder cb;
         DataTable table;
 
-        DBConnect dbConnect = new DBConnect();
+        //DBConnect dbConnect = new DBConnect();
         TableConnect tableConnection;
         
         //These variables have to be in the class and not the method
@@ -33,7 +32,7 @@ namespace SchoberApplication
 
         public Tables()
         {
-            tableConnection = new TableConnect(dbConnect.getConnection());
+            tableConnection = new TableConnect();
             InitializeComponent();
             comboBoxSelectTable.SelectedIndex = 0;
         }
@@ -45,7 +44,7 @@ namespace SchoberApplication
 
         private void btnGetTable_Click(object sender, EventArgs e)
         {
-            clearTables();
+            //clearTables();
 
             String firstSelection = (String)comboBoxSelectTable.SelectedItem;
 
@@ -124,4 +123,4 @@ namespace SchoberApplication
             
         }
     }
-}
+

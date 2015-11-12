@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Configuration;
-using ConnectCsharpToMysql;
 
 namespace SchoberApplication
 {
@@ -90,7 +89,7 @@ namespace SchoberApplication
                 using (MySqlCommand comm = new MySqlCommand(queryl, conn))
                 {
                     comm.Parameters.AddWithValue("@login", login);
-                    comm.Parameters.AddWithValue("@pass", DBConnect.calcMD5("pass"));
+                    comm.Parameters.AddWithValue("@pass", Login.calcMD5("pass"));
 
                     conn.Open();
                     comm.ExecuteNonQuery();

@@ -10,7 +10,8 @@ using System.Windows.Forms;
 using ChreneLib.Controls.TextBoxes;
 using System.Threading;
 using System.Data.SqlClient;
-using ConnectCsharpToMysql;
+using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
 
 
 namespace SchoberApplication
@@ -107,8 +108,7 @@ namespace SchoberApplication
 
         private bool checkCredentials(String username, String pass)
         {
-            DBConnect dbconn = new DBConnect();
-            bool isU = dbconn.unameExists(username);
+            bool isU = unameExists(username);
 
             if (!isU)
             {
@@ -120,7 +120,7 @@ namespace SchoberApplication
             }
             else
             {
-                if (!dbconn.matchPassword(username, pass))
+                if (!matchPassword(username, pass))
                 {
                     incorrectPasswordLabel.Visible = true;
                     cTextPassword.Text = "";
@@ -141,5 +141,86 @@ namespace SchoberApplication
         {
             OnLoginFormClose();
         }
+
+
+
+        //QUERIES
+        //For hashing passwords. source: http://blogs.msdn.com/b/csharpfaq/archive/2006/10/09/how-do-i-calculate-a-md5-hash-from-a-string_3f00_.aspx
+        public static string calcMD5(string input)
+        {
+            // step 1, calculate MD5 hash from input
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("x2"));
+            }
+            return sb.ToString();
+        }
+
+        //Check if username is in the database - for log in. Method by KP
+        private bool unameExists(String usernameToCompare)
+        {
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+
+            using (MySqlConnection conn = new MySqlConnection(connstring))
+            {
+                string query = "SELECT username FROM systemlogin";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    conn.Open();
+                    MySqlDataReader data = cmd.ExecuteReader();
+                    while (data.Read())
+                    {
+                        String username = data.GetString("username");
+                        if (username.CompareTo(usernameToCompare) == 0)
+                        {
+                            conn.Close();
+                            return true;
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            return false;
+        }
+
+        //Check if given username matches with password- for log in. Method by KP
+        private bool matchPassword(String usernameToCompare, String passToCompare)
+        {
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+
+            using (MySqlConnection conn = new MySqlConnection(connstring))
+            {
+                string query = "SELECT password FROM systemlogin WHERE username=\"" + usernameToCompare + "\"";
+                String password = null;
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    conn.Open();
+                    MySqlDataReader data = cmd.ExecuteReader();
+                    while (data.Read())
+                    {
+                        password = data.GetString("password");
+                    }
+                    if (password != null)
+                    {
+                        passToCompare = calcMD5(passToCompare);
+                        if (password.CompareTo(passToCompare) == 0)
+                        {
+                            conn.Close();
+                            return true;
+                        }
+
+                    }
+                }
+                conn.Close();
+            }
+            return false;
+        }
+            
     }
 }

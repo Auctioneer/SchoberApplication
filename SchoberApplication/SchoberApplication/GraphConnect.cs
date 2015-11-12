@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ConnectCsharpToMysql;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace SchoberApplication
 {
-    class GraphConnect : DBConnect
+    class GraphConnect 
     {
+        String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
         MySqlConnection connection;
 
-        public GraphConnect(MySqlConnection connection)
+        public GraphConnect()
         {
-            this.connection = connection;
+            this.connection = new MySqlConnection(connstring);
         }
 
         public List<StoreSale> chartStoresSales(int storeID)

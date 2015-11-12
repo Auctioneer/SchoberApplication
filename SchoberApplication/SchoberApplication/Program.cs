@@ -7,10 +7,10 @@ using System.Windows.Forms;
 namespace SchoberApplication
 {
 
-    public enum AccessLevels { None, Regular, Admin };
+    public enum AccessLevels { None, Regular, Manager, Admin };
     static class Program
     {
-       
+        public static AccessLevels userAccess = AccessLevels.None;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
