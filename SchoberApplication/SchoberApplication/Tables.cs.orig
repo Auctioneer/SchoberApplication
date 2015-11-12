@@ -115,13 +115,22 @@ namespace SchoberApplication
 
             MessageBox.Show("Update successful.");
         }
+<<<<<<< HEAD
+
+        //Method to clear all data from all tables, just in case
+        private void clearTables()
+        {
+            dgvAddress.Rows.Clear();
+            //dgvEmployee.Rows.Clear();
+        }
+=======
         
 
 
 
 
 
-            
-        }
+
+>>>>>>> Lewis
     }
 }

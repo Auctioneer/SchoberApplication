@@ -15,6 +15,7 @@ namespace SchoberApplication
         String forename;
         String surname;
         String jobName;
+        String storeName;
 
         public Worker()
         {
@@ -47,6 +48,16 @@ namespace SchoberApplication
         public decimal getSalary()
         {
             return workerSalary;
+        }
+
+        public void setStoreName(String storeName)
+        {
+            this.storeName = storeName;
+        }
+
+        public String getStoreName()
+        {
+            return storeName;
         }
 
         public String getJobName()

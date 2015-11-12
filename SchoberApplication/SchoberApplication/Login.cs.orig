@@ -75,11 +75,14 @@ namespace SchoberApplication
             return false;
         }
 
+<<<<<<< HEAD
+=======
 
 
 
 
 
+>>>>>>> Lewis
         //Called when user Presses the signInButton.
         //Calls loginEvent.
         private void signinButton_Click(object sender, EventArgs e)
@@ -95,7 +98,11 @@ namespace SchoberApplication
             incorrectPasswordLabel.Visible = false;
             String username = cTextUsername.Text;
             String pass = cTextPassword.Text;
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> Lewis
 
             if (!checkCredentials(username, pass))
             {
