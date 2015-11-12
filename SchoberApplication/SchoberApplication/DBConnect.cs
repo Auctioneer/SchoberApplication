@@ -92,7 +92,7 @@ namespace ConnectCsharpToMysql
 
 
         //For hashing passwords. source: http://blogs.msdn.com/b/csharpfaq/archive/2006/10/09/how-do-i-calculate-a-md5-hash-from-a-string_3f00_.aspx
-        public string calcMD5(string input)
+        public static string calcMD5(string input)
         {
             // step 1, calculate MD5 hash from input
             MD5 md5 = System.Security.Cryptography.MD5.Create();
