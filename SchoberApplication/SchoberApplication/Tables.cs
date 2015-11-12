@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConnectCsharpToMysql;
+using MySql.Data.MySqlClient;
 
 namespace SchoberApplication
 {
@@ -15,6 +16,10 @@ namespace SchoberApplication
     {
         //To show current table selection
         String whatTable = "";
+
+        MySqlDataAdapter da;
+        MySqlCommandBuilder cb;
+        DataTable table;
 
         DBConnect dbConnect = new DBConnect();
         TableConnect tableConnection;
@@ -99,7 +104,7 @@ namespace SchoberApplication
         }
 
         //Method to get all the addresses from the database
-        private void getAddresses()
+  /*      private void getAddresses()
         {
             //Get addresses from tableConnect
             addressList = tableConnection.getAllAddresses();
@@ -107,6 +112,8 @@ namespace SchoberApplication
             //Add addresses to table
             dgvTable.ColumnCount = 6;
             dgvTable.Columns[0].Name = "ID";
+            //Make ID read only
+            dgvTable.Columns[0].ReadOnly = true;
             dgvTable.Columns[1].Name = "Address Line 1";
             dgvTable.Columns[2].Name = "Address Line 2";
             dgvTable.Columns[3].Name = "Postcode";
@@ -122,7 +129,7 @@ namespace SchoberApplication
 
             dgvTable.Show();
 
-        }
+        } */
 
         //Method to clear all data from all tables, just in case
         private void clearTables()
@@ -130,10 +137,55 @@ namespace SchoberApplication
             dgvTable.Rows.Clear();
         }
 
+ /*       private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            //Updates table based on selection
+            if (whatTable.Equals("Address"))
+            {
+            //Updates table based on selection
+            dgvTable.EndEdit();
+             
+            DataTable dt = (DataTable)dgvTable.DataSource;
+
+            DataTable changedTable = dt.GetChanges();
+            Console.WriteLine(changedTable.Rows.Count);
+
+            int rowsUpdated = da.Update(dt);
+        
+            }
+            else
+            {
+                MessageBox.Show("You need to select a table first!");
+            }
+        } */
+
+        public void getAddresses()
+        {
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+            MySqlConnection conn = new MySqlConnection(connstring);
+            string query = "SELECT * FROM address";
+            da = new MySqlDataAdapter(query, conn);
+            cb = new MySqlCommandBuilder(da);
+            table = new DataTable();
+            da.Fill(table);
+
+            dgvTable.DataSource = table;
+            dgvTable.Show();
+        }
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             //Updates table based on selection
+            dgvTable.EndEdit();
+
+            DataTable dt = (DataTable)dgvTable.DataSource;
+
+            DataTable changedTable = dt.GetChanges();
+            Console.WriteLine(changedTable.Rows.Count);
+
+            int rowsUpdated = da.Update(dt);
         }
+        
 
 
 
