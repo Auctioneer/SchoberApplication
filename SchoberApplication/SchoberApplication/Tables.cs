@@ -70,6 +70,7 @@ namespace SchoberApplication
                     getTable();
                     dgvTable.Columns["Supplier_idSupplier"].Visible = false;
                     dgvTable.Columns["Material_idMaterial"].Visible = false;
+                    dgvTable.Columns["Material Name"].ReadOnly = true;
                     break;
             }
         }
@@ -78,7 +79,17 @@ namespace SchoberApplication
         {
             String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
             MySqlConnection conn = new MySqlConnection(connstring);
-            string query = "SELECT * FROM " + whatTable;
+            string query = "";
+            if (whatTable.Equals("product"))
+            {
+                query = "SELECT product.*,material.Name AS 'Material Name' from product inner join material on product.Material_idMaterial = material.idMaterial;";
+            }
+            else
+            {
+                query = "SELECT * FROM " + whatTable;
+            }
+            //SELECT product.*,material.Name from product inner join material on product.Material_idMaterial = material.idMaterial;
+
             da = new MySqlDataAdapter(query, conn);
             cb = new MySqlCommandBuilder(da);
             table = new DataTable();
