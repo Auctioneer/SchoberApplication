@@ -43,7 +43,11 @@ namespace SchoberApplication
             this.incorrectPasswordLabel = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> Lewis
             // 
             // cTextUsername
             // 

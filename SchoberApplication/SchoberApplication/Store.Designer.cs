@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.strnametxt = new System.Windows.Forms.TextBox();
+            this.strnametxt = new System.Windows.Forms.MaskedTextBox();
             this.strnrtxt = new System.Windows.Forms.TextBox();
             this.storetitle = new System.Windows.Forms.Label();
             this.storenr = new System.Windows.Forms.Label();
@@ -44,12 +44,13 @@
             this.strregiontxt = new System.Windows.Forms.TextBox();
             this.strcountrytxt = new System.Windows.Forms.TextBox();
             this.storeSubmit = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.storemsg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // strnametxt
             // 
             this.strnametxt.Location = new System.Drawing.Point(142, 90);
+            this.strnametxt.Mask = "00000";
             this.strnametxt.Name = "strnametxt";
             this.strnametxt.Size = new System.Drawing.Size(100, 20);
             this.strnametxt.TabIndex = 0;
@@ -178,19 +179,20 @@
             this.storeSubmit.UseVisualStyleBackColor = true;
             this.storeSubmit.Click += new System.EventHandler(this.storeSubmit_Click);
             // 
-            // textBox1
+            // storemsg
             // 
-            this.textBox1.Location = new System.Drawing.Point(422, 114);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 16;
+            this.storemsg.AutoSize = true;
+            this.storemsg.Location = new System.Drawing.Point(285, 309);
+            this.storemsg.Name = "storemsg";
+            this.storemsg.Size = new System.Drawing.Size(0, 13);
+            this.storemsg.TabIndex = 17;
             // 
             // Store
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 375);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.storemsg);
             this.Controls.Add(this.storeSubmit);
             this.Controls.Add(this.strcountrytxt);
             this.Controls.Add(this.strregiontxt);
@@ -216,7 +218,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox strnametxt;
+        private System.Windows.Forms.MaskedTextBox strnametxt;
         private System.Windows.Forms.TextBox strnrtxt;
         private System.Windows.Forms.Label storetitle;
         private System.Windows.Forms.Label storenr;
@@ -232,6 +234,6 @@
         private System.Windows.Forms.TextBox strregiontxt;
         private System.Windows.Forms.TextBox strcountrytxt;
         private System.Windows.Forms.Button storeSubmit;
-        private System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.Label storemsg;
     }
 }
