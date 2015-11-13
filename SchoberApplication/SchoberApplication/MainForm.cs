@@ -21,6 +21,7 @@ namespace SchoberApplication
         Store store = new Store();
         Graphs graphs = new Graphs();
         Tables tables = new Tables();
+        Sale sale = new Sale();
 
         //public static AccessLevels userAccess = AccessLevels.None;
 
@@ -252,6 +253,15 @@ namespace SchoberApplication
             tables.ControlBox = false;
             tables.FormBorderStyle = FormBorderStyle.None;
             tables.Show();
+        }
+
+        private void salesform_Click(object sender, EventArgs e)
+        {
+            sale.MdiParent = this;
+            sale.Dock = DockStyle.Fill;
+            sale.ControlBox = false;
+            sale.FormBorderStyle = FormBorderStyle.None;
+            sale.Show();
         }
 
     }

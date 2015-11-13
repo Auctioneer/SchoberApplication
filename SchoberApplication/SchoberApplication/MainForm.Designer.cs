@@ -36,6 +36,8 @@
             this.editTableButton = new System.Windows.Forms.Button();
             this.buttonBox = new System.Windows.Forms.GroupBox();
             this.logoutButton = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.salesform = new System.Windows.Forms.Button();
             this.buttonBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,6 +111,7 @@
             // 
             // buttonBox
             // 
+            this.buttonBox.Controls.Add(this.salesform);
             this.buttonBox.Controls.Add(this.logoutButton);
             this.buttonBox.Controls.Add(this.editTableButton);
             this.buttonBox.Controls.Add(this.employeeButton);
@@ -122,7 +125,6 @@
             this.buttonBox.Size = new System.Drawing.Size(150, 561);
             this.buttonBox.TabIndex = 7;
             this.buttonBox.TabStop = false;
-           
             // 
             // logoutButton
             // 
@@ -134,7 +136,18 @@
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
-           
+            // 
+            // salesform
+            // 
+            this.salesform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.salesform.Location = new System.Drawing.Point(13, 293);
+            this.salesform.Name = "salesform";
+            this.salesform.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.salesform.Size = new System.Drawing.Size(112, 32);
+            this.salesform.TabIndex = 8;
+            this.salesform.Text = "Sales";
+            this.salesform.UseVisualStyleBackColor = true;
+            this.salesform.Click += new System.EventHandler(this.salesform_Click);
             // 
             // MainForm
             // 
@@ -147,9 +160,7 @@
             this.Text = "MainForm";
             this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.buttonBox.ResumeLayout(false);
-            this.buttonBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -163,6 +174,8 @@
         private System.Windows.Forms.Button editTableButton;
         private System.Windows.Forms.GroupBox buttonBox;
         private System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.Button salesform;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
