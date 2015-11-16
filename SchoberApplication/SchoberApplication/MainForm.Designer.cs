@@ -35,9 +35,10 @@
             this.graphsButton = new System.Windows.Forms.Button();
             this.editTableButton = new System.Windows.Forms.Button();
             this.buttonBox = new System.Windows.Forms.GroupBox();
+            this.salesform = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.salesform = new System.Windows.Forms.Button();
+            this.passchange = new System.Windows.Forms.Button();
             this.buttonBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +90,7 @@
             // graphsButton
             // 
             this.graphsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.graphsButton.Location = new System.Drawing.Point(13, 239);
+            this.graphsButton.Location = new System.Drawing.Point(13, 232);
             this.graphsButton.Name = "graphsButton";
             this.graphsButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.graphsButton.Size = new System.Drawing.Size(112, 32);
@@ -101,7 +102,7 @@
             // editTableButton
             // 
             this.editTableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editTableButton.Location = new System.Drawing.Point(13, 381);
+            this.editTableButton.Location = new System.Drawing.Point(13, 341);
             this.editTableButton.Name = "editTableButton";
             this.editTableButton.Size = new System.Drawing.Size(112, 32);
             this.editTableButton.TabIndex = 6;
@@ -111,6 +112,7 @@
             // 
             // buttonBox
             // 
+            this.buttonBox.Controls.Add(this.passchange);
             this.buttonBox.Controls.Add(this.salesform);
             this.buttonBox.Controls.Add(this.logoutButton);
             this.buttonBox.Controls.Add(this.editTableButton);
@@ -126,6 +128,18 @@
             this.buttonBox.TabIndex = 7;
             this.buttonBox.TabStop = false;
             // 
+            // salesform
+            // 
+            this.salesform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.salesform.Location = new System.Drawing.Point(13, 287);
+            this.salesform.Name = "salesform";
+            this.salesform.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.salesform.Size = new System.Drawing.Size(112, 32);
+            this.salesform.TabIndex = 8;
+            this.salesform.Text = "Sales";
+            this.salesform.UseVisualStyleBackColor = true;
+            this.salesform.Click += new System.EventHandler(this.salesform_Click);
+            // 
             // logoutButton
             // 
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -137,17 +151,16 @@
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
-            // salesform
+            // passchange
             // 
-            this.salesform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.salesform.Location = new System.Drawing.Point(13, 293);
-            this.salesform.Name = "salesform";
-            this.salesform.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.salesform.Size = new System.Drawing.Size(112, 32);
-            this.salesform.TabIndex = 8;
-            this.salesform.Text = "Sales";
-            this.salesform.UseVisualStyleBackColor = true;
-            this.salesform.Click += new System.EventHandler(this.salesform_Click);
+            this.passchange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.passchange.Location = new System.Drawing.Point(13, 456);
+            this.passchange.Name = "passchange";
+            this.passchange.Size = new System.Drawing.Size(112, 32);
+            this.passchange.TabIndex = 9;
+            this.passchange.Text = "Change password";
+            this.passchange.UseVisualStyleBackColor = true;
+            this.passchange.Click += new System.EventHandler(this.passchange_Click);
             // 
             // MainForm
             // 
@@ -176,6 +189,7 @@
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Button salesform;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button passchange;
     }
 }
 

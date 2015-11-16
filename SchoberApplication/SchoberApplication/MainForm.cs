@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Microsoft.VisualBasic;
 
 namespace SchoberApplication
 {
@@ -22,6 +23,7 @@ namespace SchoberApplication
         Graphs graphs = new Graphs();
         Tables tables = new Tables();
         Sale sale = new Sale();
+        Password pass = new Password();
 
         //public static AccessLevels userAccess = AccessLevels.None;
 
@@ -44,7 +46,6 @@ namespace SchoberApplication
             store.Hide();
             graphs.Hide();
             tables.Hide();
-
         }
 
         private void logUser()
@@ -58,9 +59,7 @@ namespace SchoberApplication
             //If the user hasn't gained any privileges after logging in, it closes the Application. THIS SHOULDN'T EVER HAPPEN - if it does this might indicate errors in the database
             login.OnLoginFormClose += new Login.LoginPageClose(CheckForNoPrivilege);
             this.Hide();
-            login.ShowDialog();
-
-            
+            login.ShowDialog();       
         }
 
         private void CheckForNoPrivilege()
@@ -180,7 +179,6 @@ namespace SchoberApplication
             IsMdiContainer = true;
             employee.MdiParent = this;
             store.MdiParent = this;
-
         }
 
 
@@ -262,6 +260,15 @@ namespace SchoberApplication
             sale.ControlBox = false;
             sale.FormBorderStyle = FormBorderStyle.None;
             sale.Show();
+        }
+
+        private void passchange_Click(object sender, EventArgs e)
+        {
+            pass.MdiParent = this;
+            pass.Dock = DockStyle.Fill;
+            pass.ControlBox = false;
+            pass.FormBorderStyle = FormBorderStyle.None;
+            pass.Show();
         }
 
     }
