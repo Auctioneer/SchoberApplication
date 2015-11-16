@@ -44,7 +44,8 @@
             "Addresses",
             "Products",
             "Employees",
-            "Stores"});
+            "Stores",
+            "Jobs"});
             this.comboBoxSelectTable.Location = new System.Drawing.Point(152, 33);
             this.comboBoxSelectTable.Name = "comboBoxSelectTable";
             this.comboBoxSelectTable.Size = new System.Drawing.Size(264, 21);
