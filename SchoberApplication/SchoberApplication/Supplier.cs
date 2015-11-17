@@ -29,15 +29,14 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string query = "INSERT INTO supplier (BrandName, ContactNo, RepFirstName, RepLastName, ContactEmail) VALUES (@brand, @nr, @fname, @lname, @email);";
-
-                using (MySqlCommand comm = new MySqlCommand(query, conn))
+                using (MySqlCommand comm = new MySqlCommand("insertSupplier", conn))
                 {
-                    comm.Parameters.AddWithValue("@brand", suppnametxt.Text);
-                    comm.Parameters.AddWithValue("@nr", suppnrtxt.Text);
-                    comm.Parameters.AddWithValue("@fname", suppfnametxt.Text);
-                    comm.Parameters.AddWithValue("@lname", supplnametxt.Text);
-                    comm.Parameters.AddWithValue("@email", suppemailtxt.Text);
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@nameBran", suppnametxt.Text);
+                    comm.Parameters.AddWithValue("@conNo", suppnrtxt.Text);
+                    comm.Parameters.AddWithValue("@repFname", suppfnametxt.Text);
+                    comm.Parameters.AddWithValue("@RepLname", supplnametxt.Text);
+                    comm.Parameters.AddWithValue("@contEmail", suppemailtxt.Text);
 
                     conn.Open();
                     comm.ExecuteNonQuery();

@@ -34,6 +34,7 @@
             this.newpswrepeat = new System.Windows.Forms.Label();
             this.pswTitle = new System.Windows.Forms.Label();
             this.pswsubmit = new System.Windows.Forms.Button();
+            this.pswmsg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // newpswtxt
@@ -87,11 +88,20 @@
             this.pswsubmit.UseVisualStyleBackColor = true;
             this.pswsubmit.Click += new System.EventHandler(this.pswsubmit_Click);
             // 
+            // pswmsg
+            // 
+            this.pswmsg.AutoSize = true;
+            this.pswmsg.Location = new System.Drawing.Point(47, 172);
+            this.pswmsg.Name = "pswmsg";
+            this.pswmsg.Size = new System.Drawing.Size(0, 13);
+            this.pswmsg.TabIndex = 6;
+            // 
             // Password
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(395, 259);
+            this.Controls.Add(this.pswmsg);
             this.Controls.Add(this.pswsubmit);
             this.Controls.Add(this.pswTitle);
             this.Controls.Add(this.newpswrepeat);
@@ -113,5 +123,6 @@
         private System.Windows.Forms.Label newpswrepeat;
         private System.Windows.Forms.Label pswTitle;
         private System.Windows.Forms.Button pswsubmit;
+        private System.Windows.Forms.Label pswmsg;
     }
 }

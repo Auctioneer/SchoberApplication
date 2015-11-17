@@ -18,6 +18,7 @@ namespace SchoberApplication
         {
             InitializeComponent();
             getBranch();
+            getPosition();
         }
         //--------------------------------------------------------
         // POPULATE BRANCH COMBOBOX
@@ -27,12 +28,10 @@ namespace SchoberApplication
             String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
-            {
-                
-                string querybranch = "SELECT Name FROM store";
-                
-                using (MySqlCommand comm = new MySqlCommand(querybranch, conn))
+            {              
+                using (MySqlCommand comm = new MySqlCommand("storename", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -41,6 +40,31 @@ namespace SchoberApplication
                         empbranchdrop.Items.Add(dr.GetString("Name"));
                     }
                     conn.Close(); 
+                }
+            }
+        }
+
+        //--------------------------------------------------------
+        // POPULATE POSITION COMBOBOX
+        //--------------------------------------------------------
+
+        private void getPosition()
+        {
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+
+            using (MySqlConnection conn = new MySqlConnection(connstring))
+            {
+                using (MySqlCommand comm = new MySqlCommand("jobname", conn))
+                {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    MySqlDataReader dr;
+                    dr = comm.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        empposdrop.Items.Add(dr.GetString("JobName"));
+                    }
+                    conn.Close();
                 }
             }
         }
@@ -83,19 +107,18 @@ namespace SchoberApplication
             // INSERT LOGIN DETAILS
             //--------------------------------------------------------
 
-            using (MySqlConnection conn = new MySqlConnection(connstring))
+           /* using (MySqlConnection conn = new MySqlConnection(connstring))
             {
                 string queryl = "INSERT INTO systemlogin (username, password) VALUES (@login, @pass);";
                 using (MySqlCommand comm = new MySqlCommand(queryl, conn))
                 {
-                    comm.Parameters.AddWithValue("@login", login);
-                    comm.Parameters.AddWithValue("@pass", Login.calcMD5("pass"));
+                    
 
                     conn.Open();
                     comm.ExecuteNonQuery();
                     conn.Close();
                 }
-            }
+            }*/
 
             //--------------------------------------------------------
             // GET SYSTEM LOGIN ID
@@ -118,31 +141,12 @@ namespace SchoberApplication
             }
 
             //--------------------------------------------------------
-            // INSERT POSITION DETAILS
-            //--------------------------------------------------------
-
-            using (MySqlConnection conn = new MySqlConnection(connstring))
-            {
-                string queryj = "INSERT INTO job (JobName, Salary, HoursPerWeek) VALUES (@position, @salary, @hours);";
-                using (MySqlCommand comm = new MySqlCommand(queryj, conn))
-                {
-                    comm.Parameters.AddWithValue("@position", emppositiontxt.Text);
-                    comm.Parameters.AddWithValue("@salary", empsalarytxt.Text);
-                    comm.Parameters.AddWithValue("@hours", Int32.Parse(emphoursdrop.Text));
-
-                    conn.Open();
-                    comm.ExecuteNonQuery();
-                    conn.Close();
-                }
-            }
-
-            //--------------------------------------------------------
             // GET POSITION ID
             //--------------------------------------------------------
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryj = "SELECT idjob FROM job WHERE JobName=" + "'" + emppositiontxt.Text + "';";
+                string queryj = "SELECT idjob FROM job WHERE JobName=" + "'" + empposdrop.Text + "';";
                 using (MySqlCommand comm = new MySqlCommand(queryj, conn))
                 {
                     conn.Open();
@@ -162,15 +166,14 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                  
-                string query = "BEGIN;" +
-                                "INSERT INTO address (AddressLine1, AddressLine2, Postcode, Region, Country)" +
-                                "VALUES (@address1, @address2, @zip, @reg, @count);" +
-                                "INSERT INTO worker (FirstName, LastName, Email, Phone, Address_idAddress, Store_idStore, Job_idJob, SystemLogin_idSystemLogin )" +
-                                "VALUES (@fname, @lname, @email, @nr, LAST_INSERT_ID(), @branchid, @jobid, @loginid);" +
-                                "COMMIT;";
-                using (MySqlCommand comm = new MySqlCommand(query, conn))
+                using (MySqlCommand comm = new MySqlCommand("new_employee", conn))
                 {
+                    
+                    comm.CommandType = CommandType.StoredProcedure;
+
+                    //LOGIN
+                    comm.Parameters.AddWithValue("@login", login);
+                    comm.Parameters.AddWithValue("@pass", Login.calcMD5("pass"));
                     //WORKER
                     comm.Parameters.AddWithValue("@fname", empnametxt.Text);
                     comm.Parameters.AddWithValue("@lname", emplasttxt.Text);
@@ -184,7 +187,7 @@ namespace SchoberApplication
                     comm.Parameters.AddWithValue("@address2", empaddress2txt.Text);
                     comm.Parameters.AddWithValue("@zip", empziptxt.Text);
                     comm.Parameters.AddWithValue("@reg", empregiontxt.Text);
-                    comm.Parameters.AddWithValue("@count", empcountrytxt.Text);
+                    comm.Parameters.AddWithValue("@count", empcountrytxt.Text); 
 
                     conn.Open();
                     comm.ExecuteNonQuery();

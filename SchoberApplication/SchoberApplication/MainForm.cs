@@ -14,7 +14,7 @@ namespace SchoberApplication
 {
     public partial class MainForm : Form
     {
-        List<Label> _priviledgeLabels;
+        //List<Label> _priviledgeLabels;
         Login login;
         Employee employee = new Employee();
         Product productForm = new Product();
@@ -24,6 +24,7 @@ namespace SchoberApplication
         Tables tables = new Tables();
         Sale sale = new Sale();
         Password pass = new Password();
+        public static String uname;
 
         //public static AccessLevels userAccess = AccessLevels.None;
 
@@ -74,7 +75,7 @@ namespace SchoberApplication
 
             //Check in the database for worker's job and assign priviliges accordingly
             //e.LoginDetails returns a username
-            String uname = e.LoginDetails.ToString();
+            uname = e.LoginDetails.ToString();
             int priv = getJob(uname);
 
             if (priv == 0)
