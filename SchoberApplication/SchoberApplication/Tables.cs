@@ -134,6 +134,32 @@ namespace SchoberApplication
 
             MessageBox.Show("Update successful.");
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            //TEST METHOD - To delete the selected row in address
+            if (whatTable.Equals("address"))
+            {
+                foreach (DataGridViewRow item in this.dgvTable.SelectedRows)
+                {
+                    dgvTable.Rows.RemoveAt(item.Index);
+                }
+
+                //Updates table based on selection
+                dgvTable.EndEdit();
+
+                DataTable dt = (DataTable)dgvTable.DataSource;
+
+                DataTable changedTable = dt.GetChanges();
+                Console.WriteLine(changedTable.Rows.Count);
+
+                int rowsUpdated = da.Update(dt);
+
+                MessageBox.Show("Delete successful.");
+
+
+            }
+        }
          
         }
     }

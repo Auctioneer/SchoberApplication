@@ -21,6 +21,7 @@ namespace SchoberApplication
         Store store = new Store();
         Graphs graphs = new Graphs();
         Tables tables = new Tables();
+        String uname;
 
         //public static AccessLevels userAccess = AccessLevels.None;
 
@@ -74,7 +75,7 @@ namespace SchoberApplication
 
             //Check in the database for worker's job and assign priviliges accordingly
             //e.LoginDetails returns a username
-            String uname = e.LoginDetails.ToString();
+            uname = e.LoginDetails.ToString();
             int priv = getJob(uname);
 
             if (priv == 0)
@@ -172,6 +173,7 @@ namespace SchoberApplication
             }
 
             this.Show();
+            lblLogin.Text = "Logged in as " + uname;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -179,7 +181,6 @@ namespace SchoberApplication
             IsMdiContainer = true;
             employee.MdiParent = this;
             store.MdiParent = this;
-
         }
 
 
