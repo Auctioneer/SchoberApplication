@@ -89,9 +89,11 @@ namespace SchoberApplication
             
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryb = "SELECT idStore FROM store WHERE Name=" + "'" + empbranchdrop.Text + "';";
-                using (MySqlCommand comm = new MySqlCommand(queryb, conn))
+                using (MySqlCommand comm = new MySqlCommand("getstoreid", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@store", empbranchdrop.Text);
+
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -107,18 +109,20 @@ namespace SchoberApplication
             // INSERT LOGIN DETAILS
             //--------------------------------------------------------
 
-           /* using (MySqlConnection conn = new MySqlConnection(connstring))
+            using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryl = "INSERT INTO systemlogin (username, password) VALUES (@login, @pass);";
-                using (MySqlCommand comm = new MySqlCommand(queryl, conn))
+                using (MySqlCommand comm = new MySqlCommand("insert_login", conn))
                 {
-                    
+                    comm.CommandType = CommandType.StoredProcedure;
+
+                    comm.Parameters.AddWithValue("@login", login);
+                    comm.Parameters.AddWithValue("@pass", Login.calcMD5("pass"));
 
                     conn.Open();
                     comm.ExecuteNonQuery();
                     conn.Close();
                 }
-            }*/
+            }
 
             //--------------------------------------------------------
             // GET SYSTEM LOGIN ID
@@ -126,9 +130,11 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryl = "SELECT idSystemLogin FROM systemlogin WHERE username=" + "'" + login + "';";
-                using (MySqlCommand comm = new MySqlCommand(queryl, conn))
+                using (MySqlCommand comm = new MySqlCommand("getloginid", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@user", login);
+                    
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -146,9 +152,12 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryj = "SELECT idjob FROM job WHERE JobName=" + "'" + empposdrop.Text + "';";
-                using (MySqlCommand comm = new MySqlCommand(queryj, conn))
+                using (MySqlCommand comm = new MySqlCommand("getjobid", conn))
                 {
+
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@job", empposdrop.Text);
+
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -170,10 +179,7 @@ namespace SchoberApplication
                 {
                     
                     comm.CommandType = CommandType.StoredProcedure;
-
-                    //LOGIN
-                    comm.Parameters.AddWithValue("@login", login);
-                    comm.Parameters.AddWithValue("@pass", Login.calcMD5("pass"));
+                    
                     //WORKER
                     comm.Parameters.AddWithValue("@fname", empnametxt.Text);
                     comm.Parameters.AddWithValue("@lname", emplasttxt.Text);
