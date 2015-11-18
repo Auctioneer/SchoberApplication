@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace SchoberApplication
 {
-    class GraphConnect 
+    class GraphConnect
     {
         String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
         MySqlConnection connection;
@@ -26,34 +27,43 @@ namespace SchoberApplication
                 MySqlCommand command;
                 MySqlDataReader data;
 
-                string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore = " + storeID;
+                //string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore = " + storeID;
+                string query = "chartStoreSales";
                 List<StoreSale> listOfSales = new List<StoreSale>();
 
                 command = new MySqlCommand(query, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@storeId", storeID);
                 data = command.ExecuteReader();
 
                 while (data.Read())
                 {
                     int quantity = data.GetInt32("Quantity");
                     int productID = data.GetInt32("Product_idProduct");
+                    decimal value = data.GetDecimal("Price");
+                    string type = data.GetString("Type");
+                    string activity = data.GetString("Activity");
                     //decimal value = getProductPrice(data.GetInt32("Product_idProduct"));
                     //StoreSale store = new StoreSale(quantity, value);
                     StoreSale store = new StoreSale();
                     store.setQuantity(quantity);
                     store.setProductId(productID);
+                    store.setValue(value);
+                    store.setType(type);
+                    store.setActivity(activity);
                     listOfSales.Add(store);
 
                 }
                 connection.Close();
-                foreach (StoreSale sale in listOfSales)
-                {
-                    decimal value = getProductPrice(sale.getProductID());
-                    string type = getProductType(sale.getProductID());
-                    string activity = getProductActivity(sale.getProductID());
-                    sale.setValue(value);
-                    sale.setType(type);
-                    sale.setActivity(activity);
-                }
+                /* foreach (StoreSale sale in listOfSales)
+                 {
+                     decimal value = getProductPrice(sale.getProductID());
+                     string type = getProductType(sale.getProductID());
+                     string activity = getProductActivity(sale.getProductID());
+                     sale.setValue(value);
+                     sale.setType(type);
+                     sale.setActivity(activity);
+                 }*/
 
 
                 return listOfSales;
@@ -75,30 +85,35 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT Quantity,Product_idProduct,Date FROM sales WHERE Date < CURDATE() AND Date > (CURDATE() - 30) AND Store_idStore =" + storeID + ";";
+                //string query = "SELECT Quantity,Product_idProduct,Date FROM sales WHERE Date < CURDATE() AND Date > (CURDATE() - 30) AND Store_idStore =" + storeID + ";";
+                string query = "chartMonthGross";
                 List<StoreSale> listOfSales = new List<StoreSale>();
 
                 command = new MySqlCommand(query, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@storeId", storeID);
                 data = command.ExecuteReader();
 
                 while (data.Read())
                 {
                     int quantity = data.GetInt32("Quantity");
                     int productID = data.GetInt32("Product_idProduct");
+                    decimal value = data.GetDecimal("Price");
                     //decimal value = getProductPrice(data.GetInt32("Product_idProduct"));
                     //StoreSale store = new StoreSale(quantity, value);
                     StoreSale store = new StoreSale();
                     store.setQuantity(quantity);
                     store.setProductId(productID);
+                    store.setValue(value);
                     listOfSales.Add(store);
 
                 }
                 connection.Close();
-                foreach (StoreSale sale in listOfSales)
+                /*foreach (StoreSale sale in listOfSales)
                 {
                     decimal value = getProductPrice(sale.getProductID());
                     sale.setValue(value);
-                }
+                }*/
 
                 return listOfSales;
 
@@ -414,31 +429,36 @@ namespace SchoberApplication
                 connection.Open();
                 MySqlCommand command;
                 MySqlDataReader data;
-                string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore =" + storeID + ";";
+                // string query = "SELECT Quantity,Product_idProduct FROM sales WHERE Store_idStore =" + storeID + ";";
+                string query = "getWaterPData";
                 List<StoreSale> listOfSales = new List<StoreSale>();
 
                 command = new MySqlCommand(query, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@storeId", storeID);
                 data = command.ExecuteReader();
 
                 while (data.Read())
                 {
                     int quantity = data.GetInt32("Quantity");
                     int productID = data.GetInt32("Product_idProduct");
+                    bool waterproof = data.GetBoolean("Waterproof");
                     //decimal value = getProductPrice(data.GetInt32("Product_idProduct"));
                     //StoreSale store = new StoreSale(quantity, value);
                     StoreSale store = new StoreSale();
                     store.setQuantity(quantity);
                     store.setProductId(productID);
+                    store.setWaterproof(waterproof);
                     listOfSales.Add(store);
 
                 }
                 connection.Close();
-                foreach (StoreSale sale in listOfSales)
+                /*foreach (StoreSale sale in listOfSales)
                 {
                     int materialID = getMaterialID(sale.getProductID());
                     bool waterproof = getWaterProof(materialID);
                     sale.setWaterproof(waterproof);
-                }
+                }*/
 
                 return listOfSales;
 
