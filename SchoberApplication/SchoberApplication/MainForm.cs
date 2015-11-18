@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using Microsoft.VisualBasic;
 
 namespace SchoberApplication
 {
@@ -173,6 +172,7 @@ namespace SchoberApplication
             }
 
             this.Show();
+            lblLogin.Text = "Logged in as " + uname;
         }
 
         private void MainForm_Load(object sender, EventArgs e)

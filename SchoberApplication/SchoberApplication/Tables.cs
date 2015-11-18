@@ -81,6 +81,11 @@ namespace SchoberApplication
                     getTable();
                     dgvTable.Columns["idJob"].ReadOnly = true;
                     break;
+                case "Sales":
+                    whatTable = "sales";
+                    getTable();
+                    dgvTable.Columns["idSales"].ReadOnly = true;
+                    break;
             }
         }
 
@@ -90,28 +95,44 @@ namespace SchoberApplication
             //Create connection
             String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
             MySqlConnection conn = new MySqlConnection(connstring);
+            MySqlCommand command;
             string query = "";
 
             //Make query based on selected table
             if (whatTable.Equals("product"))
             {
-                query = "CREATE OR REPLACE VIEW t AS SELECT product.*,material.Name AS 'Material Name' from product inner join material on product.Material_idMaterial = material.idMaterial; SELECT * FROM t";
+                //query = "CREATE OR REPLACE VIEW t AS SELECT product.*,material.Name AS 'Material Name' from product inner join material on product.Material_idMaterial = material.idMaterial; SELECT * FROM t";
+                query = "getProduct";
             }
             else if (whatTable.Equals("store"))
             {
-                query = "CREATE OR REPLACE VIEW t AS SELECT * FROM store inner join address on store.Address_idAddress = address.idAddress; SELECT * FROM t";
+                //query = "CREATE OR REPLACE VIEW t AS SELECT * FROM store inner join address on store.Address_idAddress = address.idAddress; SELECT * FROM t";
+                query = "getStore";
             }
             else if (whatTable.Equals("worker"))
             {
-                query = "CREATE OR REPLACE VIEW t AS SELECT worker.*, store.Name AS 'Store Name', job.JobName AS 'Job Name' FROM  worker, store, job WHERE worker.Store_idStore = store.idStore AND worker.Job_idJob = job.idJob; SELECT * FROM t";
+                //query = "CREATE OR REPLACE VIEW t AS SELECT worker.*, store.Name AS 'Store Name', job.JobName AS 'Job Name' FROM  worker, store, job WHERE worker.Store_idStore = store.idStore AND worker.Job_idJob = job.idJob; SELECT * FROM t";
+                query = "getWorker";
+            }
+            else if (whatTable.Equals("address"))
+            {
+                query = "getAddress";
+            }
+            else if (whatTable.Equals("job"))
+            {
+                query = "getJob";
             }
             else
             {
-                query = "CREATE OR REPLACE VIEW t AS SELECT * FROM " + whatTable + "; SELECT * FROM t;";
+                query = "getSales";
             }
-            
+ 
             //Fill the datagridview with the data returned
-            da = new MySqlDataAdapter(query, conn);
+            command = new MySqlCommand(query, conn);
+            command.CommandType = CommandType.StoredProcedure;
+
+            da = new MySqlDataAdapter();
+            da.SelectCommand = command;
             cb = new MySqlCommandBuilder(da);
             table = new DataTable();
             da.Fill(table);
@@ -133,6 +154,32 @@ namespace SchoberApplication
             int rowsUpdated = da.Update(dt);
 
             MessageBox.Show("Update successful.");
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            //TEST METHOD - To delete the selected row in address
+            if (whatTable.Equals("address") || (whatTable.Equals("sales")))
+            {
+                foreach (DataGridViewRow item in this.dgvTable.SelectedRows)
+                {
+                    dgvTable.Rows.RemoveAt(item.Index);
+                }
+
+                //Updates table based on selection
+                dgvTable.EndEdit();
+
+                DataTable dt = (DataTable)dgvTable.DataSource;
+
+                DataTable changedTable = dt.GetChanges();
+                Console.WriteLine(changedTable.Rows.Count);
+
+                int rowsUpdated = da.Update(dt);
+
+                MessageBox.Show("Delete successful.");
+
+
+            }
         }
          
         }

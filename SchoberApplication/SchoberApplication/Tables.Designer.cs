@@ -32,6 +32,7 @@
             this.dgvTable = new System.Windows.Forms.DataGridView();
             this.btnGetTable = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,8 @@
             "Products",
             "Employees",
             "Stores",
-            "Jobs"});
+            "Jobs",
+            "Sales"});
             this.comboBoxSelectTable.Location = new System.Drawing.Point(152, 33);
             this.comboBoxSelectTable.Name = "comboBoxSelectTable";
             this.comboBoxSelectTable.Size = new System.Drawing.Size(264, 21);
@@ -55,6 +57,7 @@
             // 
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTable.Location = new System.Drawing.Point(25, 79);
+            this.dgvTable.MultiSelect = false;
             this.dgvTable.Name = "dgvTable";
             this.dgvTable.Size = new System.Drawing.Size(597, 254);
             this.dgvTable.TabIndex = 1;
@@ -79,11 +82,22 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(423, 350);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(130, 23);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "Delete Selected Row";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // Tables
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 475);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnGetTable);
             this.Controls.Add(this.dgvTable);
@@ -102,6 +116,7 @@
         private System.Windows.Forms.DataGridView dgvTable;
         private System.Windows.Forms.Button btnGetTable;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDelete;
 
     }
 }
