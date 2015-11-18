@@ -149,7 +149,6 @@ namespace SchoberApplication
             DataTable dt = (DataTable)dgvTable.DataSource;
 
             DataTable changedTable = dt.GetChanges();
-            Console.WriteLine(changedTable.Rows.Count);
 
             int rowsUpdated = da.Update(dt);
 
@@ -172,7 +171,6 @@ namespace SchoberApplication
                 DataTable dt = (DataTable)dgvTable.DataSource;
 
                 DataTable changedTable = dt.GetChanges();
-                Console.WriteLine(changedTable.Rows.Count);
 
                 int rowsUpdated = da.Update(dt);
 

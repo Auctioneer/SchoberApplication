@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.strnametxt = new System.Windows.Forms.MaskedTextBox();
             this.strnrtxt = new System.Windows.Forms.TextBox();
             this.storetitle = new System.Windows.Forms.Label();
             this.storenr = new System.Windows.Forms.Label();
@@ -45,15 +44,8 @@
             this.strcountrytxt = new System.Windows.Forms.TextBox();
             this.storeSubmit = new System.Windows.Forms.Button();
             this.storemsg = new System.Windows.Forms.Label();
+            this.strnametxt = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // strnametxt
-            // 
-            this.strnametxt.Location = new System.Drawing.Point(142, 90);
-            this.strnametxt.Mask = "00000";
-            this.strnametxt.Name = "strnametxt";
-            this.strnametxt.Size = new System.Drawing.Size(100, 20);
-            this.strnametxt.TabIndex = 0;
             // 
             // strnrtxt
             // 
@@ -187,11 +179,19 @@
             this.storemsg.Size = new System.Drawing.Size(0, 13);
             this.storemsg.TabIndex = 17;
             // 
+            // strnametxt
+            // 
+            this.strnametxt.Location = new System.Drawing.Point(142, 90);
+            this.strnametxt.Name = "strnametxt";
+            this.strnametxt.Size = new System.Drawing.Size(100, 20);
+            this.strnametxt.TabIndex = 18;
+            // 
             // Store
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 375);
+            this.Controls.Add(this.strnametxt);
             this.Controls.Add(this.storemsg);
             this.Controls.Add(this.storeSubmit);
             this.Controls.Add(this.strcountrytxt);
@@ -208,7 +208,6 @@
             this.Controls.Add(this.storenr);
             this.Controls.Add(this.storetitle);
             this.Controls.Add(this.strnrtxt);
-            this.Controls.Add(this.strnametxt);
             this.Name = "Store";
             this.Text = "Store";
             this.ResumeLayout(false);
@@ -218,7 +217,6 @@
 
         #endregion
 
-        private System.Windows.Forms.MaskedTextBox strnametxt;
         private System.Windows.Forms.TextBox strnrtxt;
         private System.Windows.Forms.Label storetitle;
         private System.Windows.Forms.Label storenr;
@@ -235,5 +233,6 @@
         private System.Windows.Forms.TextBox strcountrytxt;
         private System.Windows.Forms.Button storeSubmit;
         public System.Windows.Forms.Label storemsg;
+        private System.Windows.Forms.TextBox strnametxt;
     }
 }
