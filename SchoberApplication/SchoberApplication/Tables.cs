@@ -81,6 +81,11 @@ namespace SchoberApplication
                     getTable();
                     dgvTable.Columns["idJob"].ReadOnly = true;
                     break;
+                case "Sales":
+                    whatTable = "sales";
+                    getTable();
+                    dgvTable.Columns["idSales"].ReadOnly = true;
+                    break;
             }
         }
 
@@ -138,7 +143,7 @@ namespace SchoberApplication
         private void btnDelete_Click(object sender, EventArgs e)
         {
             //TEST METHOD - To delete the selected row in address
-            if (whatTable.Equals("address"))
+            if (whatTable.Equals("address") || (whatTable.Equals("sales")))
             {
                 foreach (DataGridViewRow item in this.dgvTable.SelectedRows)
                 {
