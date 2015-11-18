@@ -29,11 +29,10 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-
-                string querybranch = "SELECT Name FROM store";
-
-                using (MySqlCommand comm = new MySqlCommand(querybranch, conn))
+                using (MySqlCommand comm = new MySqlCommand("storename", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -55,11 +54,10 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-
-                string queryprod = "SELECT ProductName FROM product";
-
-                using (MySqlCommand comm = new MySqlCommand(queryprod, conn))
+                using (MySqlCommand comm = new MySqlCommand("getproductname", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -88,9 +86,11 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryb = "SELECT idStore FROM store WHERE Name=" + "'" + saleinstoredrop.Text + "';";
-                using (MySqlCommand comm = new MySqlCommand(queryb, conn))
+                using (MySqlCommand comm = new MySqlCommand("getstoreid", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@store", saleinstoredrop.Text);
+
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -108,9 +108,11 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryb = "SELECT idProduct FROM product WHERE ProductName=" + "'" + itemsolddrop.Text + "';";
-                using (MySqlCommand comm = new MySqlCommand(queryb, conn))
+                using (MySqlCommand comm = new MySqlCommand("getproductid", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@product", itemsolddrop.Text);
+                    
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -124,10 +126,10 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string query = "INSERT INTO sales (Date, Quantity, Store_idStore, Product_idProduct)" +
-                               "VALUES (@date, @quantity, @storeid, @productid);";
-                using (MySqlCommand comm = new MySqlCommand(query, conn))
+                using (MySqlCommand comm = new MySqlCommand("insertsale", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    
                     comm.Parameters.AddWithValue("@date", DateTime.Now);
                     comm.Parameters.AddWithValue("@quantity", Int32.Parse(soldquantitytxt.Text));
                     comm.Parameters.AddWithValue("@storeid", branchid);

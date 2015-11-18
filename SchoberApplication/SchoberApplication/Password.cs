@@ -45,10 +45,14 @@ namespace SchoberApplication
             String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string query = "UPDATE systemlogin SET password=" + Login.calcMD5(newpass) + " WHERE systemlogin.username=" + MainForm.uname.ToString() + ";";
-
-                using (MySqlCommand comm = new MySqlCommand(query, conn))
+                //string query = "UPDATE systemlogin SET password=\"" + Login.calcMD5(newpass) + "\"" + " WHERE systemlogin.username=\"" + MainForm.uname.ToString() + "\";";
+                using (MySqlCommand comm = new MySqlCommand("updatepassword", conn))
                 {
+
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@newpass", Login.calcMD5(newpass));
+                    comm.Parameters.AddWithValue("@uname", MainForm.uname.ToString());
+
                     conn.Open();
 
                     comm.ExecuteNonQuery();

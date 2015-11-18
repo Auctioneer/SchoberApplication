@@ -31,11 +31,10 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-
-                string querybranch = "SELECT Name FROM store";
-
-                using (MySqlCommand comm = new MySqlCommand(querybranch, conn))
+                using (MySqlCommand comm = new MySqlCommand("storename", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -58,11 +57,10 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-
-                string querymaterial = "SELECT Name FROM material";
-
-                using (MySqlCommand comm = new MySqlCommand(querymaterial, conn))
+                using (MySqlCommand comm = new MySqlCommand("getmaterialname", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -85,11 +83,10 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-
-                string querybrand = "SELECT BrandName FROM supplier";
-
-                using (MySqlCommand comm = new MySqlCommand(querybrand, conn))
+                using (MySqlCommand comm = new MySqlCommand("getbrandname", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -113,15 +110,17 @@ namespace SchoberApplication
             int materialid = 0;
             String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
             
-        //--------------------------------------------------------
-        // GT SUPPLIER ID
-        //--------------------------------------------------------
+            //--------------------------------------------------------
+            // GT SUPPLIER ID
+            //--------------------------------------------------------
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryb = "SELECT idSupplier FROM supplier WHERE BrandName=" + "'" + prodbranddrop.Text + "';";
-                using (MySqlCommand comm = new MySqlCommand(queryb, conn))
+                using (MySqlCommand comm = new MySqlCommand("getsuppid", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@bname", prodbranddrop.Text);
+                    
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -136,12 +135,14 @@ namespace SchoberApplication
             //--------------------------------------------------------
             // GET STORE ID
             //--------------------------------------------------------
-            
+
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryb = "SELECT idStore FROM store WHERE Name=" + "'" + prodinstoredrop.Text + "';";
-                using (MySqlCommand comm = new MySqlCommand(queryb, conn))
+                using (MySqlCommand comm = new MySqlCommand("getstoreid", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@store", prodinstoredrop.Text);
+
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -159,9 +160,11 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string queryb = "SELECT idMaterial FROM material WHERE Name=" + "'" + prodmaterialdrop.Text + "';";
-                using (MySqlCommand comm = new MySqlCommand(queryb, conn))
+                using (MySqlCommand comm = new MySqlCommand("getmaterialid", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+                    comm.Parameters.AddWithValue("@mat", prodmaterialdrop.Text);
+                    
                     conn.Open();
                     MySqlDataReader dr;
                     dr = comm.ExecuteReader();
@@ -175,14 +178,15 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string query = "BEGIN;" +
+                /*string query = "BEGIN;" +
                                 "INSERT INTO product (ProductName, Colour, Price, Supplier_idSupplier, Capacity, Weight, Type, Activity, Material_idMaterial)" +
                                 "VALUES (@name, @colour, @price, @sup, @capacity, @weight, @type, @activity, @material);" +
                                 "INSERT INTO stock (Quantity, Store_idStore, Product_idProduct)" +
                                 "VALUES (@quantity, @storeid, LAST_INSERT_ID());" +
-                                "COMMIT;";
-                using (MySqlCommand comm = new MySqlCommand(query, conn))
+                                "COMMIT;";*/
+                using (MySqlCommand comm = new MySqlCommand("insertproduct", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
                     
                     comm.Parameters.AddWithValue("@name", prodnametxt.Text);
                     comm.Parameters.AddWithValue("@colour", prodcolourdrop.Text);
