@@ -186,7 +186,7 @@ namespace SchoberApplication
             {
                 int workerID = (int)dgvTable.SelectedRows[0].Cells[0].Value;
 
-               // dgvTable.Rows.RemoveAt(dgvTable.SelectedRows[0]);
+                dgvTable.Rows.Remove(dgvTable.SelectedRows[0]);
 
 
                 query = "deleteWorkerAS";
@@ -199,7 +199,7 @@ namespace SchoberApplication
                 da = new MySqlDataAdapter();
                 da.SelectCommand = command;
                 cb = new MySqlCommandBuilder(da);
-                table = new DataTable();
+                DataTable changedTable = table.GetChanges();
                 da.Fill(table);
 
                 dgvTable.DataSource = table;
