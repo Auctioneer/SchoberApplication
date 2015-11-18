@@ -157,6 +157,13 @@ namespace SchoberApplication
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            //Create connection
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+            MySqlConnection conn = new MySqlConnection(connstring);
+            MySqlCommand command;
+            string query = "";
+
+
             //When deleting from address or sale, we can actually just remove from the table and refresh
             if (whatTable.Equals("address") || (whatTable.Equals("sales")))
             {
@@ -174,10 +181,32 @@ namespace SchoberApplication
 
                 int rowsUpdated = da.Update(dt);
 
-                MessageBox.Show("Delete successful.");
-
-
             }
+            else if (whatTable.Equals("worker"))
+            {
+                int workerID = (int)dgvTable.SelectedRows[0].Cells[0].Value;
+
+               // dgvTable.Rows.RemoveAt(dgvTable.SelectedRows[0]);
+
+
+                query = "deleteWorkerAS";
+
+                //Fill the datagridview with the data returned
+                command = new MySqlCommand(query, conn);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@workerID", workerID);
+
+                da = new MySqlDataAdapter();
+                da.SelectCommand = command;
+                cb = new MySqlCommandBuilder(da);
+                table = new DataTable();
+                da.Fill(table);
+
+                dgvTable.DataSource = table;
+                dgvTable.Show();
+            }
+
+            MessageBox.Show("Delete successful.");
         }
          
         }
