@@ -13,7 +13,7 @@ namespace SchoberApplication
 {
     public partial class MainForm : Form
     {
-        List<Label> _priviledgeLabels;
+        //List<Label> _priviledgeLabels;
         Login login;
         Employee employee = new Employee();
         Product productForm = new Product();
@@ -21,7 +21,9 @@ namespace SchoberApplication
         Store store = new Store();
         Graphs graphs = new Graphs();
         Tables tables = new Tables();
-        String uname;
+        Sale sale = new Sale();
+        Password pass = new Password();
+        public static String uname;
 
         //public static AccessLevels userAccess = AccessLevels.None;
 
@@ -44,7 +46,6 @@ namespace SchoberApplication
             store.Hide();
             graphs.Hide();
             tables.Hide();
-
         }
 
         private void logUser()
@@ -58,9 +59,7 @@ namespace SchoberApplication
             //If the user hasn't gained any privileges after logging in, it closes the Application. THIS SHOULDN'T EVER HAPPEN - if it does this might indicate errors in the database
             login.OnLoginFormClose += new Login.LoginPageClose(CheckForNoPrivilege);
             this.Hide();
-            login.ShowDialog();
-
-            
+            login.ShowDialog();       
         }
 
         private void CheckForNoPrivilege()
@@ -253,6 +252,24 @@ namespace SchoberApplication
             tables.ControlBox = false;
             tables.FormBorderStyle = FormBorderStyle.None;
             tables.Show();
+        }
+
+        private void salesform_Click(object sender, EventArgs e)
+        {
+            sale.MdiParent = this;
+            sale.Dock = DockStyle.Fill;
+            sale.ControlBox = false;
+            sale.FormBorderStyle = FormBorderStyle.None;
+            sale.Show();
+        }
+
+        private void passchange_Click(object sender, EventArgs e)
+        {
+            pass.MdiParent = this;
+            pass.Dock = DockStyle.Fill;
+            pass.ControlBox = false;
+            pass.FormBorderStyle = FormBorderStyle.None;
+            pass.Show();
         }
 
     }

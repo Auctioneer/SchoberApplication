@@ -27,10 +27,10 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                string query = "BEGIN; INSERT INTO address (AddressLine1, AddressLine2, Postcode, Region, Country) VALUES (@address1, @address2, @zip, @reg, @count); INSERT INTO store (Address_idAddress, Name, ContactNumber) VALUES (LAST_INSERT_ID(), @storename, @storenr); COMMIT;";
-                
-                using(MySqlCommand comm = new MySqlCommand(query, conn))
+                using(MySqlCommand comm = new MySqlCommand("insertstore", conn))
                 {
+                    comm.CommandType = CommandType.StoredProcedure;
+
                     comm.Parameters.AddWithValue("@address1",straddress1txt.Text);
                     comm.Parameters.AddWithValue("@address2", straddress2txt.Text);
                     comm.Parameters.AddWithValue("@zip", strziptxt.Text);

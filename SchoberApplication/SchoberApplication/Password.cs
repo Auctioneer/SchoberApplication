@@ -11,38 +11,49 @@ using System.Windows.Forms;
 
 namespace SchoberApplication
 {
-    public partial class Supplier : Form
+    public partial class Password : Form
     {
-        public Supplier()
+        string user = MainForm.uname;
+        public Password()
         {
             InitializeComponent();
+            newpswtxt.PasswordChar = '*';
+            newpswrepeattxt.PasswordChar = '*';
         }
-
-        private void Supplier_Load(object sender, EventArgs e)
+        
+        private void pswsubmit_Click(object sender, EventArgs e)
         {
-
+            string psw = "";
+            if(newpswtxt.Text.Equals(newpswrepeattxt.Text))
+            {
+                psw = newpswtxt.Text;
+                updatepsw(psw);
+                pswmsg.Text = "Password changed successfully.";
+                clear();
+            }
+            else
+            {
+                pswmsg.Text = "Entered passwords do not match.";
+            }
+            
+ 
         }
-
-        private void suppSubmit_Click(object sender, EventArgs e)
+       
+        private void updatepsw(String newpass)
         {
+               
             String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
-
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
-                using (MySqlCommand comm = new MySqlCommand("insertSupplier", conn))
-                {
-                    comm.CommandType = CommandType.StoredProcedure;
-                    comm.Parameters.AddWithValue("@nameBran", suppnametxt.Text);
-                    comm.Parameters.AddWithValue("@conNo", suppnrtxt.Text);
-                    comm.Parameters.AddWithValue("@repFname", suppfnametxt.Text);
-                    comm.Parameters.AddWithValue("@RepLname", supplnametxt.Text);
-                    comm.Parameters.AddWithValue("@contEmail", suppemailtxt.Text);
+                string query = "UPDATE systemlogin SET password=" + Login.calcMD5(newpass) + " WHERE systemlogin.username=" + MainForm.uname.ToString() + ";";
 
+                using (MySqlCommand comm = new MySqlCommand(query, conn))
+                {
                     conn.Open();
+
                     comm.ExecuteNonQuery();
+
                     conn.Close();
-                    clear();
-                    suppmsg.Text = "Successfully added an entry";
                 }
             }
         }

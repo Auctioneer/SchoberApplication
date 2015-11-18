@@ -36,8 +36,6 @@
             this.empaddress1txt = new System.Windows.Forms.TextBox();
             this.empaddress2txt = new System.Windows.Forms.TextBox();
             this.empziptxt = new System.Windows.Forms.TextBox();
-            this.emppositiontxt = new System.Windows.Forms.TextBox();
-            this.empsalarytxt = new System.Windows.Forms.TextBox();
             this.empname = new System.Windows.Forms.Label();
             this.emplastname = new System.Windows.Forms.Label();
             this.empemail = new System.Windows.Forms.Label();
@@ -50,15 +48,13 @@
             this.personDetails = new System.Windows.Forms.Label();
             this.posDetails = new System.Windows.Forms.Label();
             this.empposition = new System.Windows.Forms.Label();
-            this.empsalary = new System.Windows.Forms.Label();
-            this.emphours = new System.Windows.Forms.Label();
             this.empbranch = new System.Windows.Forms.Label();
             this.submitEmployee = new System.Windows.Forms.Button();
             this.employeemsg = new System.Windows.Forms.Label();
             this.empregiontxt = new System.Windows.Forms.TextBox();
             this.empcountrytxt = new System.Windows.Forms.TextBox();
-            this.emphoursdrop = new System.Windows.Forms.ComboBox();
             this.empbranchdrop = new System.Windows.Forms.ComboBox();
+            this.empposdrop = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // empTitle
@@ -118,20 +114,6 @@
             this.empziptxt.Name = "empziptxt";
             this.empziptxt.Size = new System.Drawing.Size(100, 20);
             this.empziptxt.TabIndex = 7;
-            // 
-            // emppositiontxt
-            // 
-            this.emppositiontxt.Location = new System.Drawing.Point(401, 103);
-            this.emppositiontxt.Name = "emppositiontxt";
-            this.emppositiontxt.Size = new System.Drawing.Size(100, 20);
-            this.emppositiontxt.TabIndex = 8;
-            // 
-            // empsalarytxt
-            // 
-            this.empsalarytxt.Location = new System.Drawing.Point(401, 128);
-            this.empsalarytxt.Name = "empsalarytxt";
-            this.empsalarytxt.Size = new System.Drawing.Size(100, 20);
-            this.empsalarytxt.TabIndex = 9;
             // 
             // empname
             // 
@@ -235,34 +217,16 @@
             // empposition
             // 
             this.empposition.AutoSize = true;
-            this.empposition.Location = new System.Drawing.Point(335, 106);
+            this.empposition.Location = new System.Drawing.Point(335, 103);
             this.empposition.Name = "empposition";
             this.empposition.Size = new System.Drawing.Size(44, 13);
             this.empposition.TabIndex = 23;
             this.empposition.Text = "Position";
             // 
-            // empsalary
-            // 
-            this.empsalary.AutoSize = true;
-            this.empsalary.Location = new System.Drawing.Point(335, 132);
-            this.empsalary.Name = "empsalary";
-            this.empsalary.Size = new System.Drawing.Size(36, 13);
-            this.empsalary.TabIndex = 24;
-            this.empsalary.Text = "Salary";
-            // 
-            // emphours
-            // 
-            this.emphours.AutoSize = true;
-            this.emphours.Location = new System.Drawing.Point(335, 156);
-            this.emphours.Name = "emphours";
-            this.emphours.Size = new System.Drawing.Size(35, 13);
-            this.emphours.TabIndex = 25;
-            this.emphours.Text = "Hours";
-            // 
             // empbranch
             // 
             this.empbranch.AutoSize = true;
-            this.empbranch.Location = new System.Drawing.Point(335, 180);
+            this.empbranch.Location = new System.Drawing.Point(338, 130);
             this.empbranch.Name = "empbranch";
             this.empbranch.Size = new System.Drawing.Size(41, 13);
             this.empbranch.TabIndex = 26;
@@ -300,42 +264,37 @@
             this.empcountrytxt.Size = new System.Drawing.Size(100, 20);
             this.empcountrytxt.TabIndex = 32;
             // 
-            // emphoursdrop
-            // 
-            this.emphoursdrop.AutoCompleteCustomSource.AddRange(new string[] {
-            "part-time",
-            "full-time"});
-            this.emphoursdrop.FormattingEnabled = true;
-            this.emphoursdrop.Items.AddRange(new object[] {
-            "20",
-            "40"});
-            this.emphoursdrop.Location = new System.Drawing.Point(401, 154);
-            this.emphoursdrop.Name = "emphoursdrop";
-            this.emphoursdrop.Size = new System.Drawing.Size(121, 21);
-            this.emphoursdrop.TabIndex = 33;
-            // 
             // empbranchdrop
             // 
             this.empbranchdrop.FormattingEnabled = true;
-            this.empbranchdrop.Location = new System.Drawing.Point(401, 181);
+            this.empbranchdrop.Location = new System.Drawing.Point(385, 130);
             this.empbranchdrop.Name = "empbranchdrop";
             this.empbranchdrop.Size = new System.Drawing.Size(121, 21);
             this.empbranchdrop.TabIndex = 34;
+            // 
+            // empposdrop
+            // 
+            this.empposdrop.AutoCompleteCustomSource.AddRange(new string[] {
+            "part-time",
+            "full-time"});
+            this.empposdrop.FormattingEnabled = true;
+            this.empposdrop.Location = new System.Drawing.Point(385, 103);
+            this.empposdrop.Name = "empposdrop";
+            this.empposdrop.Size = new System.Drawing.Size(121, 21);
+            this.empposdrop.TabIndex = 35;
             // 
             // Employee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 400);
+            this.Controls.Add(this.empposdrop);
             this.Controls.Add(this.empbranchdrop);
-            this.Controls.Add(this.emphoursdrop);
             this.Controls.Add(this.empcountrytxt);
             this.Controls.Add(this.empregiontxt);
             this.Controls.Add(this.employeemsg);
             this.Controls.Add(this.submitEmployee);
             this.Controls.Add(this.empbranch);
-            this.Controls.Add(this.emphours);
-            this.Controls.Add(this.empsalary);
             this.Controls.Add(this.empposition);
             this.Controls.Add(this.posDetails);
             this.Controls.Add(this.personDetails);
@@ -348,8 +307,6 @@
             this.Controls.Add(this.empemail);
             this.Controls.Add(this.emplastname);
             this.Controls.Add(this.empname);
-            this.Controls.Add(this.empsalarytxt);
-            this.Controls.Add(this.emppositiontxt);
             this.Controls.Add(this.empziptxt);
             this.Controls.Add(this.empaddress2txt);
             this.Controls.Add(this.empaddress1txt);
@@ -375,8 +332,6 @@
         private System.Windows.Forms.TextBox empaddress1txt;
         private System.Windows.Forms.TextBox empaddress2txt;
         private System.Windows.Forms.TextBox empziptxt;
-        private System.Windows.Forms.TextBox emppositiontxt;
-        private System.Windows.Forms.TextBox empsalarytxt;
         private System.Windows.Forms.Label empname;
         private System.Windows.Forms.Label emplastname;
         private System.Windows.Forms.Label empemail;
@@ -389,15 +344,13 @@
         private System.Windows.Forms.Label personDetails;
         private System.Windows.Forms.Label posDetails;
         private System.Windows.Forms.Label empposition;
-        private System.Windows.Forms.Label empsalary;
-        private System.Windows.Forms.Label emphours;
         private System.Windows.Forms.Label empbranch;
         private System.Windows.Forms.Button submitEmployee;
         private System.Windows.Forms.Label employeemsg;
         private System.Windows.Forms.TextBox empregiontxt;
         private System.Windows.Forms.TextBox empcountrytxt;
-        private System.Windows.Forms.ComboBox emphoursdrop;
         private System.Windows.Forms.ComboBox empbranchdrop;
+        private System.Windows.Forms.ComboBox empposdrop;
 
     }
 }

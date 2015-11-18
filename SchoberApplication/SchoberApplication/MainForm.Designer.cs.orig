@@ -37,9 +37,12 @@
             this.buttonBox = new System.Windows.Forms.GroupBox();
             this.salesform = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.passchange = new System.Windows.Forms.Button();
+=======
             this.lblLogin = new System.Windows.Forms.Label();
+>>>>>>> Lewis
             this.buttonBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,9 +116,12 @@
             // 
             // buttonBox
             // 
+<<<<<<< HEAD
             this.buttonBox.Controls.Add(this.passchange);
             this.buttonBox.Controls.Add(this.salesform);
+=======
             this.buttonBox.Controls.Add(this.lblLogin);
+>>>>>>> Lewis
             this.buttonBox.Controls.Add(this.logoutButton);
             this.buttonBox.Controls.Add(this.editTableButton);
             this.buttonBox.Controls.Add(this.employeeButton);
@@ -129,6 +135,7 @@
             this.buttonBox.Size = new System.Drawing.Size(150, 561);
             this.buttonBox.TabIndex = 7;
             this.buttonBox.TabStop = false;
+<<<<<<< HEAD
             // 
             // salesform
             // 
@@ -141,6 +148,8 @@
             this.salesform.Text = "Sales";
             this.salesform.UseVisualStyleBackColor = true;
             this.salesform.Click += new System.EventHandler(this.salesform_Click);
+=======
+>>>>>>> Lewis
             // 
             // logoutButton
             // 
@@ -153,16 +162,9 @@
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
-            // lblLogin
+<<<<<<< HEAD
+            // passchange
             // 
-            this.lblLogin.AutoSize = true;
-            this.lblLogin.Location = new System.Drawing.Point(17, 533);
-            this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(0, 13);
-            this.lblLogin.TabIndex = 8;
-	    //
-   	    //passchange
-	    //
             this.passchange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.passchange.Location = new System.Drawing.Point(13, 456);
             this.passchange.Name = "passchange";
@@ -171,6 +173,15 @@
             this.passchange.Text = "Change password";
             this.passchange.UseVisualStyleBackColor = true;
             this.passchange.Click += new System.EventHandler(this.passchange_Click);
+=======
+            // lblLogin
+            // 
+            this.lblLogin.AutoSize = true;
+            this.lblLogin.Location = new System.Drawing.Point(17, 533);
+            this.lblLogin.Name = "lblLogin";
+            this.lblLogin.Size = new System.Drawing.Size(0, 13);
+            this.lblLogin.TabIndex = 8;
+>>>>>>> Lewis
             // 
             // MainForm
             // 
@@ -183,7 +194,6 @@
             this.Text = "MainForm";
             this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.buttonBox.ResumeLayout(false);
-            this.buttonBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -198,10 +208,13 @@
         private System.Windows.Forms.Button editTableButton;
         private System.Windows.Forms.GroupBox buttonBox;
         private System.Windows.Forms.Button logoutButton;
+<<<<<<< HEAD
         private System.Windows.Forms.Button salesform;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button passchange;
+=======
         private System.Windows.Forms.Label lblLogin;
+>>>>>>> Lewis
     }
 }
 
