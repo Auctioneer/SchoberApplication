@@ -158,7 +158,7 @@ namespace SchoberApplication
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            //TEST METHOD - To delete the selected row in address
+            //When deleting from address or sale, we can actually just remove from the table and refresh
             if (whatTable.Equals("address") || (whatTable.Equals("sales")))
             {
                 foreach (DataGridViewRow item in this.dgvTable.SelectedRows)
