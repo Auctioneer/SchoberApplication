@@ -190,7 +190,10 @@ namespace SchoberApplication
                     comm.Parameters.AddWithValue("@loginid", loginid);
                     //ADDRESS
                     comm.Parameters.AddWithValue("@address1", empaddress1txt.Text);
-                    comm.Parameters.AddWithValue("@address2", empaddress2txt.Text);
+                    if (empaddress2txt.Text != "")
+                    {
+                        comm.Parameters.AddWithValue("@address2", empaddress2txt.Text);
+                    }
                     comm.Parameters.AddWithValue("@zip", empziptxt.Text);
                     comm.Parameters.AddWithValue("@reg", empregiontxt.Text);
                     comm.Parameters.AddWithValue("@count", empcountrytxt.Text); 
@@ -200,12 +203,13 @@ namespace SchoberApplication
                     conn.Close();
 
                     clear();
-                    employeemsg.Text = "Successfully added an entry";
+                    //employeemsg.Text = "Successfully added an entry";
+                    MessageBox.Show("Successfully added an entry");
                 }
             }
         }
 
-        private void clear()
+        public void clear()
         {
             foreach (var c in this.Controls)
             {

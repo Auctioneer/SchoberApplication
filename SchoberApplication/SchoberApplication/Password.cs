@@ -28,12 +28,12 @@ namespace SchoberApplication
             {
                 psw = newpswtxt.Text;
                 updatepsw(psw);
-                pswmsg.Text = "Password changed successfully.";
+                MessageBox.Show("Password changed successfully.");
                 clear();
             }
             else
             {
-                pswmsg.Text = "Entered passwords do not match.";
+                MessageBox.Show("Entered passwords do not match.");
             }
             
  
@@ -61,7 +61,7 @@ namespace SchoberApplication
                 }
             }
         }
-        private void clear()
+        public void clear()
         {
             foreach (var c in this.Controls)
             {

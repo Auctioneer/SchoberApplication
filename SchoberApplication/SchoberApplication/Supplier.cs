@@ -42,11 +42,12 @@ namespace SchoberApplication
                     comm.ExecuteNonQuery();
                     conn.Close();
                     clear();
-                    suppmsg.Text = "Successfully added an entry";
+                    //suppmsg.Text = "Successfully added an entry";
+                    MessageBox.Show("Successfully added an entry");
                 }
             }
         }
-        private void clear()
+        public void clear()
         {
             foreach (var c in this.Controls)
             {

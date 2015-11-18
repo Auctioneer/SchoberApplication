@@ -206,12 +206,13 @@ namespace SchoberApplication
                     conn.Close();
 
                     clear();
-                    prodmsg.Text = "Successfully added an entry";
+                    //prodmsg.Text = "Successfully added an entry";
+                    MessageBox.Show("Successfully added an entry");
                 }
             }
 
         }
-        private void clear()
+        public void clear()
         {
             foreach (var c in this.Controls)
             {

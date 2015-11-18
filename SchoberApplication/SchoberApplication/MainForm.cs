@@ -41,11 +41,18 @@ namespace SchoberApplication
         private void hideControls()
         {
             employee.Hide();
+            employee.clear();
             productForm.Hide();
+            productForm.clear();
             supplierForm.Hide();
+            supplierForm.clear();
             store.Hide();
+            store.clear();
             graphs.Hide();
             tables.Hide();
+            sale.Hide();
+            pass.Hide();
+            pass.clear();
         }
 
         private void logUser()
@@ -195,6 +202,8 @@ namespace SchoberApplication
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
+            hideControls();
+            uname = "";
             Program.userAccess = AccessLevels.None;
             logUser();
         }
@@ -229,6 +238,7 @@ namespace SchoberApplication
 
         private void storeButton_Click(object sender, EventArgs e)
         {
+            hideControls();
             store.MdiParent = this;
             store.Dock = DockStyle.Fill;
             store.ControlBox = false;
@@ -238,6 +248,7 @@ namespace SchoberApplication
 
         private void graphsButton_Click(object sender, EventArgs e)
         {
+            hideControls();
             graphs.MdiParent = this;
             graphs.Dock = DockStyle.Fill;
             graphs.ControlBox = false;
@@ -247,6 +258,7 @@ namespace SchoberApplication
 
         private void editTableButton_Click(object sender, EventArgs e)
         {
+            hideControls();
             tables.MdiParent = this;
             tables.Dock = DockStyle.Fill;
             tables.ControlBox = false;
@@ -256,6 +268,7 @@ namespace SchoberApplication
 
         private void salesform_Click(object sender, EventArgs e)
         {
+            hideControls();
             sale.MdiParent = this;
             sale.Dock = DockStyle.Fill;
             sale.ControlBox = false;
@@ -265,6 +278,7 @@ namespace SchoberApplication
 
         private void passchange_Click(object sender, EventArgs e)
         {
+            hideControls();
             pass.MdiParent = this;
             pass.Dock = DockStyle.Fill;
             pass.ControlBox = false;
