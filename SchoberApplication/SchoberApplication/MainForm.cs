@@ -13,7 +13,7 @@ namespace SchoberApplication
 {
     public partial class MainForm : Form
     {
-        List<Label> _priviledgeLabels;
+        //List<Label> _priviledgeLabels;
         Login login;
         Employee employee = new Employee();
         Product productForm = new Product();
@@ -21,6 +21,9 @@ namespace SchoberApplication
         Store store = new Store();
         Graphs graphs = new Graphs();
         Tables tables = new Tables();
+        Sale sale = new Sale();
+        Password pass = new Password();
+        public static String uname;
 
         //public static AccessLevels userAccess = AccessLevels.None;
 
@@ -38,12 +41,18 @@ namespace SchoberApplication
         private void hideControls()
         {
             employee.Hide();
+            employee.clear();
             productForm.Hide();
+            productForm.clear();
             supplierForm.Hide();
+            supplierForm.clear();
             store.Hide();
+            store.clear();
             graphs.Hide();
             tables.Hide();
-
+            sale.Hide();
+            pass.Hide();
+            pass.clear();
         }
 
         private void logUser()
@@ -57,9 +66,7 @@ namespace SchoberApplication
             //If the user hasn't gained any privileges after logging in, it closes the Application. THIS SHOULDN'T EVER HAPPEN - if it does this might indicate errors in the database
             login.OnLoginFormClose += new Login.LoginPageClose(CheckForNoPrivilege);
             this.Hide();
-            login.ShowDialog();
-
-            
+            login.ShowDialog();       
         }
 
         private void CheckForNoPrivilege()
@@ -74,7 +81,7 @@ namespace SchoberApplication
 
             //Check in the database for worker's job and assign priviliges accordingly
             //e.LoginDetails returns a username
-            String uname = e.LoginDetails.ToString();
+            uname = e.LoginDetails.ToString();
             int priv = getJob(uname);
 
             if (priv == 0)
@@ -172,6 +179,7 @@ namespace SchoberApplication
             }
 
             this.Show();
+            lblLogin.Text = "Logged in as " + uname;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -179,7 +187,6 @@ namespace SchoberApplication
             IsMdiContainer = true;
             employee.MdiParent = this;
             store.MdiParent = this;
-
         }
 
 
@@ -195,6 +202,8 @@ namespace SchoberApplication
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
+            hideControls();
+            uname = "";
             Program.userAccess = AccessLevels.None;
             logUser();
         }
@@ -229,6 +238,7 @@ namespace SchoberApplication
 
         private void storeButton_Click(object sender, EventArgs e)
         {
+            hideControls();
             store.MdiParent = this;
             store.Dock = DockStyle.Fill;
             store.ControlBox = false;
@@ -238,6 +248,7 @@ namespace SchoberApplication
 
         private void graphsButton_Click(object sender, EventArgs e)
         {
+            hideControls();
             graphs.MdiParent = this;
             graphs.Dock = DockStyle.Fill;
             graphs.ControlBox = false;
@@ -247,11 +258,32 @@ namespace SchoberApplication
 
         private void editTableButton_Click(object sender, EventArgs e)
         {
+            hideControls();
             tables.MdiParent = this;
             tables.Dock = DockStyle.Fill;
             tables.ControlBox = false;
             tables.FormBorderStyle = FormBorderStyle.None;
             tables.Show();
+        }
+
+        private void salesform_Click(object sender, EventArgs e)
+        {
+            hideControls();
+            sale.MdiParent = this;
+            sale.Dock = DockStyle.Fill;
+            sale.ControlBox = false;
+            sale.FormBorderStyle = FormBorderStyle.None;
+            sale.Show();
+        }
+
+        private void passchange_Click(object sender, EventArgs e)
+        {
+            hideControls();
+            pass.MdiParent = this;
+            pass.Dock = DockStyle.Fill;
+            pass.ControlBox = false;
+            pass.FormBorderStyle = FormBorderStyle.None;
+            pass.Show();
         }
 
     }

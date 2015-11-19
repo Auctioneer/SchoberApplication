@@ -40,6 +40,7 @@
             this.supplnametxt = new System.Windows.Forms.TextBox();
             this.suppemailtxt = new System.Windows.Forms.TextBox();
             this.suppSubmit = new System.Windows.Forms.Button();
+            this.suppmsg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // suppTitle
@@ -139,12 +140,22 @@
             this.suppSubmit.TabIndex = 47;
             this.suppSubmit.Text = "Submit";
             this.suppSubmit.UseVisualStyleBackColor = true;
+            this.suppSubmit.Click += new System.EventHandler(this.suppSubmit_Click);
+            // 
+            // suppmsg
+            // 
+            this.suppmsg.AutoSize = true;
+            this.suppmsg.Location = new System.Drawing.Point(356, 223);
+            this.suppmsg.Name = "suppmsg";
+            this.suppmsg.Size = new System.Drawing.Size(0, 13);
+            this.suppmsg.TabIndex = 48;
             // 
             // Supplier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 585);
+            this.Controls.Add(this.suppmsg);
             this.Controls.Add(this.suppSubmit);
             this.Controls.Add(this.suppemailtxt);
             this.Controls.Add(this.supplnametxt);
@@ -179,5 +190,6 @@
         private System.Windows.Forms.TextBox supplnametxt;
         private System.Windows.Forms.TextBox suppemailtxt;
         private System.Windows.Forms.Button suppSubmit;
+        private System.Windows.Forms.Label suppmsg;
     }
 }

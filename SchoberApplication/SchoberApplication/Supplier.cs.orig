@@ -29,25 +29,42 @@ namespace SchoberApplication
 
             using (MySqlConnection conn = new MySqlConnection(connstring))
             {
+<<<<<<< HEAD
                 using (MySqlCommand comm = new MySqlCommand("insertSupplier", conn))
+=======
+                //string query = "BEGIN; INSERT INTO address (AddressLine1, AddressLine2, Postcode, Region, Country) VALUES (@address1, @address2, @zip, @reg, @count); INSERT INTO store (Address_idAddress, Name, ContactNumber) VALUES (LAST_INSERT_ID(), @storename, @storenr); COMMIT;";
+                string query = "insertSupplier";
+                using (MySqlCommand comm = new MySqlCommand(query, conn))
+>>>>>>> Lewis
                 {
                     comm.CommandType = CommandType.StoredProcedure;
                     comm.Parameters.AddWithValue("@nameBran", suppnametxt.Text);
                     comm.Parameters.AddWithValue("@conNo", suppnrtxt.Text);
                     comm.Parameters.AddWithValue("@repFname", suppfnametxt.Text);
+<<<<<<< HEAD
                     comm.Parameters.AddWithValue("@RepLname", supplnametxt.Text);
+=======
+                    comm.Parameters.AddWithValue("@repLname", supplnametxt.Text);
+>>>>>>> Lewis
                     comm.Parameters.AddWithValue("@contEmail", suppemailtxt.Text);
 
                     conn.Open();
                     comm.ExecuteNonQuery();
                     conn.Close();
                     clear();
-                    //suppmsg.Text = "Successfully added an entry";
-                    MessageBox.Show("Successfully added an entry");
+<<<<<<< HEAD
+                    suppmsg.Text = "Successfully added an entry";
                 }
             }
         }
-        public void clear()
+=======
+                    //storemsg.Text = "Successfully added an entry";
+                }
+            }
+        }
+
+>>>>>>> Lewis
+        private void clear()
         {
             foreach (var c in this.Controls)
             {
