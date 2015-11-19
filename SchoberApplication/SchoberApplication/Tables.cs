@@ -157,7 +157,14 @@ namespace SchoberApplication
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            //TEST METHOD - To delete the selected row in address
+            //Create connection
+            String connstring = System.Configuration.ConfigurationManager.ConnectionStrings["team06ConnectionString"].ConnectionString;
+            MySqlConnection conn = new MySqlConnection(connstring);
+            MySqlCommand command;
+            string query = "";
+
+
+            //When deleting from address or sale, we can actually just remove from the table and refresh
             if (whatTable.Equals("address") || (whatTable.Equals("sales")))
             {
                 foreach (DataGridViewRow item in this.dgvTable.SelectedRows)
@@ -174,10 +181,58 @@ namespace SchoberApplication
 
                 int rowsUpdated = da.Update(dt);
 
-                MessageBox.Show("Delete successful.");
+            }
+            else
+            {
+
+
+                if (whatTable.Equals("worker"))
+                {
+                    int workerID = (int)dgvTable.SelectedRows[0].Cells[0].Value;
+
+                    dgvTable.Rows.Remove(dgvTable.SelectedRows[0]);
+
+                    query = "deleteWorkerAS";
+
+                    //Fill the datagridview with the data returned
+                    command = new MySqlCommand(query, conn);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@workerID", workerID);
+                    da = new MySqlDataAdapter();
+                    da.SelectCommand = command;
+                    cb = new MySqlCommandBuilder(da);
+                    DataTable changedTable = table.GetChanges();
+                    da.Fill(table);
+
+                    dgvTable.DataSource = table;
+                    dgvTable.Show();
+                }
+                else if (whatTable.Equals("store"))
+                {
+                    int storeID = (int)dgvTable.SelectedRows[0].Cells[0].Value;
+
+                    dgvTable.Rows.Remove(dgvTable.SelectedRows[0]);
+
+                    query = "deleteStoreA";
+
+                    //Fill the datagridview with the data returned
+                    command = new MySqlCommand(query, conn);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@storeID", storeID);
+                    da = new MySqlDataAdapter();
+                    da.SelectCommand = command;
+                    cb = new MySqlCommandBuilder(da);
+                    DataTable changedTable = table.GetChanges();
+                    da.Fill(table);
+
+                    dgvTable.DataSource = table;
+                    dgvTable.Show();
+                }
 
 
             }
+
+            MessageBox.Show("Delete successful.");
         }
          
         }
