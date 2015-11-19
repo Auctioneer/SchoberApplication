@@ -55,6 +55,8 @@
             this.empcountrytxt = new System.Windows.Forms.TextBox();
             this.empbranchdrop = new System.Windows.Forms.ComboBox();
             this.empposdrop = new System.Windows.Forms.ComboBox();
+            this.dob = new System.Windows.Forms.Label();
+            this.dobtxt = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // empTitle
@@ -89,28 +91,28 @@
             // 
             // empphonetxt
             // 
-            this.empphonetxt.Location = new System.Drawing.Point(95, 184);
+            this.empphonetxt.Location = new System.Drawing.Point(95, 210);
             this.empphonetxt.Name = "empphonetxt";
             this.empphonetxt.Size = new System.Drawing.Size(100, 20);
             this.empphonetxt.TabIndex = 4;
             // 
             // empaddress1txt
             // 
-            this.empaddress1txt.Location = new System.Drawing.Point(95, 210);
+            this.empaddress1txt.Location = new System.Drawing.Point(95, 236);
             this.empaddress1txt.Name = "empaddress1txt";
             this.empaddress1txt.Size = new System.Drawing.Size(100, 20);
             this.empaddress1txt.TabIndex = 5;
             // 
             // empaddress2txt
             // 
-            this.empaddress2txt.Location = new System.Drawing.Point(95, 239);
+            this.empaddress2txt.Location = new System.Drawing.Point(95, 265);
             this.empaddress2txt.Name = "empaddress2txt";
             this.empaddress2txt.Size = new System.Drawing.Size(100, 20);
             this.empaddress2txt.TabIndex = 6;
             // 
             // empziptxt
             // 
-            this.empziptxt.Location = new System.Drawing.Point(95, 265);
+            this.empziptxt.Location = new System.Drawing.Point(95, 291);
             this.empziptxt.Name = "empziptxt";
             this.empziptxt.Size = new System.Drawing.Size(100, 20);
             this.empziptxt.TabIndex = 7;
@@ -145,7 +147,7 @@
             // empnr
             // 
             this.empnr.AutoSize = true;
-            this.empnr.Location = new System.Drawing.Point(14, 187);
+            this.empnr.Location = new System.Drawing.Point(14, 213);
             this.empnr.Name = "empnr";
             this.empnr.Size = new System.Drawing.Size(53, 13);
             this.empnr.TabIndex = 13;
@@ -154,7 +156,7 @@
             // empaddress1
             // 
             this.empaddress1.AutoSize = true;
-            this.empaddress1.Location = new System.Drawing.Point(14, 213);
+            this.empaddress1.Location = new System.Drawing.Point(14, 239);
             this.empaddress1.Name = "empaddress1";
             this.empaddress1.Size = new System.Drawing.Size(54, 13);
             this.empaddress1.TabIndex = 14;
@@ -163,7 +165,7 @@
             // empaddress2
             // 
             this.empaddress2.AutoSize = true;
-            this.empaddress2.Location = new System.Drawing.Point(13, 239);
+            this.empaddress2.Location = new System.Drawing.Point(13, 265);
             this.empaddress2.Name = "empaddress2";
             this.empaddress2.Size = new System.Drawing.Size(54, 13);
             this.empaddress2.TabIndex = 15;
@@ -172,7 +174,7 @@
             // empzip
             // 
             this.empzip.AutoSize = true;
-            this.empzip.Location = new System.Drawing.Point(14, 265);
+            this.empzip.Location = new System.Drawing.Point(14, 291);
             this.empzip.Name = "empzip";
             this.empzip.Size = new System.Drawing.Size(22, 13);
             this.empzip.TabIndex = 16;
@@ -181,7 +183,7 @@
             // empregion
             // 
             this.empregion.AutoSize = true;
-            this.empregion.Location = new System.Drawing.Point(14, 291);
+            this.empregion.Location = new System.Drawing.Point(14, 317);
             this.empregion.Name = "empregion";
             this.empregion.Size = new System.Drawing.Size(41, 13);
             this.empregion.TabIndex = 17;
@@ -190,7 +192,7 @@
             // empcountry
             // 
             this.empcountry.AutoSize = true;
-            this.empcountry.Location = new System.Drawing.Point(14, 318);
+            this.empcountry.Location = new System.Drawing.Point(14, 344);
             this.empcountry.Name = "empcountry";
             this.empcountry.Size = new System.Drawing.Size(43, 13);
             this.empcountry.TabIndex = 18;
@@ -252,14 +254,14 @@
             // 
             // empregiontxt
             // 
-            this.empregiontxt.Location = new System.Drawing.Point(95, 291);
+            this.empregiontxt.Location = new System.Drawing.Point(95, 317);
             this.empregiontxt.Name = "empregiontxt";
             this.empregiontxt.Size = new System.Drawing.Size(100, 20);
             this.empregiontxt.TabIndex = 31;
             // 
             // empcountrytxt
             // 
-            this.empcountrytxt.Location = new System.Drawing.Point(95, 317);
+            this.empcountrytxt.Location = new System.Drawing.Point(95, 343);
             this.empcountrytxt.Name = "empcountrytxt";
             this.empcountrytxt.Size = new System.Drawing.Size(100, 20);
             this.empcountrytxt.TabIndex = 32;
@@ -283,11 +285,29 @@
             this.empposdrop.Size = new System.Drawing.Size(121, 21);
             this.empposdrop.TabIndex = 35;
             // 
+            // dob
+            // 
+            this.dob.AutoSize = true;
+            this.dob.Location = new System.Drawing.Point(14, 187);
+            this.dob.Name = "dob";
+            this.dob.Size = new System.Drawing.Size(65, 13);
+            this.dob.TabIndex = 37;
+            this.dob.Text = "Date of birth";
+            // 
+            // dobtxt
+            // 
+            this.dobtxt.Location = new System.Drawing.Point(95, 184);
+            this.dobtxt.Name = "dobtxt";
+            this.dobtxt.Size = new System.Drawing.Size(100, 20);
+            this.dobtxt.TabIndex = 38;
+            // 
             // Employee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 400);
+            this.Controls.Add(this.dobtxt);
+            this.Controls.Add(this.dob);
             this.Controls.Add(this.empposdrop);
             this.Controls.Add(this.empbranchdrop);
             this.Controls.Add(this.empcountrytxt);
@@ -351,6 +371,8 @@
         private System.Windows.Forms.TextBox empcountrytxt;
         private System.Windows.Forms.ComboBox empbranchdrop;
         private System.Windows.Forms.ComboBox empposdrop;
+        private System.Windows.Forms.Label dob;
+        private System.Windows.Forms.DateTimePicker dobtxt;
 
     }
 }

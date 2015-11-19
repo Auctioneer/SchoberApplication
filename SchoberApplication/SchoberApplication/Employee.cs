@@ -188,6 +188,7 @@ namespace SchoberApplication
                     comm.Parameters.AddWithValue("@branchid", branchid);
                     comm.Parameters.AddWithValue("@jobid", jobid);
                     comm.Parameters.AddWithValue("@loginid", loginid);
+                    comm.Parameters.AddWithValue("@dob", dobtxt.Value.Date);
                     //ADDRESS
                     comm.Parameters.AddWithValue("@address1", empaddress1txt.Text);
                     if (empaddress2txt.Text != "")
